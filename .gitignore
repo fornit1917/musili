@@ -1,0 +1,7 @@
+.vs
+.vscode
+packages
+TestResults
+*/bin
+*/obj
+*/testDir
