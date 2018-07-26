@@ -1,2 +1,2 @@
 # musili-backend
-Back-end part of my service for background music listening
+Back-end part of my service for background music listening. Not ready yet.
