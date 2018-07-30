@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Musili.WebApp", "Musili.WebApp\Musili.WebApp.csproj", "{55021E38-3C22-4EB5-9B98-79819E9B6C9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Musili.WebApi", "Musili.WebApi\Musili.WebApi.csproj", "{55021E38-3C22-4EB5-9B98-79819E9B6C9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Musili.Tests", "Musili.Tests\Musili.Tests.csproj", "{F463C11E-AE81-4424-9F4A-B03CBFB315E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Musili.Tests", "Musili.Tests\Musili.Tests.csproj", "{F463C11E-AE81-4424-9F4A-B03CBFB315E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

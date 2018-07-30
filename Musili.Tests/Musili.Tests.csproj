@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Musili.WebApp\Musili.WebApp.csproj" />
+    <ProjectReference Include="..\Musili.WebApi\Musili.WebApi.csproj" />
   </ItemGroup>
 
 </Project>
