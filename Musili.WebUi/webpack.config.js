@@ -76,7 +76,7 @@ module.exports = function (env, options) {
             rules: [
                 {
                     test: /\.tsx?$/,
-                    use: 'ts-loader',
+                    use: 'awesome-typescript-loader',
                     exclude: /node_modules/
                 },
                 { test: /\.twig$/, loader: "twig-loader" }

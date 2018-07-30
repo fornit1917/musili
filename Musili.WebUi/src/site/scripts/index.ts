@@ -1,2 +1,2 @@
-﻿const s: string = "Hello!";
+﻿const s: string = "Hello";
 console.log(s);
