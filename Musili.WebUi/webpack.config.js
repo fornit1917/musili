@@ -1,17 +1,17 @@
 const webpack = require("webpack");
-//const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 //const CopyWebpackPlugin = require('copy-webpack-plugin');
-//const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-//const cssnano = require("cssnano");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const cssnano = require("cssnano");
 
 module.exports = function (env, options) {
     const isDev = options.mode === "development";
 
     var plugins = [
-        //new MiniCssExtractPlugin({
-        //    filename: "css/[name].css",
-        //}),
+        new MiniCssExtractPlugin({
+           filename: "css/[name].css",
+        }),
 
         new HtmlWebpackPlugin({
             hash: true,
@@ -42,18 +42,18 @@ module.exports = function (env, options) {
             })
         );
 
-        //plugins.push(
-        //    new OptimizeCSSAssetsPlugin({
-        //        cssProcessor: cssnano,
-        //        canPrint: false,
-        //    })
-        //);
+        plugins.push(
+           new OptimizeCSSAssetsPlugin({
+               cssProcessor: cssnano,
+               canPrint: false,
+           })
+        );
     }
 
     return {
         entry: {
             //"vendors-common-css": ["./src/css/vendor-common.scss"],
-            "site": ["./src/site/scripts/index.ts"],
+            "site": ["./src/site/scripts/index.ts", "./src/site/styles/site.scss"],
             "admin": ["./src/admin/scripts/index.ts"],
         },
         output: { path: `${__dirname}/dist`, filename: "js/[name].js" },
@@ -79,6 +79,26 @@ module.exports = function (env, options) {
                     use: 'awesome-typescript-loader',
                     exclude: /node_modules/
                 },
+
+                {
+                    test: /\.scss$/,
+                    use: [
+                        MiniCssExtractPlugin.loader,
+                        "css-loader",
+                        "sass-loader",
+                    ],
+                },
+
+                {
+                    test: /\.woff2?$|\.ttf$|\.eot$|\.svg$|\.png|\.jpe?g|\.gif$/,
+                    loader: "file-loader",
+                    options: {
+                        name: "[name].[ext]",
+                        //useRelativePath: true,
+                        publicPath: "/",
+                    }
+                },                
+                
                 { test: /\.twig$/, loader: "twig-loader" }
             ],
         },
