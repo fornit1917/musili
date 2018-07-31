@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+{% set tempos = ['any', 'soft', 'rhytmic'] %}
+{% set genres = ['classical', 'electronic', 'jazz', 'rock', 'metal'] %}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{metaTitle}}</title>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+</head>
+<body class="site-body">
+	<h1 class="site-header">Musili</h1>
+
+    <div class="site-tagline">
+        <div class="site-tagline__item">{{taglineFirst}}</div>
+        <div class="site-tagline__item">{{taglineSecond}}</div>
+    </div>
+
+    <div class="tracks-settings-container">
+        <div class="tracks-settings">
+            <h3 class="tracks-settings__header">{{tempoTitle}}</h3>
+            <div class="tracks-settings__body">
+                {% for tempo in tempos %}
+                    <button class="tracks-settings__btn">{{tempoTitles[tempo]}}</button>
+                {% endfor %}
+            </div>    
+        </div>
+        <div class="tracks-settings">
+            <h3 class="tracks-settings__header">{{genreTitle}}</h3>
+            <div class="tracks-settings__body">
+                {% for genre in genres %}
+                    <button class="tracks-settings__btn">{{genreTitles[genre]}}</button>
+                {% endfor %}
+            </div>    
+        </div>
+        
+    </div>
+
+    {# <div class="player" id="player">
+        <div class="player__progress"></div>
+        <div class="player__body">
+            <div class="player__left-controls">
+                <button class="player-button player-button--prev">Prev</button>
+                <button class="player-button player-button--prev">Play/Pause</button>
+                <button class="player-button player-button--prev">Next</button>
+            </div>
+            <div class="player__middle-controls">
+            </div>
+            <div class="player__right-controls">
+            </div>
+        <div>
+    </div> #}
+
+    </div>
+</body>
+</html>

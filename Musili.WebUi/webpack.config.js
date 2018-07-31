@@ -22,6 +22,13 @@ module.exports = function (env, options) {
 
         new HtmlWebpackPlugin({
             hash: true,
+            template: "./src/site/templates/en/index.twig",
+            filename: "en/index.html",
+            chunks: ["site"],
+        }),        
+
+        new HtmlWebpackPlugin({
+            hash: true,
             template: "./src/admin/templates/index.twig",
             filename: "admin/index.html",
             chunks: ["admin"],
@@ -98,7 +105,7 @@ module.exports = function (env, options) {
                         publicPath: "/",
                     }
                 },                
-                
+
                 { test: /\.twig$/, loader: "twig-loader" }
             ],
         },

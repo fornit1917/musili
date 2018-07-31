@@ -1,3 +1,24 @@
-body {
-    background-color: red;
+@import "tracks-settings";
+
+.site-body {
+    background-color: #212737;
+    color: #e9eff5;
+    font-family: 'PT Sans', sans-serif;
+}
+
+.site-header {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.site-tagline {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+
+    &__item {
+        margin-bottom: 6px;
+    }
 }

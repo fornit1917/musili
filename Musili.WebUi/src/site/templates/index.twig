@@ -1,11 +1,12 @@
-﻿<!DOCTYPE html>
+﻿{% extends "./_layout.twig" %}
+{% set lang = 'ru' %}
+{% set metaTitle = 'Musili - Твоя фоновая музыка для любых занятий' %}
+{% set taglineFirst = 'Твоя фоновая музыка для любых занятий.' %}
+{% set taglineSecond = 'Работай эффективнее и отдыхай с удовольствием!' %}
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-	<p>Hello!</p>
-</body>
-</html>
+{% set tempoTitle = 'По темпу' %}
+{% set tempoTitles = { 'any': 'Любая', 'soft': 'Спокойная', 'rhytmic': 'Ритмичная' } %}
+
+
+{% set genreTitle = 'По жанру' %}
+{% set genreTitles = { 'classical': 'Классика / Инструментал', 'electronic': 'Электронная', 'jazz': 'Джаз', 'rock': 'Рок', 'metal': 'Металл' } %}

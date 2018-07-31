@@ -1,0 +1,64 @@
+.tracks-settings {
+
+
+    &__section-header {
+        
+    }
+
+    &__section-body {
+
+
+        .checkbox {
+            
+            label, input[type="checkbox"] {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.tracks-settings-container {
+    margin: 25px auto;
+    max-width: 768px;
+}
+
+.tracks-settings {
+    &__header {
+        margin-top: 10px;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
+    &__body {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    &__btn {
+        text-transform: uppercase;
+        background: #313649;
+        border: 1px solid #494e61;
+        border-radius: 3px;
+        color: #9ba5c5;
+        cursor: pointer;
+        font-size: 12px;
+        padding: 6px;
+        margin: 4px 4px;
+        transition: border-color 0.7s;
+
+        &--selected {
+            border-color: #fff;
+            background: #fff;
+            color: #151c26;
+        }
+
+        &:hover {
+            border-color: #288cfb;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
