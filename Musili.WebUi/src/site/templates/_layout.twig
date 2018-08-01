@@ -9,6 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{metaTitle}}</title>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            initMusiliApp();
+        });
+    </script>
 </head>
 <body class="site-body">
 	<h1 class="site-header">Musili</h1>
@@ -17,12 +22,12 @@
         {{tagline}}
     </div>
 
-    <div class="tracks-settings-container">
+    <div class="tracks-settings-container" id="settings">
         <div class="tracks-settings">
             <h3 class="tracks-settings__header">{{tempoTitle}}</h3>
             <div class="tracks-settings__body">
                 {% for tempo in tempos %}
-                    <button class="tracks-settings__btn selectable-btn">{{tempoTitles[tempo]}}</button>
+                    <button data-id="{{tempo}}" class="tracks-settings__btn selectable-btn js-tempo">{{tempoTitles[tempo]}}</button>
                 {% endfor %}
             </div>    
         </div>
@@ -30,7 +35,7 @@
             <h3 class="tracks-settings__header">{{genreTitle}}</h3>
             <div class="tracks-settings__body">
                 {% for genre in genres %}
-                    <button class="tracks-settings__btn selectable-btn">{{genreTitles[genre]}}</button>
+                    <button data-id="{{genre}}" class="tracks-settings__btn selectable-btn js-genre">{{genreTitles[genre]}}</button>
                 {% endfor %}
             </div>    
         </div>
@@ -41,20 +46,18 @@
 
     <div class="player" id="player">
         <div class="player__left-controls">
-            <button class="player__control-btn player__control-btn--play">
-                <svg class="icon-play" width="24px" height="24px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"><g><rect x="0" y="0" width="24" height="24" style="fill:none;"/><path d="M6.857,2.571l15.429,9.429l-15.429,9.429l0,-18.858Z" style="fill:#e9eff5;"/></g></svg>
-                <svg class="icon-pause" style="display: none" width="24px" height="24px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"><g><rect x="0" y="0" width="24" height="24" style="fill:none;"/><path d="M5.143,3.429l5.143,0l0,17.142l-5.143,0l0,-17.142Zm8.571,0l5.143,0l0,17.142l-5.143,0l0,-17.142Z" style="fill:#e9eff5;"/></g></svg>
+            <button class="player__control-btn js-play">
+                <svg class="js-icon-play" width="24px" height="24px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"><g><rect x="0" y="0" width="24" height="24" style="fill:none;"/><path d="M6.857,2.571l15.429,9.429l-15.429,9.429l0,-18.858Z" style="fill:#e9eff5;"/></g></svg>
+                <svg class="js-icon-pause" style="display: none" width="24px" height="24px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"><g><rect x="0" y="0" width="24" height="24" style="fill:none;"/><path d="M5.143,3.429l5.143,0l0,17.142l-5.143,0l0,-17.142Zm8.571,0l5.143,0l0,17.142l-5.143,0l0,-17.142Z" style="fill:#e9eff5;"/></g></svg>
             </button>
-            <button class="player__control-btn player__control-btn--next">
-                <svg class="icon-next" xmlns="http://www.w3.org/2000/svg" width="28" height="24" viewBox="0 0 28 28"><g fill="none" fill-rule="evenodd"><path fill="#e9eff5" d="M3,7 L13,14 L3,21 L3,7 Z M23,7 L25,7 L25,21 L23,21 L23,7 Z M13,7 L23,14 L13,21 L13,7 Z"/><rect width="28" height="28"/></g></svg>
+            <button class="player__control-btn js-next">
+                <svg class="js-icon-next" xmlns="http://www.w3.org/2000/svg" width="28" height="24" viewBox="0 0 28 28"><g fill="none" fill-rule="evenodd"><path fill="#e9eff5" d="M3,7 L13,14 L3,21 L3,7 Z M23,7 L25,7 L25,21 L23,21 L23,7 Z M13,7 L23,14 L13,21 L13,7 Z"/><rect width="28" height="28"/></g></svg>
             </button>
         </div>
         <div class="player__middle-controls">
         </div>
         <div class="player__right-controls">
         </div>
-    </div>
-
     </div>
 </body>
 </html>
