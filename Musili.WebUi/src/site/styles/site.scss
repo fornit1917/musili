@@ -1,11 +1,14 @@
 @import "variables";
-@import "tracks-settings";
 @import "buttons";
+@import "tracks-settings";
+@import "player";
 
 .site-body {
     background-color: $dark-bg;
     color: $light-text-color;
     font-family: 'PT Sans', sans-serif;
+    padding: 0;
+    margin: 0;
 }
 
 .site-header {
