@@ -4,4 +4,39 @@
     bottom: 0;
     height: 64px;
     width: 100%;
+    display: flex;
+    padding: 0 10px;
+    align-items: center;
+
+    
+
+    &__control-btn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 6px;
+
+        svg {
+            transition: opacity 0.3s;
+            opacity: 0.8;
+        }
+
+        &:hover {
+            svg {
+                opacity: 1;
+            }
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &--play {
+
+        }
+
+        &--next {
+            
+        }
+    }
 }
