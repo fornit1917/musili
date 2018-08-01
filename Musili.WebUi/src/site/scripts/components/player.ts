@@ -68,12 +68,16 @@ export default class Player {
         }
 
         const btn = this.settingsBtn;
+        const icon = btn.querySelector(".js-icon") as HTMLElement;
+        const text = btn.querySelector(".js-text") as HTMLElement;
         if (this.settings.isHidden) {
             this.settings.show();
-            btn.innerText = btn.dataset.textHide;
+            text.innerText = btn.dataset.textHide;
+            icon.style.display = "none";
         } else {
             this.settings.hide();
-            btn.innerText = btn.dataset.text;
+            text.innerText = btn.dataset.text;
+            icon.style.display = "block";
         }
     }
 }

@@ -30,10 +30,20 @@
     border: 1px solid #595e6f;
     border-radius: 16px;
     box-sizing: border-box;
-    background: transparent;
+    background: $dark-bg;
     cursor: pointer;
     height: 33px;
     padding: 0 1em;
+    
+    &--with-icon {
+        display: flex;
+        align-items: center;
+        margin: auto;
+
+        .round-btn__icon {
+            margin-right: 5px;
+        }
+    }
 
     &:hover {
         color: #fff;
