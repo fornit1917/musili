@@ -23,7 +23,7 @@
             <h3 class="tracks-settings__header">{{tempoTitle}}</h3>
             <div class="tracks-settings__body">
                 {% for tempo in tempos %}
-                    <button class="tracks-settings__btn">{{tempoTitles[tempo]}}</button>
+                    <button class="tracks-settings__btn selectable-btn">{{tempoTitles[tempo]}}</button>
                 {% endfor %}
             </div>    
         </div>
@@ -31,11 +31,13 @@
             <h3 class="tracks-settings__header">{{genreTitle}}</h3>
             <div class="tracks-settings__body">
                 {% for genre in genres %}
-                    <button class="tracks-settings__btn">{{genreTitles[genre]}}</button>
+                    <button class="tracks-settings__btn selectable-btn">{{genreTitles[genre]}}</button>
                 {% endfor %}
             </div>    
         </div>
-        
+        <div class="tracks-settings__footer">
+            <button class="round-btn">&#9654; {{startBtnTitle}}</button>
+        </div>
     </div>
 
     {# <div class="player" id="player">

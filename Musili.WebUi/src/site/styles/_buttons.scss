@@ -1,0 +1,45 @@
+.selectable-btn {
+    text-transform: uppercase;
+    background: #313649;
+    border: 1px solid #494e61;
+    border-radius: 3px;
+    color: #9ba5c5;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 6px;
+    transition: border-color 0.7s;
+
+    &--selected {
+        border-color: #fff;
+        background: #fff;
+        color: #151c26;
+    }
+
+    &:hover {
+        border-color: #288cfb;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.round-btn {
+    color: #dde3f3;;
+    transition: border-color 0.7s;
+    border: 1px solid #595e6f;
+    border-radius: 16px;
+    background: transparent;
+    cursor: pointer;
+    height: 33px;
+    padding: 0 1em;
+
+    &:hover {
+        color: #fff;
+        border-color: #288cfb;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}

@@ -1,8 +1,10 @@
+@import "variables";
 @import "tracks-settings";
+@import "buttons";
 
 .site-body {
-    background-color: #212737;
-    color: #e9eff5;
+    background-color: $dark-bg;
+    color: $light-text-color;
     font-family: 'PT Sans', sans-serif;
 }
 
