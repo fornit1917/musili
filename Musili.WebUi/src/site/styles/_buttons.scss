@@ -43,4 +43,13 @@
     &:focus {
         outline: none;
     }
+
+    &.disabled {
+        cursor: default;
+        opacity: 0.5;
+        &:hover {
+            color: #dde3f3;;
+            border-color: #595e6f;
+        }
+    }
 }

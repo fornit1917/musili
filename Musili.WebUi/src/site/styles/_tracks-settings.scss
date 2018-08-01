@@ -6,12 +6,18 @@
     right: 0;
     bottom: #{$player-height + 20px};
     padding: 20px 10px;
+    opacity: 1;
+    transition: opacity 0.3s;
 
     &--initial {
         position: static;
         margin-top: 50px;
         width: 100%;
         padding: 0;
+    }
+
+    &--hidden {
+        opacity: 0;
     }
 }
 

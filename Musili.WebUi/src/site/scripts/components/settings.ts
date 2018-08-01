@@ -12,6 +12,7 @@ export default class Settings {
     private root: HTMLElement;
     private tempos: HTMLElement[];
     private genres: HTMLElement[];
+    public isHidden: boolean = false;
 
     constructor(selector: string) {
         this.root = document.querySelector(selector);
@@ -38,12 +39,20 @@ export default class Settings {
     }
 
     public hide() {
-        this.root.style.display = "none";
-        this.root.classList.remove("tracks-settings--initial");
+        this.root.classList.add("tracks-settings-container--hidden");
+        setTimeout(() =>{
+            this.root.classList.remove("tracks-settings-container--initial");
+            this.root.style.display = "none";
+            this.isHidden = true;
+        }, 300);
     }
 
     public show() {
         this.root.style.display = "block";
+        setTimeout(() => {
+            this.root.classList.remove("tracks-settings-container--hidden");
+            this.isHidden = false;
+        }, 100);
     }
 
     private getSettingsFromStore(): TracksSettings {

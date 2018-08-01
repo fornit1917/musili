@@ -30,10 +30,24 @@
         &:focus {
             outline: none;
         }
+
+        &.disabled {
+            cursor: default;
+            opacity: 0.5;
+            &:hover {
+                svg {
+                    opacity: 0.8;
+                }
+            }
+        }
     }
 
     &__middle-controls {
         margin-left: 40px;
+    }
+
+    &__right-controls {
+        margin-left: auto;
     }
 }
 

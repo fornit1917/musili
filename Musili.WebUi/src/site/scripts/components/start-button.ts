@@ -16,5 +16,6 @@ export default class StartButton {
     private onStartBtnClick(e: MouseEvent) {
         this.startBtn.style.display = "none";
         this.settings.hide();
+        this.player.loadAndStart();
     }
 }
