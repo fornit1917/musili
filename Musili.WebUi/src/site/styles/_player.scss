@@ -6,9 +6,7 @@
     width: 100%;
     display: flex;
     padding: 0 10px;
-    align-items: center;
-
-    
+    align-items: center;    
 
     &__control-btn {
         background: transparent;
@@ -30,13 +28,15 @@
         &:focus {
             outline: none;
         }
+    }
 
-        &--play {
+    &__middle-controls {
+        margin-left: 40px;
+    }
+}
 
-        }
-
-        &--next {
-            
-        }
+.track-info {
+    &__artist {
+        font-size: 0.9rem;
     }
 }
