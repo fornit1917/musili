@@ -2,11 +2,13 @@
     background: #3d4558;
     position: fixed;
     bottom: 0;
+    box-sizing: border-box;
     height: 64px;
     width: 100%;
     display: flex;
     padding: 0 10px;
-    align-items: center;    
+    align-items: center;
+    justify-content: space-between;
 
     &__control-btn {
         background: transparent;

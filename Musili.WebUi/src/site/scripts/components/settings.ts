@@ -13,7 +13,7 @@ export default class Settings {
     private tempos: HTMLElement[];
     private genres: HTMLElement[];
 
-    public init(selector: string): void {
+    constructor(selector: string) {
         this.root = document.querySelector(selector);
         const tempos = this.root.querySelectorAll(".js-tempo");
         const genres = this.root.querySelectorAll(".js-genre");
@@ -34,7 +34,16 @@ export default class Settings {
             if (storedSettings.genres.some(item => item === btn.dataset.id)) {
                 btn.classList.add("selectable-btn--selected");
             }
-        })
+        });
+    }
+
+    public hide() {
+        this.root.style.display = "none";
+        this.root.classList.remove("tracks-settings--initial");
+    }
+
+    public show() {
+        this.root.style.display = "block";
     }
 
     private getSettingsFromStore(): TracksSettings {

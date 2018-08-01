@@ -1,9 +1,18 @@
 @import "variables";
 
 .tracks-settings-container {
-    margin-top: 50px;
-    width: 100%;
     background: $dark-bg;
+    position: absolute;
+    right: 0;
+    bottom: #{$player-height + 20px};
+    padding: 20px 10px;
+
+    &--initial {
+        position: static;
+        margin-top: 50px;
+        width: 100%;
+        padding: 0;
+    }
 }
 
 .tracks-settings {
@@ -17,11 +26,6 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-    }
-
-    &__footer {
-        text-align: center;
-        margin-top: 30px;
     }
 
     &__btn {

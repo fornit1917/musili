@@ -22,7 +22,7 @@
         {{tagline}}
     </div>
 
-    <div class="tracks-settings-container" id="settings">
+    <div class="tracks-settings-container tracks-settings-container--initial" id="settings">
         <div class="tracks-settings">
             <h3 class="tracks-settings__header">{{tempoTitle}}</h3>
             <div class="tracks-settings__body">
@@ -39,10 +39,11 @@
                 {% endfor %}
             </div>    
         </div>
-        <div class="tracks-settings__footer">
-            <button class="round-btn">&#9654; {{startBtnTitle}}</button>
-        </div>
     </div>
+
+    <div class="start-btn-container">
+        <button id="start-btn" class="round-btn">&#9654; {{startBtnTitle}}</button>
+    </div>    
 
     <div class="player" id="player">
         <div class="player__left-controls">
@@ -61,6 +62,7 @@
             </div>
         </div>
         <div class="player__right-controls">
+            <button class="round-btn">{{settingsBtnTitle}}</button>
         </div>
     </div>
 </body>

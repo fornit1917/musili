@@ -1,3 +1,5 @@
+import Settings from "./settings";
+
 export default class Player {    
     private root: HTMLElement;
     private playPauseBtn: HTMLElement;
@@ -7,7 +9,7 @@ export default class Player {
 
     private isPaused: boolean = true;
 
-    public init(selector: string): void {
+    constructor(selector: string, settings: Settings) {
         this.root = document.querySelector(selector);
         this.playPauseBtn = this.root.querySelector(".js-play");
         this.playIcon = this.playPauseBtn.querySelector(".js-icon-play");
