@@ -28,5 +28,10 @@ namespace Musili.WebApi.Controllers
         public string Hello(string name) {
             return $"Hello, {name}!";
         }
+
+        [HttpGet("test")]
+        public Track Test() {
+            return new Track();
+        }
     }
 }
