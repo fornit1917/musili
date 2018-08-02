@@ -22,6 +22,7 @@ export default class Player {
         this.settings = settings;
         this.settings.setCallback(() => {
             this.applySettingsAfterTimeout();
+            this.hideSettingsAfterTimeout();
         });
         
         this.storage = storage;
@@ -54,6 +55,13 @@ export default class Player {
         }, 1500);
     }
 
+    private hideSettingsAfterTimeout() {
+        if (this.hideSettingsTimeoutId) {
+            clearTimeout(this.hideSettingsTimeoutId);
+        }
+        this.hideSettingsTimeoutId = setTimeout(() => { this.hideSettings(); }, 10000);
+    }
+
     private setDisabled(isDisabled: boolean) {
         this.isDisabled = isDisabled;
         nodeListToArray(this.root.querySelectorAll("button")).forEach(item => isDisabled ? item.classList.add("disabled") : item.classList.remove("disabled"));
@@ -66,6 +74,11 @@ export default class Player {
         this.settings.hide();
         text.innerText = btn.dataset.text;
         icon.style.display = "block";
+
+        if (this.hideSettingsTimeoutId) {
+            clearTimeout(this.hideSettingsTimeoutId);
+            this.hideSettingsTimeoutId = 0;
+        }
     }
 
     private onPlayPauseClick(e: MouseEvent) {
@@ -103,6 +116,7 @@ export default class Player {
             this.settings.show();
             text.innerText = btn.dataset.textHide;
             icon.style.display = "none";
+            this.hideSettingsAfterTimeout();
         } else {
             this.hideSettings();
         }
