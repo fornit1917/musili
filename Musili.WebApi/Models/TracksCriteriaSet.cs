@@ -1,10 +1,10 @@
-﻿using Musili.WebApp.Utils;
+﻿using Musili.WebApi.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Musili.WebApp.Models
+namespace Musili.WebApi.Models
 {
     public class TracksCriteriaSet
     {

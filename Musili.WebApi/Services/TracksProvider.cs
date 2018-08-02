@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Musili.WebApp.Interfaces;
-using Musili.WebApp.Models;
+using Musili.WebApi.Interfaces;
+using Musili.WebApi.Models;
+using Musili.WebApi.Models.Entities;
 
-namespace Musili.WebApp.Services
+namespace Musili.WebApi.Services
 {
     public class TracksProvider : ITracksProvider
     {

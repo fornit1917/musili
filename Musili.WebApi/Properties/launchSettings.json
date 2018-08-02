@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Musili.WebApp": {
+    "Musili.WebApi": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/tracks/hello/vit",

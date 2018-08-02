@@ -9,10 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-using Musili.WebApp.Interfaces;
-using Musili.WebApp.Services;
+using Musili.WebApi.Interfaces;
+using Musili.WebApi.Services;
 
-namespace Musili.WebApp
+namespace Musili.WebApi
 {
     public class Startup
     {

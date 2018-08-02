@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Musili.WebApp.Models;
+using Musili.WebApi.Models;
 
 namespace Musili.Tests
 {

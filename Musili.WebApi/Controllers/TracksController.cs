@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Musili.WebApp.Interfaces;
-using Musili.WebApp.Models;
+using Musili.WebApi.Interfaces;
+using Musili.WebApi.Models;
+using Musili.WebApi.Models.Entities;
 
-namespace Musili.WebApp.Controllers
+namespace Musili.WebApi.Controllers
 {
     [Route("api/[controller]")]
     public class TracksController : Controller
