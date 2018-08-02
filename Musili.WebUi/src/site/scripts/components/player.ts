@@ -18,6 +18,11 @@ export default class Player {
 
     constructor(selector: string, storage: AppStorage, settings: Settings) {
         this.settings = settings;
+        this.settings.setCallback(() => {
+            console.log("Settings was changed!");
+            console.log({ tempo: this.storage.getTempo(), genres: this.storage.getGenres() });
+        });
+        
         this.storage = storage;
 
         this.root = document.querySelector(selector);

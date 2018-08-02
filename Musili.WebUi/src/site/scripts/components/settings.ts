@@ -1,19 +1,17 @@
 import { addEventListenerToList, nodeListToArray } from "../utils/dom-utils";
 import AppStorage from "../services/app-storage";
+import { TracksCriteria } from "../services/types";
 
 const SELECTED_CLASS = "selectable-btn--selected";
-
-interface TracksSettings {
-    tempo: string;
-    genres: string[];
-    lastId?: number;
-}
 
 export default class Settings {
     private root: HTMLElement;
     private tempos: HTMLElement[];
     private genres: HTMLElement[];
     private storage: AppStorage;
+    private changeCallback: () => void;
+
+    private notifyTimeoutId: number = 0;
 
     public isHidden: boolean = false;
 
@@ -42,6 +40,10 @@ export default class Settings {
         });
     }
 
+    public setCallback(cb: () => void): void {
+        this.changeCallback = cb;
+    }
+
     public hide() {
         this.root.classList.add("tracks-settings-container--hidden");
         setTimeout(() =>{
@@ -59,7 +61,17 @@ export default class Settings {
         }, 100);
     }
 
-    private getSettingsFromStore(): TracksSettings {
+    private notifyAboutChangesAfterTimeout() {
+        if (this.notifyTimeoutId) {
+            clearTimeout(this.notifyTimeoutId);
+            this.notifyTimeoutId = 0;
+        }
+        if (this.changeCallback) {
+            this.notifyTimeoutId = setTimeout(this.changeCallback, 1500);
+        }
+    }
+
+    private getSettingsFromStore(): TracksCriteria {
         return {
             tempo: this.storage.getTempo(),
             genres: this.storage.getGenres(),
@@ -77,8 +89,9 @@ export default class Settings {
     private onTempoClick(e: MouseEvent) {
         this.tempos.forEach(btn => {
             if (btn.dataset.id === (e.target as HTMLElement).dataset.id) {
-                this.storage.setTempo(String(btn.dataset.id));
                 btn.classList.add(SELECTED_CLASS);
+                this.storage.setTempo(String(btn.dataset.id));
+                this.notifyAboutChangesAfterTimeout();
             } else {
                 btn.classList.remove(SELECTED_CLASS);
             }
@@ -93,5 +106,6 @@ export default class Settings {
         }
         target.classList.toggle(SELECTED_CLASS);
         this.storage.setGenres(this.getSelectedGenres());
+        this.notifyAboutChangesAfterTimeout();
     }
 }
