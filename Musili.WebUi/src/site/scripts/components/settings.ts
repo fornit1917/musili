@@ -56,15 +56,23 @@ export default class Settings {
     }
 
     private getSettingsFromStore(): TracksSettings {
-        return {
-            tempo: "any",
-            genres: ["classical", "electronic"],
-        }
+        const tempo = localStorage.getItem("tempo") ? localStorage.getItem("tempo") : "any";
+        const genres = localStorage.getItem("genres") ? localStorage.getItem("genres").split(",") : ["classical", "electronic"];
+        return { tempo, genres };
+    }
+
+    private getSelectedGenresButtons(): HTMLElement[] {
+        return this.genres.filter(item => item.classList.contains(SELECTED_CLASS));
+    }
+
+    private getSelectedGenres(): string[] {
+        return this.getSelectedGenresButtons().map(item => item.dataset.id);
     }
 
     private onTempoClick(e: MouseEvent) {
         this.tempos.forEach(btn => {
             if (btn.dataset.id === (e.target as HTMLElement).dataset.id) {
+                localStorage.setItem("tempo", String(btn.dataset.id));
                 btn.classList.add(SELECTED_CLASS);
             } else {
                 btn.classList.remove(SELECTED_CLASS);
@@ -73,11 +81,12 @@ export default class Settings {
     }
 
     private onGenreClick(e: MouseEvent) {
-        const selectedGenres = this.genres.filter(item => item.classList.contains(SELECTED_CLASS));
+        const selectedGenres = this.getSelectedGenresButtons();
         const target = e.target as HTMLElement;
         if (selectedGenres.length === 1 && selectedGenres[0].dataset.id === target.dataset.id) {
             return;
         }
         target.classList.toggle(SELECTED_CLASS);
+        localStorage.setItem("genres", this.getSelectedGenres().join(","));
     }
 }
