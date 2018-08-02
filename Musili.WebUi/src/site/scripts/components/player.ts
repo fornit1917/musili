@@ -13,14 +13,15 @@ export default class Player {
 
     private isPaused: boolean = true;
     private isDisabled: boolean = true;
+    private hideSettingsTimeoutId: number = 0;
+    private applySettingsTimeoutId: number = 0;
 
     private storage: AppStorage;
 
     constructor(selector: string, storage: AppStorage, settings: Settings) {
         this.settings = settings;
         this.settings.setCallback(() => {
-            console.log("Settings was changed!");
-            console.log({ tempo: this.storage.getTempo(), genres: this.storage.getGenres() });
+            this.applySettingsAfterTimeout();
         });
         
         this.storage = storage;
@@ -43,10 +44,29 @@ export default class Player {
         this.setDisabled(false);
     }
 
+    private applySettingsAfterTimeout() {
+        if (this.applySettingsTimeoutId) {
+            clearTimeout(this.applySettingsTimeoutId);
+        }
+        this.applySettingsTimeoutId = setTimeout(() => {
+            console.log("Settings was changed!");
+            console.log({ tempo: this.storage.getTempo(), genres: this.storage.getGenres() });
+        }, 1500);
+    }
+
     private setDisabled(isDisabled: boolean) {
         this.isDisabled = isDisabled;
         nodeListToArray(this.root.querySelectorAll("button")).forEach(item => isDisabled ? item.classList.add("disabled") : item.classList.remove("disabled"));
-    }    
+    }
+
+    private hideSettings() {
+        const btn = this.settingsBtn;
+        const icon = btn.querySelector(".js-icon") as HTMLElement;
+        const text = btn.querySelector(".js-text") as HTMLElement;
+        this.settings.hide();
+        text.innerText = btn.dataset.text;
+        icon.style.display = "block";
+    }
 
     private onPlayPauseClick(e: MouseEvent) {
         if (this.isDisabled) {
@@ -84,9 +104,7 @@ export default class Player {
             text.innerText = btn.dataset.textHide;
             icon.style.display = "none";
         } else {
-            this.settings.hide();
-            text.innerText = btn.dataset.text;
-            icon.style.display = "block";
+            this.hideSettings();
         }
     }
 }

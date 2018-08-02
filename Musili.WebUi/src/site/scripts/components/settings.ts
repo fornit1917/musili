@@ -9,9 +9,7 @@ export default class Settings {
     private tempos: HTMLElement[];
     private genres: HTMLElement[];
     private storage: AppStorage;
-    private changeCallback: () => void;
-
-    private notifyTimeoutId: number = 0;
+    private changesCallback: () => void;
 
     public isHidden: boolean = false;
 
@@ -41,7 +39,7 @@ export default class Settings {
     }
 
     public setCallback(cb: () => void): void {
-        this.changeCallback = cb;
+        this.changesCallback = cb;
     }
 
     public hide() {
@@ -61,13 +59,9 @@ export default class Settings {
         }, 100);
     }
 
-    private notifyAboutChangesAfterTimeout() {
-        if (this.notifyTimeoutId) {
-            clearTimeout(this.notifyTimeoutId);
-            this.notifyTimeoutId = 0;
-        }
-        if (this.changeCallback) {
-            this.notifyTimeoutId = setTimeout(this.changeCallback, 1500);
+    private notifyAboutChanges() {
+        if (this.changesCallback) {
+            this.changesCallback();
         }
     }
 
@@ -91,7 +85,7 @@ export default class Settings {
             if (btn.dataset.id === (e.target as HTMLElement).dataset.id) {
                 btn.classList.add(SELECTED_CLASS);
                 this.storage.setTempo(String(btn.dataset.id));
-                this.notifyAboutChangesAfterTimeout();
+                this.notifyAboutChanges();
             } else {
                 btn.classList.remove(SELECTED_CLASS);
             }
@@ -106,6 +100,6 @@ export default class Settings {
         }
         target.classList.toggle(SELECTED_CLASS);
         this.storage.setGenres(this.getSelectedGenres());
-        this.notifyAboutChangesAfterTimeout();
+        this.notifyAboutChanges();
     }
 }
