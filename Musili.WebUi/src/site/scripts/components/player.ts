@@ -1,5 +1,6 @@
 import Settings from "./settings";
 import { nodeListToArray } from "../utils/dom-utils";
+import AppStorage from "../services/app-storage";
 
 export default class Player {    
     private root: HTMLElement;
@@ -13,8 +14,11 @@ export default class Player {
     private isPaused: boolean = true;
     private isDisabled: boolean = true;
 
-    constructor(selector: string, settings: Settings) {
+    private storage: AppStorage;
+
+    constructor(selector: string, storage: AppStorage, settings: Settings) {
         this.settings = settings;
+        this.storage = storage;
 
         this.root = document.querySelector(selector);
         this.playPauseBtn = this.root.querySelector(".js-play");

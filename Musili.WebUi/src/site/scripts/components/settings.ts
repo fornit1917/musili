@@ -1,4 +1,5 @@
 import { addEventListenerToList, nodeListToArray } from "../utils/dom-utils";
+import AppStorage from "../services/app-storage";
 
 const SELECTED_CLASS = "selectable-btn--selected";
 
@@ -12,9 +13,12 @@ export default class Settings {
     private root: HTMLElement;
     private tempos: HTMLElement[];
     private genres: HTMLElement[];
+    private storage: AppStorage;
+
     public isHidden: boolean = false;
 
-    constructor(selector: string) {
+    constructor(selector: string, storage: AppStorage) {
+        this.storage = storage;
         this.root = document.querySelector(selector);
         const tempos = this.root.querySelectorAll(".js-tempo");
         const genres = this.root.querySelectorAll(".js-genre");
@@ -56,9 +60,10 @@ export default class Settings {
     }
 
     private getSettingsFromStore(): TracksSettings {
-        const tempo = localStorage.getItem("tempo") ? localStorage.getItem("tempo") : "any";
-        const genres = localStorage.getItem("genres") ? localStorage.getItem("genres").split(",") : ["classical", "electronic"];
-        return { tempo, genres };
+        return {
+            tempo: this.storage.getTempo(),
+            genres: this.storage.getGenres(),
+        };
     }
 
     private getSelectedGenresButtons(): HTMLElement[] {
@@ -72,7 +77,7 @@ export default class Settings {
     private onTempoClick(e: MouseEvent) {
         this.tempos.forEach(btn => {
             if (btn.dataset.id === (e.target as HTMLElement).dataset.id) {
-                localStorage.setItem("tempo", String(btn.dataset.id));
+                this.storage.setTempo(String(btn.dataset.id));
                 btn.classList.add(SELECTED_CLASS);
             } else {
                 btn.classList.remove(SELECTED_CLASS);
@@ -87,6 +92,6 @@ export default class Settings {
             return;
         }
         target.classList.toggle(SELECTED_CLASS);
-        localStorage.setItem("genres", this.getSelectedGenres().join(","));
+        this.storage.setGenres(this.getSelectedGenres());
     }
 }
