@@ -8,7 +8,7 @@ namespace Musili.WebApi.Services.Db
         public DbSet<TracksSource> TracksSources { get; set; }
         public DbSet<Track> Tracks { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options): base(options) {
+        public AppDbContext(DbContextOptions<AppDbContext> options): base(options) {   
         }
-    }    
+    }        
 }

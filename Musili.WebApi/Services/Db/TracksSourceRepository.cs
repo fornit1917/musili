@@ -5,6 +5,7 @@ using Musili.WebApi.Interfaces;
 using Musili.WebApi.Models;
 using Musili.WebApi.Models.Entities;
 using Musili.WebApi.Utils;
+using System;
 
 namespace Musili.WebApi.Services.Db
 {
@@ -27,8 +28,9 @@ namespace Musili.WebApi.Services.Db
 
             int count = await query.CountAsync();
             int offset = RandomUtils.GetRandomFromInterval(0, count);
-
-            return await query.Skip(offset).FirstOrDefaultAsync();
+            query = query.Skip(offset).Take(1);
+            
+            return await query.FirstOrDefaultAsync();
         }
     }
 }
