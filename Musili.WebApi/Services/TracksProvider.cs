@@ -16,7 +16,7 @@ namespace Musili.WebApi.Services
             this.tracksSourceRepository = tracksSourceRepository;
         }
 
-        public Task<List<Track>> GetTracksAsync(TracksCriteriaSet criteria, int lastId = 0) {
+        public Task<List<Track>> GetTracksAsync(TracksCriteria criteria, int lastId = 0) {
             var result = new List<Track> {
                 new Track(){ Artist = criteria.Genres.ToString(), Title = "Title 1", Url = "Url 1" },
                 new Track(){ Artist = criteria.Tempos.ToString(), Title = "Title 2", Url = "Url 2" },

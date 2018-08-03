@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Musili.WebApi.Models
 {
-    public class TracksCriteriaSet
+    public class TracksCriteria
     {
         private List<Tempo> tempos;
         private List<Genre> genres;
@@ -20,7 +20,7 @@ namespace Musili.WebApi.Models
         public bool IsAnyTempo => isAnyTempo;
         public bool IsAnyGenre => isAnyGenre;
 
-        public TracksCriteriaSet(string temposCommaList, string genresCommaList) {
+        public TracksCriteria(string temposCommaList, string genresCommaList) {
             tempos = EnumUtils.ParseEnumValuesList<Tempo>(temposCommaList, ',').Where(item => item != Tempo.Any).ToList();
             isAnyTempo = tempos.Count == 0 || (tempos.Count == 1 && tempos[0] == Tempo.Any) || (tempos.Count == Enum.GetValues(typeof(Tempo)).Length - 1);
 

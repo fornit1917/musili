@@ -24,7 +24,7 @@ namespace Musili.WebApi.Controllers
 
         [HttpGet("source")]
         public async Task<TracksSource> Source(string tempo, string genres, [FromServices] ITracksSourcesRepository sourcesRepository) {
-            return await sourcesRepository.GetRandomTracksSourceAsync(new TracksCriteriaSet(tempo, genres));
+            return await sourcesRepository.GetRandomTracksSourceAsync(new TracksCriteria(tempo, genres));
         }
     }
 }

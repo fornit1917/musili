@@ -6,6 +6,6 @@ namespace Musili.WebApi.Interfaces
 {
     public interface ITracksSourcesRepository
     {
-         Task<TracksSource> GetRandomTracksSourceAsync(TracksCriteriaSet criteria);
+         Task<TracksSource> GetRandomTracksSourceAsync(TracksCriteria criteria);
     }
 }

@@ -16,7 +16,7 @@ namespace Musili.WebApi.Services.Db
             this.db = db;
         }
 
-        public async Task<TracksSource> GetRandomTracksSourceAsync(TracksCriteriaSet criteria) {
+        public async Task<TracksSource> GetRandomTracksSourceAsync(TracksCriteria criteria) {
             var query = from ts in db.TracksSources select ts;
             if (!criteria.IsAnyTempo) {
                 query = query.Where(ts => ts.Tempo == Tempo.Any || criteria.Tempos.Contains(ts.Tempo));

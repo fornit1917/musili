@@ -6,67 +6,67 @@ using Musili.WebApi.Models;
 namespace Musili.Tests
 {
     [TestClass]
-    public class TracksCriteriaSetTest
+    public class TracksCriteriaTest
     {
         [TestMethod]
         public void TestParse() {
-            var criteriaSet = new TracksCriteriaSet("", "");
+            var criteriaSet = new TracksCriteria("", "");
             Assert.AreEqual(0, criteriaSet.Tempos.Count);
             Assert.AreEqual(0, criteriaSet.Genres.Count);
 
-            criteriaSet = new TracksCriteriaSet("any", "any");
+            criteriaSet = new TracksCriteria("any", "any");
             Assert.AreEqual(0, criteriaSet.Tempos.Count);
             Assert.AreEqual(0, criteriaSet.Genres.Count);
 
-            criteriaSet = new TracksCriteriaSet("sadsad", "asdsad,asd");
+            criteriaSet = new TracksCriteria("sadsad", "asdsad,asd");
             Assert.AreEqual(0, criteriaSet.Tempos.Count);            
             Assert.AreEqual(0, criteriaSet.Genres.Count);
 
-            criteriaSet = new TracksCriteriaSet("soft", "rock,metal");
+            criteriaSet = new TracksCriteria("soft", "rock,metal");
             Assert.AreEqual(1, criteriaSet.Tempos.Count);
             Assert.AreEqual(2, criteriaSet.Genres.Count);                        
 
-            criteriaSet = new TracksCriteriaSet("soft,rhytmic,any", "rock,metal,classical,jazz,electronic");
+            criteriaSet = new TracksCriteria("soft,rhytmic,any", "rock,metal,classical,jazz,electronic");
             Assert.AreEqual(2, criteriaSet.Tempos.Count);
             Assert.AreEqual(5, criteriaSet.Genres.Count);
         }
 
         [TestMethod]
         public void TestIsAnyTempo() {
-            var criteriaSet = new TracksCriteriaSet("any", "rock,");
+            var criteriaSet = new TracksCriteria("any", "rock,");
             Assert.AreEqual(true, criteriaSet.IsAnyTempo);
 
-            criteriaSet = new TracksCriteriaSet("", "");
+            criteriaSet = new TracksCriteria("", "");
             Assert.AreEqual(true, criteriaSet.IsAnyTempo);
 
-            criteriaSet = new TracksCriteriaSet("asdsa", "");
+            criteriaSet = new TracksCriteria("asdsa", "");
             Assert.AreEqual(true, criteriaSet.IsAnyTempo);
 
-            criteriaSet = new TracksCriteriaSet("soft", "");
+            criteriaSet = new TracksCriteria("soft", "");
             Assert.AreEqual(false, criteriaSet.IsAnyTempo);
 
-            criteriaSet = new TracksCriteriaSet("soft,rhytmic", "");
+            criteriaSet = new TracksCriteria("soft,rhytmic", "");
             Assert.AreEqual(true, criteriaSet.IsAnyTempo);
         }
 
         [TestMethod]
         public void TestIsAnyGenre() {
-            var criteriaSet = new TracksCriteriaSet("any", "any");
+            var criteriaSet = new TracksCriteria("any", "any");
             Assert.AreEqual(true, criteriaSet.IsAnyGenre);
 
-            criteriaSet = new TracksCriteriaSet("", "");
+            criteriaSet = new TracksCriteria("", "");
             Assert.AreEqual(true, criteriaSet.IsAnyGenre);
 
-            criteriaSet = new TracksCriteriaSet("soft", "asdsdad");
+            criteriaSet = new TracksCriteria("soft", "asdsdad");
             Assert.AreEqual(true, criteriaSet.IsAnyGenre);
 
-            criteriaSet = new TracksCriteriaSet("soft", "rock");
+            criteriaSet = new TracksCriteria("soft", "rock");
             Assert.AreEqual(false, criteriaSet.IsAnyGenre);
 
-            criteriaSet = new TracksCriteriaSet("soft,rhytmic", "rock,jazz");
+            criteriaSet = new TracksCriteria("soft,rhytmic", "rock,jazz");
             Assert.AreEqual(false, criteriaSet.IsAnyGenre);
 
-            criteriaSet = new TracksCriteriaSet("soft,rhytmic", String.Join(',', Enum.GetNames(typeof(Genre)).Where(item => item != "Any").ToArray()));
+            criteriaSet = new TracksCriteria("soft,rhytmic", String.Join(',', Enum.GetNames(typeof(Genre)).Where(item => item != "Any").ToArray()));
             Assert.AreEqual(true, criteriaSet.IsAnyGenre);            
         }
     }
