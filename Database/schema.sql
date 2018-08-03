@@ -1,3 +1,5 @@
+create schema if not exists app;
+
 create table app.tracks_source (
 	id serial primary key,
 	tempo smallint not null,

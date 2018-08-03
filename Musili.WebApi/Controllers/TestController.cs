@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Musili.WebApi.Db;
+using Musili.WebApi.Services.Db;
 using Musili.WebApi.Interfaces;
 using Musili.WebApi.Models;
 using Musili.WebApi.Models.Entities;
@@ -22,9 +22,9 @@ namespace Musili.WebApi.Controllers
             this.tracksProvider = tracksProvider;
         }
 
-        [HttpGet("sources")]
-        public async Task<List<TracksSource>> Sources(string tempo, string genres) {
-            return await db.TracksSources.Where(t => t.Genre == Genre.Any || t.Genre == Genre.Rock).ToListAsync();
+        [HttpGet("source")]
+        public async Task<TracksSource> Source(string tempo, string genres, [FromServices] ITracksSourcesRepository sourcesRepository) {
+            return await sourcesRepository.GetRandomTracksSourceAsync(new TracksCriteriaSet(tempo, genres));
         }
     }
 }

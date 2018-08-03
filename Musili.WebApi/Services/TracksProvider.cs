@@ -10,6 +10,12 @@ namespace Musili.WebApi.Services
 {
     public class TracksProvider : ITracksProvider
     {
+        private ITracksSourcesRepository tracksSourceRepository;
+
+        public TracksProvider(ITracksSourcesRepository tracksSourceRepository) {
+            this.tracksSourceRepository = tracksSourceRepository;
+        }
+
         public Task<List<Track>> GetTracksAsync(TracksCriteria criteria, int lastId = 0) {
             var result = new List<Track> {
                 new Track(){ Artist = criteria.Genre.ToString(), Title = "Title 1", Url = "Url 1" },

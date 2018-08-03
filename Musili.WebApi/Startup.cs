@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
-using Musili.WebApi.Db;
+using Musili.WebApi.Services.Db;
 using Musili.WebApi.Interfaces;
 using Musili.WebApi.Services;
 
@@ -25,12 +25,13 @@ namespace Musili.WebApi
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            services.AddScoped<ITracksProvider, TracksProvider>();
-            services.AddMvc();
-
             services.AddDbContext<AppDbContext>(opts => {
                 opts.UseNpgsql(Configuration.GetConnectionString("MusiliDatabase"));
             });
+            services.AddScoped<ITracksSourcesRepository, TracksSourceRepository>();
+            services.AddScoped<ITracksProvider, TracksProvider>();
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

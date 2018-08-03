@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Musili.WebApi.Models.Entities;
 
-namespace Musili.WebApi.Db
+namespace Musili.WebApi.Services.Db
 {
     public class AppDbContext : DbContext
     {
