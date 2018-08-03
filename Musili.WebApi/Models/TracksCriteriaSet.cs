@@ -27,12 +27,5 @@ namespace Musili.WebApi.Models
             genres = EnumUtils.ParseEnumValuesList<Genre>(genresCommaList, ',').Where(item => item != Genre.Any).ToList();
             isAnyGenre = genres.Count == 0 || (genres.Count == 1 && genres[0] == Genre.Any) || (genres.Count == Enum.GetValues(typeof(Genre)).Length - 1);
         }
-
-        public TracksCriteria GetRandomCriteria() {
-            TracksCriteria criteria = new TracksCriteria();
-            criteria.Genre = genres.Count > 0 ? RandomUtils.GetRandomListItem<Genre>(genres) : Genre.Any;
-            criteria.Tempo = tempos.Count > 0 ? RandomUtils.GetRandomListItem<Tempo>(tempos) : Tempo.Any;
-            return criteria;
-        }
     }
 }

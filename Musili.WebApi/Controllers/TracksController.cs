@@ -22,7 +22,7 @@ namespace Musili.WebApi.Controllers
         [HttpGet("")]
         public async Task<List<Track>> GetTracks(string tempos, string genres, int lastId = 0) {
             TracksCriteriaSet criteriaSet = new TracksCriteriaSet(tempos, genres);
-            return await tracksProvider.GetTracksAsync(criteriaSet.GetRandomCriteria(), lastId);
+            return await tracksProvider.GetTracksAsync(criteriaSet, lastId);
         }
 
         [HttpGet("hello/{name}")]

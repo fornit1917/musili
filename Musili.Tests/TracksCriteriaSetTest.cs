@@ -32,21 +32,6 @@ namespace Musili.Tests
         }
 
         [TestMethod]
-        public void TestRandomCriteriaWithEmptyLists() {
-            var criteriaSet = new TracksCriteriaSet("", "");
-            Assert.AreEqual(Tempo.Any, criteriaSet.GetRandomCriteria().Tempo);
-            Assert.AreEqual(Genre.Any, criteriaSet.GetRandomCriteria().Genre);
-        }
-
-        [TestMethod]
-        public void TestRandomCriteriaWithNotEmptyListsWithBadValues() {
-            var criteriaSet = new TracksCriteriaSet("sadsadsad,soft", "rock,");
-            var criteria = criteriaSet.GetRandomCriteria();
-            Assert.AreEqual(Tempo.Soft, criteria.Tempo);
-            Assert.AreEqual(Genre.Rock, criteria.Genre);
-        }
-
-        [TestMethod]
         public void TestIsAnyTempo() {
             var criteriaSet = new TracksCriteriaSet("any", "rock,");
             Assert.AreEqual(true, criteriaSet.IsAnyTempo);
