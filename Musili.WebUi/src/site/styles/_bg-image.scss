@@ -30,3 +30,10 @@
         background: radial-gradient(closest-side, transparent, $dark-bg);
     }    
 }
+
+@media (max-width: 768px) {
+    .bg-image {
+        width: 100%;
+        height: 500px;
+    }
+}
