@@ -3,11 +3,12 @@
 .tracks-settings-container {
     background: $dark-bg;
     position: absolute;
-    right: 0;
+    right: 10px;
     bottom: #{$player-height + 20px};
     padding: 20px 10px;
     opacity: 1;
     transition: opacity 0.3s;
+    z-index: 100;
 
     &--initial {
         position: static;

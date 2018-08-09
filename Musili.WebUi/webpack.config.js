@@ -1,6 +1,6 @@
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-//const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const cssnano = require("cssnano");
@@ -34,11 +34,9 @@ module.exports = function (env, options) {
             chunks: ["admin"],
         }),
 
-        //new CopyWebpackPlugin([
-        //    { from: "img", to: "img" },
-        //    { from: "charting_library", to: "charting_library" },
-        //    { from: "datafeeds/udf/dist", to: "datafeeds/udf/dist" }
-        //]),
+        new CopyWebpackPlugin([
+           { from: "./src/site/img", to: "img" },
+        ]),
     ];
     if (!isDev) {
         plugins.push(
