@@ -10,7 +10,6 @@ namespace Musili.WebApi.Utils
         private static Random rnd = new Random();
 
         public static T GetRandomListItem<T>(List<T> items) {
-            rnd = new Random();
             return items[rnd.Next(0, items.Count)];
         }
 
