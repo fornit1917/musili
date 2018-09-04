@@ -9,6 +9,6 @@ namespace Musili.WebApi.Interfaces
 {
     public interface ITracksProvider
     {
-        Task<List<Track>> GetTracksAsync(TracksCriteria criteria, int lastId = 0);
+        Task<Track[]> GetTracksAsync(TracksCriteria criteria, int lastId = 0);
     }
 }

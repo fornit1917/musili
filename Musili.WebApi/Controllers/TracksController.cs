@@ -20,7 +20,7 @@ namespace Musili.WebApi.Controllers
         }
 
         [HttpGet("")]
-        public async Task<List<Track>> GetTracks(string tempos, string genres, int lastId = 0) {
+        public async Task<Track[]> GetTracks(string tempos, string genres, int lastId = 0) {
             TracksCriteria criteriaSet = new TracksCriteria(tempos, genres);
             return await tracksProvider.GetTracksAsync(criteriaSet, lastId);
         }
