@@ -11,7 +11,10 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Musili.WebApi.Services.Db;
 using Musili.WebApi.Interfaces;
+using Musili.WebApi.Models;
 using Musili.WebApi.Services;
+using Musili.WebApi.Services.Grabbers;
+using Musili.WebApi.Services.Grabbers.Yandex;
 
 namespace Musili.WebApi
 {
@@ -25,6 +28,24 @@ namespace Musili.WebApi
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            // grabbers for each service
+            services.AddSingleton<YandexTracksGrabber>();
+
+            // factory for grabber for each music service
+            services.AddSingleton<Func<TracksSourceService, ITracksGrabber>>(serviceProvider => {
+                return source => {
+                    switch (source) {
+                        case TracksSourceService.Yandex:
+                            return serviceProvider.GetService<YandexTracksGrabber>();
+                        default:
+                            throw new NotImplementedException();
+                    }
+                };
+            });
+
+            // common tracks grabber
+            services.AddSingleton<ITracksGrabber, TracksGrabber>();
+
             services.AddDbContext<AppDbContext>(opts => {
                 opts.UseNpgsql(Configuration.GetConnectionString("MusiliDatabase"));
             });
