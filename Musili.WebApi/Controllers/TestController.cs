@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Musili.WebApi.Services.Db;
 using Musili.WebApi.Interfaces;
 using Musili.WebApi.Models;
-using Musili.WebApi.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Musili.WebApi.Controllers

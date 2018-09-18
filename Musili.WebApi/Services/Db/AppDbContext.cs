@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Musili.WebApi.Models.Entities;
+using Musili.WebApi.Models;
 
 namespace Musili.WebApi.Services.Db
 {

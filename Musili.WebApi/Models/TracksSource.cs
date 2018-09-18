@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Musili.WebApi.Models;
 
-namespace Musili.WebApi.Models.Entities
+namespace Musili.WebApi.Models
 {
     [Table("tracks_source", Schema="app")]
     public class TracksSource

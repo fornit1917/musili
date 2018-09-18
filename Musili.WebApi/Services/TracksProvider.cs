@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Musili.WebApi.Interfaces;
 using Musili.WebApi.Models;
-using Musili.WebApi.Models.Entities;
 
 namespace Musili.WebApi.Services
 {

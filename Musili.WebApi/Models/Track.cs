@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Musili.WebApi.Models;
 
-namespace Musili.WebApi.Models.Entities
+namespace Musili.WebApi.Models
 {
     [Table("track", Schema="app")]
     public class Track
