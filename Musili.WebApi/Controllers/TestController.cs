@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Musili.WebApi.Services.Db;
 using Musili.WebApi.Interfaces;
 using Musili.WebApi.Models;
+using Musili.WebApi.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace Musili.WebApi.Controllers
@@ -24,6 +25,12 @@ namespace Musili.WebApi.Controllers
         [HttpGet("source")]
         public async Task<TracksSource> Source(string tempo, string genres, [FromServices] ITracksSourcesRepository sourcesRepository) {
             return await sourcesRepository.GetRandomTracksSourceAsync(new TracksCriteria(tempo, genres));
+        }
+
+        [HttpGet("")]
+        public object Index() {
+            List<int> list = new List<int>{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+            return RandomUtils.GetRandomSlice(list, 3);
         }
     }
 }
