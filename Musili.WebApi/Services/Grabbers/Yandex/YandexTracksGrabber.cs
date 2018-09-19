@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Musili.WebApi.Interfaces;
 using Musili.WebApi.Models;
+using Musili.WebApi.Utils;
 
 namespace Musili.WebApi.Services.Grabbers.Yandex
 {
@@ -27,9 +28,11 @@ namespace Musili.WebApi.Services.Grabbers.Yandex
         private async Task<List<Track>> GrabTracksFromList(string url) {
             YandexPlaylistParams playlistParams = urlParser.ParsePlaylistUrl(url);
             List<int> ids = null;
+            int count = 2;
             switch (playlistParams.type) {
                 case YandexPlaylistType.UserPlaylist:
                     ids = await client.GetTracksIdsByUserPlaylistAsync(playlistParams.userId, playlistParams.playlistId);
+                    count = 3;
                     break;
                 case YandexPlaylistType.Artist:
                     ids = await client.GetTracksIdsByArtistAsync(playlistParams.playlistId);
@@ -39,8 +42,7 @@ namespace Musili.WebApi.Services.Grabbers.Yandex
                     break;        
             }
 
-            // todo: get random subset from ids
-
+            ids = RandomUtils.GetRandomSlice(ids, count);
             return await client.GetTracksByIdsAsync(ids);
         }
     }
