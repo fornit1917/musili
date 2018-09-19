@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Musili.WebApi.Interfaces;
 using Musili.WebApi.Models;
@@ -13,7 +14,7 @@ namespace Musili.WebApi.Services.Grabbers
             this.grabbersProvider = grabbersProvider;
         }
 
-        public Task<Track[]> GrabRandomTracksAsync(TracksSource tracksSource) {
+        public Task<List<Track>> GrabRandomTracksAsync(TracksSource tracksSource) {
             ITracksGrabber grabber = grabbersProvider(tracksSource.Service);
             return grabber.GrabRandomTracksAsync(tracksSource);
         }
