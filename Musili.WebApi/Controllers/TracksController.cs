@@ -23,10 +23,5 @@ namespace Musili.WebApi.Controllers
             TracksCriteria criteriaSet = new TracksCriteria(tempos, genres);
             return await tracksProvider.GetTracksAsync(criteriaSet, lastId);
         }
-
-        [HttpGet("hello/{name}")]
-        public string Hello(string name) {
-            return $"Hello, {name}!";
-        }
     }
 }

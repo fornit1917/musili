@@ -10,17 +10,16 @@ namespace Musili.WebApi.Services
     public class TracksProvider : ITracksProvider
     {
         private ITracksSourcesRepository tracksSourceRepository;
+        private ICommonTracksGrabber grabber;
 
-        public TracksProvider(ITracksSourcesRepository tracksSourceRepository) {
+        public TracksProvider(ITracksSourcesRepository tracksSourceRepository, ICommonTracksGrabber grabber) {
             this.tracksSourceRepository = tracksSourceRepository;
+            this.grabber = grabber;
         }
 
-        public Task<List<Track>> GetTracksAsync(TracksCriteria criteria, int lastId = 0) {
-            var result = new List<Track> {
-                new Track(){ Artist = criteria.Genres.ToString(), Title = "Title 1", Url = "Url 1" },
-                new Track(){ Artist = criteria.Tempos.ToString(), Title = "Title 2", Url = "Url 2" },
-            };
-            return Task.FromResult(result);
+        public async Task<List<Track>> GetTracksAsync(TracksCriteria criteria, int lastId = 0) {
+            TracksSource tracksSource =  await tracksSourceRepository.GetRandomTracksSourceAsync(criteria);
+            return await grabber.GrabRandomTracksAsync(tracksSource);
         }
     }
 }

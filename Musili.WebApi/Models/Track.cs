@@ -33,6 +33,8 @@ namespace Musili.WebApi.Models
 
         [Column("expiration_datetime")]
         public DateTime ExpirationDatetime { get; set; }
+
+        public int RemainingLifeSeconds => (int)ExpirationDatetime.Subtract(DateTime.Now.AddSeconds(10)).TotalSeconds;
         
         public TracksSource TracksSource { get; set; }
     }
