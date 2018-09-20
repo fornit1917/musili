@@ -5,6 +5,6 @@ TestResults
 */bin
 */obj
 */testDir
-Musili.WebUi/node_modules
-Musili.WebUi/dist
+WebUi/node_modules
+WebUi/dist
 
