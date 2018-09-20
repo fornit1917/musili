@@ -11,6 +11,9 @@ namespace Musili.WebApi.Services.Grabbers.Yandex
     {
         private IYandexMusicClient client;
         private YandexUrlParser urlParser = new YandexUrlParser();
+        private TimeSpan linkLifeTime = new TimeSpan(0, 50, 0);
+        
+        public TimeSpan LinkLifeTime => linkLifeTime;
 
         public YandexTracksGrabber(IYandexMusicClient client) {
             this.client = client;

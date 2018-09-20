@@ -6,7 +6,7 @@ using Musili.WebApi.Models;
 
 namespace Musili.WebApi.Services.Grabbers
 {
-    public class TracksGrabber : ITracksGrabber
+    public class TracksGrabber : ICommonTracksGrabber
     {
         private Func<TracksSourceService, ITracksGrabber> grabbersProvider;
 
@@ -14,9 +14,16 @@ namespace Musili.WebApi.Services.Grabbers
             this.grabbersProvider = grabbersProvider;
         }
 
-        public Task<List<Track>> GrabRandomTracksAsync(TracksSource tracksSource) {
+        public async Task<List<Track>> GrabRandomTracksAsync(TracksSource tracksSource) {
             ITracksGrabber grabber = grabbersProvider(tracksSource.Service);
-            return grabber.GrabRandomTracksAsync(tracksSource);
+            DateTime expirationDatetime = DateTime.Now.Add(grabber.LinkLifeTime);
+            List<Track> tracks = await grabber.GrabRandomTracksAsync(tracksSource);
+            foreach (var track in tracks) {
+                track.Genre = tracksSource.Genre;
+                track.Tempo = tracksSource.Tempo;
+                track.ExpirationDatetime = expirationDatetime;
+            }
+            return tracks;
         }
     }
 }

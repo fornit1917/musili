@@ -30,6 +30,9 @@ namespace Musili.WebApi.Models
 
         [Column("tempo")]
         public Tempo Tempo { get; set; }
+
+        [Column("expiration_datetime")]
+        public DateTime ExpirationDatetime { get; set; }
         
         public TracksSource TracksSource { get; set; }
     }

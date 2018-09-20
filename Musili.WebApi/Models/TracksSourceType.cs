@@ -4,6 +4,7 @@ namespace Musili.WebApi.Models
     {
         YandexTracks,
         YandexPlaylistSearchQuery,
-        
+
+        VkGroupWall,   
     }
 }

@@ -28,9 +28,9 @@ namespace Musili.WebApi.Controllers
         }
 
         [HttpGet("")]
-        public object Index() {
-            List<int> list = new List<int>{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-            return RandomUtils.GetRandomSlice(list, 3);
+        public async Task<List<Track>> Index([FromServices] ICommonTracksGrabber grabber) {
+            var source = new TracksSource() { Service = TracksSourceService.Yandex, SourceType = TracksSourceType.YandexTracks, Genre = Genre.Electronic, Tempo = Tempo.Rhytmic, Value = "https://music.yandex.ru/users/Musili.Ru/playlists/1001" };
+            return await grabber.GrabRandomTracksAsync(source);
         }
     }
 }

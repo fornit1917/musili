@@ -28,6 +28,8 @@ namespace Musili.WebApi
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            services.AddSingleton<IYandexMusicClient, YandexMusicClient>();
+
             // grabbers for each service
             services.AddSingleton<YandexTracksGrabber>();
 
@@ -44,7 +46,7 @@ namespace Musili.WebApi
             });
 
             // common tracks grabber
-            services.AddSingleton<ITracksGrabber, TracksGrabber>();
+            services.AddSingleton<ICommonTracksGrabber, TracksGrabber>();
 
             services.AddDbContext<AppDbContext>(opts => {
                 opts.UseNpgsql(Configuration.GetConnectionString("MusiliDatabase"));

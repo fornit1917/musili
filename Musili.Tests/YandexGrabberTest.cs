@@ -11,7 +11,7 @@ namespace Musili.Tests
     [TestClass]
     public class YandexGrabberTest
     {
-        private ITracksGrabber grabber = GrabbersMocksFactory.CreateMockedGrabber();
+        private ICommonTracksGrabber grabber = GrabbersMocksFactory.CreateMockedGrabber();
 
         [TestMethod]
         public void TestGrabFromAlbum() {
@@ -24,8 +24,89 @@ namespace Musili.Tests
             };
 
             List<Track> tracks = grabber.GrabRandomTracksAsync(tracksSource).Result;
+            CheckTracks(tracks, 2, Genre.Rock, Tempo.Soft, DateTime.Now.AddMinutes(50));
+        }
+
+        [TestMethod]
+        public void TestGrabByArtist() {
+            TracksSource tracksSource = new TracksSource() {
+                Service = TracksSourceService.Yandex,
+                SourceType = TracksSourceType.YandexTracks,
+                Genre = Genre.Metal,
+                Tempo = Tempo.Soft,
+                Value = "https://music.yandex.ru/artist/2000"
+            };
+
+            List<Track> tracks = grabber.GrabRandomTracksAsync(tracksSource).Result;
+            CheckTracks(tracks, 2, Genre.Metal, Tempo.Soft, DateTime.Now.AddMinutes(50));            
+        }
+
+        [TestMethod]
+        public void TestGrabByPlaylist() {
+            TracksSource tracksSource = new TracksSource() {
+                Service = TracksSourceService.Yandex,
+                SourceType = TracksSourceType.YandexTracks,
+                Genre = Genre.Electronic,
+                Tempo = Tempo.Rhytmic,
+                Value = "https://music.yandex.ru/users/UserId/playlists/3000"
+            };
+
+            List<Track> tracks = grabber.GrabRandomTracksAsync(tracksSource).Result;
+            CheckTracks(tracks, 3, Genre.Electronic, Tempo.Rhytmic, DateTime.Now.AddMinutes(50));                        
+        }
+
+        [TestMethod]
+        public void TestGrabIncorrectUrl() {
+            TracksSource tracksSource = new TracksSource() {
+                Service = TracksSourceService.Yandex,
+                SourceType = TracksSourceType.YandexTracks,
+                Genre = Genre.Electronic,
+                Tempo = Tempo.Rhytmic,
+                Value = "https://music.yandex.ru/incorrecturl"
+            };
+
+            Exception expectedException = null;
+            try {
+                grabber.GrabRandomTracksAsync(tracksSource).Wait();
+            } catch (Exception e) {
+                expectedException = e;
+            }
+            Assert.IsNotNull(expectedException);
+        }
+
+        [TestMethod]
+        public void TestNotSupportedSource() {
+            TracksSource tracksSource = new TracksSource() {
+                Service = TracksSourceService.Yandex,
+                SourceType = TracksSourceType.VkGroupWall,
+                Genre = Genre.Electronic,
+                Tempo = Tempo.Rhytmic,
+                Value = "https://music.yandex.ru/incorrecturl"
+            };
+            
+            Exception expectedException = null;
+            try {
+                grabber.GrabRandomTracksAsync(tracksSource).Wait();
+            } catch (Exception e) {
+                expectedException = e;
+            }
+            Assert.IsNotNull(expectedException);
+        }
+
+        private void CheckTracks(List<Track> tracks, int maxCount, Genre genre, Tempo tempo, DateTime maxExpDatetime) {
             Assert.IsNotNull(tracks);
-            Assert.IsTrue(tracks.Count <= 2 && tracks.Count >= 0);
+            Assert.IsTrue(tracks.Count <= maxCount);
+            Assert.IsTrue(tracks.Count > 0);
+            
+            foreach (Track track in tracks) {
+                Assert.IsNotNull(track.Artist);
+                Assert.IsNotNull(track.Title);
+                Assert.IsNotNull(track.Url);
+                Assert.IsNotNull(track.ExpirationDatetime);
+                Assert.IsTrue(track.ExpirationDatetime <= maxExpDatetime);
+                Assert.AreEqual(genre, track.Genre);
+                Assert.AreEqual(tempo, track.Tempo);
+            }
         }
     }
 }

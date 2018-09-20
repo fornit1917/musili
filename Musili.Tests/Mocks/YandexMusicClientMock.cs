@@ -22,24 +22,28 @@ namespace Musili.Tests.Mocks
 
         public Task<List<int>> GetTracksIdsByAlbumAsync(string albumId)
         {
-            int start = Int32.Parse(albumId);
-            return Task.FromResult(new List<int> {
+            return Task.FromResult(GetTracksIds(albumId));
+        }
+
+        public Task<List<int>> GetTracksIdsByArtistAsync(string artistId)
+        {
+            return Task.FromResult(GetTracksIds(artistId));
+        }
+
+        public Task<List<int>> GetTracksIdsByUserPlaylistAsync(string userId, string playlistId)
+        {
+            return Task.FromResult(GetTracksIds(playlistId));
+        }
+
+        private List<int> GetTracksIds(string id) {
+            int start = Int32.Parse(id);
+            return new List<int> {
                 start + 1,
                 start + 2,
                 start + 3,
                 start + 4,
                 start + 5,
-            });
-        }
-
-        public Task<List<int>> GetTracksIdsByArtistAsync(string artistId)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<List<int>> GetTracksIdsByUserPlaylistAsync(string userId, string playlistId)
-        {
-            throw new System.NotImplementedException();
+            };
         }
     }
 }

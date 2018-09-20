@@ -5,10 +5,8 @@ using Musili.WebApi.Models;
 
 namespace Musili.WebApi.Interfaces
 {
-    public interface ITracksGrabber
+    public interface ICommonTracksGrabber
     {
-        TimeSpan LinkLifeTime { get; }
-        
         Task<List<Track>> GrabRandomTracksAsync(TracksSource tracksSource);
     }
 }
