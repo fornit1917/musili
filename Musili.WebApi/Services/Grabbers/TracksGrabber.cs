@@ -19,8 +19,7 @@ namespace Musili.WebApi.Services.Grabbers
             DateTime expirationDatetime = DateTime.Now.Add(grabber.LinkLifeTime);
             List<Track> tracks = await grabber.GrabRandomTracksAsync(tracksSource);
             foreach (var track in tracks) {
-                track.Genre = tracksSource.Genre;
-                track.Tempo = tracksSource.Tempo;
+                track.TracksSource = tracksSource;
                 track.ExpirationDatetime = expirationDatetime;
             }
             return tracks;

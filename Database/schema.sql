@@ -14,8 +14,6 @@ create index tracks_source_genre_idx on app.tracks_source(genre);
 
 create table app.track (
 	id serial primary key,
-	tempo smallint not null,
-	genre smallint not null,	
 	tracks_source_id int not null references app.tracks_source(id) on delete cascade on update cascade,
 	artist varchar(255) not null,
 	title varchar(255) not null,
@@ -25,5 +23,3 @@ create table app.track (
 );
 create index track_tracks_source_idx on app.track(tracks_source_id);
 create index track_expiration_datetime_idx on app.track(expiration_datetime);
-create index track_tempo_idx on app.track(tempo);
-create index track_genre_idx on app.track(genre);

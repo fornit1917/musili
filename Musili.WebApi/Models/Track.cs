@@ -25,12 +25,6 @@ namespace Musili.WebApi.Models
         [Column("tracks_source_id")]
         public int TracksSourceId { get; set; }
 
-        [Column("genre")]
-        public Genre Genre { get; set; }
-
-        [Column("tempo")]
-        public Tempo Tempo { get; set; }
-
         [Column("expiration_datetime")]
         public DateTime ExpirationDatetime { get; set; }
 

@@ -24,7 +24,7 @@ namespace Musili.Tests
             };
 
             List<Track> tracks = grabber.GrabRandomTracksAsync(tracksSource).Result;
-            CheckTracks(tracks, 2, Genre.Rock, Tempo.Soft, DateTime.Now.AddMinutes(50));
+            CheckTracks(tracks, 2, tracksSource, DateTime.Now.AddMinutes(50));
         }
 
         [TestMethod]
@@ -38,7 +38,7 @@ namespace Musili.Tests
             };
 
             List<Track> tracks = grabber.GrabRandomTracksAsync(tracksSource).Result;
-            CheckTracks(tracks, 2, Genre.Metal, Tempo.Soft, DateTime.Now.AddMinutes(50));            
+            CheckTracks(tracks, 2, tracksSource, DateTime.Now.AddMinutes(50));            
         }
 
         [TestMethod]
@@ -52,7 +52,7 @@ namespace Musili.Tests
             };
 
             List<Track> tracks = grabber.GrabRandomTracksAsync(tracksSource).Result;
-            CheckTracks(tracks, 3, Genre.Electronic, Tempo.Rhytmic, DateTime.Now.AddMinutes(50));                        
+            CheckTracks(tracks, 3, tracksSource, DateTime.Now.AddMinutes(50));                        
         }
 
         [TestMethod]
@@ -93,7 +93,7 @@ namespace Musili.Tests
             Assert.IsNotNull(expectedException);
         }
 
-        private void CheckTracks(List<Track> tracks, int maxCount, Genre genre, Tempo tempo, DateTime maxExpDatetime) {
+        private void CheckTracks(List<Track> tracks, int maxCount, TracksSource source, DateTime maxExpDatetime) {
             Assert.IsNotNull(tracks);
             Assert.IsTrue(tracks.Count <= maxCount);
             Assert.IsTrue(tracks.Count > 0);
@@ -103,9 +103,11 @@ namespace Musili.Tests
                 Assert.IsNotNull(track.Title);
                 Assert.IsNotNull(track.Url);
                 Assert.IsNotNull(track.ExpirationDatetime);
+                Assert.IsNotNull(track.TracksSource);
                 Assert.IsTrue(track.ExpirationDatetime <= maxExpDatetime);
-                Assert.AreEqual(genre, track.Genre);
-                Assert.AreEqual(tempo, track.Tempo);
+                Assert.AreEqual(source.Genre, track.TracksSource.Genre);
+                Assert.AreEqual(source.Tempo, track.TracksSource.Tempo);
+                Assert.AreEqual(source.Id, track.TracksSource.Id);
             }
         }
     }
