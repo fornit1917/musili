@@ -23,6 +23,9 @@ namespace Musili.WebApi.Models
         [Column("title")]
         public string Title { get; set; }
 
+        [Column("duration")]
+        public int Duration { get; set; }
+
         [Column("url")]
         public string Url { get; set; }
 

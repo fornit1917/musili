@@ -28,6 +28,7 @@ namespace Musili.WebApi.Services.Grabbers.Yandex
                     OriginalId = (string)t["id"],
                     Title = version == null ? (string)t["title"] : $"{t["title"]} ({version})",
                     Artist = (string)t["artists"][0]["name"],
+                    Duration = t["durationMs"] != null ? Convert.ToInt32(t["durationMs"]) / 1000 : 0,
                 }
             ).ToList();
 
