@@ -45,7 +45,7 @@ namespace Musili.WebApi.Services.Grabbers.Yandex
                     break;        
             }
 
-            ids = RandomUtils.GetRandomSlice(ids, count);
+            ids = RandomUtils.GetRandomItems(ids, count);
             return await client.GetTracksByIdsAsync(ids);
         }
     }

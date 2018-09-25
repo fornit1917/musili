@@ -17,17 +17,30 @@ namespace Musili.WebApi.Utils
             return rnd.Next(start, end);
         }
 
-        public static List<T> GetRandomSlice<T>(List<T> items, int count) {
+        public static List<T> GetRandomItems<T>(List<T> items, int count) {
             if (count > items.Count) {
                 count = items.Count;
             }
-            int start = rnd.Next(0, items.Count);
-            if (items.Count - start >= count) {
-                return items.GetRange(start, count);
-            } else {
-                int firstCount = items.Count - start;
-                return items.GetRange(start, firstCount).Concat(items.GetRange(0, count - firstCount)).ToList();
+
+            HashSet<int> indexes = new HashSet<int>(count);
+            List<T> result = new List<T>(count);
+            for (int i = 0; i < count; i++) {
+                int index = rnd.Next(0, items.Count);
+                while (true) {
+                    if (index >= items.Count) {
+                        index = 0;
+                    }
+                    if (!indexes.Contains(index)) {
+                        break;
+                    }
+                    index++;
+                }
+
+                indexes.Add(index);
+                result.Add(items[index]);
             }
+
+            return result;
         }
     }
 }
