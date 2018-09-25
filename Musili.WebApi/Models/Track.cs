@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using Musili.WebApi.Models;
+using Newtonsoft.Json;
 
 namespace Musili.WebApi.Models
 {
@@ -12,6 +13,9 @@ namespace Musili.WebApi.Models
     {
         [Column("id")]
         public int Id { get; set; }
+
+        [JsonIgnore]
+        public string OriginalId { get; set; }
 
         [Column("artist")]
         public string Artist { get; set; }
@@ -23,6 +27,7 @@ namespace Musili.WebApi.Models
         public string Url { get; set; }
 
         [Column("tracks_source_id")]
+        [JsonIgnore]
         public int TracksSourceId { get; set; }
 
         [Column("expiration_datetime")]
@@ -30,6 +35,7 @@ namespace Musili.WebApi.Models
 
         public int RemainingLifeSeconds => (int)ExpirationDatetime.Subtract(DateTime.Now.AddSeconds(10)).TotalSeconds;
         
+        [JsonIgnore]
         public TracksSource TracksSource { get; set; }
     }
 }
