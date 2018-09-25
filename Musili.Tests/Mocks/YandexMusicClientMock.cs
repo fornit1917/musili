@@ -10,7 +10,7 @@ namespace Musili.Tests.Mocks
 {
     public class YandexMusicClientMock : IYandexMusicClient
     {
-        public Task<List<Track>> GetTracksByIdsAsync(List<int> ids)
+        public Task<List<Track>> GetTracksByIdsAsync(List<string> ids)
         {
             List<Track> tracks = ids.Select(id => new Track() {
                 Artist = "Artist",
@@ -20,29 +20,29 @@ namespace Musili.Tests.Mocks
             return Task.FromResult(tracks);
         }
 
-        public Task<List<int>> GetTracksIdsByAlbumAsync(string albumId)
+        public Task<List<string>> GetTracksIdsByAlbumAsync(string albumId)
         {
             return Task.FromResult(GetTracksIds(albumId));
         }
 
-        public Task<List<int>> GetTracksIdsByArtistAsync(string artistId)
+        public Task<List<string>> GetTracksIdsByArtistAsync(string artistId)
         {
             return Task.FromResult(GetTracksIds(artistId));
         }
 
-        public Task<List<int>> GetTracksIdsByUserPlaylistAsync(string userId, string playlistId)
+        public Task<List<string>> GetTracksIdsByUserPlaylistAsync(string userId, string playlistId)
         {
             return Task.FromResult(GetTracksIds(playlistId));
         }
 
-        private List<int> GetTracksIds(string id) {
+        private List<string> GetTracksIds(string id) {
             int start = Int32.Parse(id);
-            return new List<int> {
-                start + 1,
-                start + 2,
-                start + 3,
-                start + 4,
-                start + 5,
+            return new List<string> {
+                (start + 1).ToString(),
+                (start + 2).ToString(),
+                (start + 3).ToString(),
+                (start + 4).ToString(),
+                (start + 5).ToString(),
             };
         }
     }

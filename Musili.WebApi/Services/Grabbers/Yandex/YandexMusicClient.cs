@@ -8,7 +8,7 @@ namespace Musili.WebApi.Services.Grabbers.Yandex
 {
     public class YandexMusicClient : IYandexMusicClient
     {
-        public Task<List<Track>> GetTracksByIdsAsync(List<int> ids)
+        public Task<List<Track>> GetTracksByIdsAsync(List<string> ids)
         {
             List<Track> tracks = ids.Select(id => new Track() {
                 Artist = "Artist",
@@ -18,19 +18,19 @@ namespace Musili.WebApi.Services.Grabbers.Yandex
             return Task.FromResult(tracks);
         }
 
-        public Task<List<int>> GetTracksIdsByAlbumAsync(string albumId)
+        public Task<List<string>> GetTracksIdsByAlbumAsync(string albumId)
         {
-            return Task.FromResult(new List<int>() { 1, 2, 3, 4, 5 });
+            return Task.FromResult(new List<string>() { "1", "2", "3", "4", "5" });
         }
 
-        public Task<List<int>> GetTracksIdsByArtistAsync(string artistId)
+        public Task<List<string>> GetTracksIdsByArtistAsync(string artistId)
         {
-            return Task.FromResult(new List<int>() { 1, 2, 3, 4, 5 });
+            return Task.FromResult(new List<string>() { "1", "2", "3", "4", "5" });
         }
 
-        public Task<List<int>> GetTracksIdsByUserPlaylistAsync(string userId, string playlistId)
+        public Task<List<string>> GetTracksIdsByUserPlaylistAsync(string userId, string playlistId)
         {
-            return Task.FromResult(new List<int>() { 1, 2, 3, 4, 5 });
+            return Task.FromResult(new List<string>() { "1", "2", "3", "4", "5" });
         }
     }
 }

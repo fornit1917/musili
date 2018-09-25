@@ -30,7 +30,7 @@ namespace Musili.WebApi.Services.Grabbers.Yandex
 
         private async Task<List<Track>> GrabTracksFromList(string url) {
             YandexPlaylistParams playlistParams = urlParser.ParsePlaylistUrl(url);
-            List<int> ids = null;
+            List<string> ids = null;
             int count = 2;
             switch (playlistParams.type) {
                 case YandexPlaylistType.UserPlaylist:
