@@ -2,6 +2,7 @@ create schema if not exists app;
 
 create table app.tracks_source (
 	id serial primary key,
+	is_priority boolean not null default false,
 	tempo smallint not null,
 	genre smallint not null,
 	service smallint not null,
@@ -11,6 +12,7 @@ create table app.tracks_source (
 );
 create index tracks_source_tempo_idx on app.tracks_source(tempo);
 create index tracks_source_genre_idx on app.tracks_source(genre);
+create index tracks_source_is_priority_idx on app.tracks_source(is_priority);
 
 create table app.track (
 	id serial primary key,
