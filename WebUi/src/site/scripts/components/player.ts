@@ -1,31 +1,30 @@
-import Settings from "./settings";
 import { nodeListToArray } from "../utils/dom-utils";
-import AppStorage from "../services/app-storage";
+import { TracksCriteria } from "../services/types";
 
-export default class Player {    
+interface PlayerMessageHandlers {
+    onShowSettings: () => void;
+    onHideSettings: () => void;
+}
+
+export default class Player {
     private root: HTMLElement;
     private playPauseBtn: HTMLElement;
     private playIcon: HTMLElement;
     private pauseIcon: HTMLElement;
     private nextBtn: HTMLElement;
+
     private settingsBtn: HTMLElement;
-    private settings: Settings;
+    private isSettingsHidden: boolean = true;
 
     private isPaused: boolean = true;
     private isDisabled: boolean = true;
     private hideSettingsTimeoutId: number = 0;
     private applySettingsTimeoutId: number = 0;
 
-    private storage: AppStorage;
+    private messageHandlers: PlayerMessageHandlers;
 
-    constructor(selector: string, storage: AppStorage, settings: Settings) {
-        this.settings = settings;
-        this.settings.setCallback(() => {
-            this.applySettingsAfterTimeout();
-            this.hideSettingsAfterTimeout();
-        });
-        
-        this.storage = storage;
+    constructor(selector: string, messageHandlers: PlayerMessageHandlers) {
+        this.messageHandlers = messageHandlers;
 
         this.root = document.querySelector(selector);
         this.playPauseBtn = this.root.querySelector(".js-play");
@@ -45,13 +44,15 @@ export default class Player {
         this.setDisabled(false);
     }
 
-    private applySettingsAfterTimeout() {
+    public applyTracksSettingsAfterTimeout(settings: TracksCriteria) {
+        this.hideSettingsAfterTimeout();
+
         if (this.applySettingsTimeoutId) {
             clearTimeout(this.applySettingsTimeoutId);
         }
         this.applySettingsTimeoutId = setTimeout(() => {
             console.log("Settings was changed!");
-            console.log({ tempo: this.storage.getTempo(), genres: this.storage.getGenres() });
+            console.log(settings);
         }, 1500);
     }
 
@@ -71,7 +72,6 @@ export default class Player {
         const btn = this.settingsBtn;
         const icon = btn.querySelector(".js-icon") as HTMLElement;
         const text = btn.querySelector(".js-text") as HTMLElement;
-        this.settings.hide();
         text.innerText = btn.dataset.text;
         icon.style.display = "block";
 
@@ -79,6 +79,9 @@ export default class Player {
             clearTimeout(this.hideSettingsTimeoutId);
             this.hideSettingsTimeoutId = 0;
         }
+
+        this.messageHandlers.onHideSettings();
+        this.isSettingsHidden = true;
     }
 
     private onPlayPauseClick(e: MouseEvent) {
@@ -112,8 +115,9 @@ export default class Player {
         const btn = this.settingsBtn;
         const icon = btn.querySelector(".js-icon") as HTMLElement;
         const text = btn.querySelector(".js-text") as HTMLElement;
-        if (this.settings.isHidden) {
-            this.settings.show();
+        if (this.isSettingsHidden) {
+            this.messageHandlers.onShowSettings();
+            this.isSettingsHidden = false;
             text.innerText = btn.dataset.textHide;
             icon.style.display = "none";
             this.hideSettingsAfterTimeout();

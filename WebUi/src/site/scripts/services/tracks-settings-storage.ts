@@ -1,7 +1,7 @@
 const TEMPO_KEY = "msl_tempo";
 const GENRES_KEY = "msl_genres"
 
-export default class AppStorage {
+export default class TracksSettingsStorage {
     public setTempo(tempo: string) {
         localStorage.setItem(TEMPO_KEY, tempo);
     }

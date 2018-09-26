@@ -1,4 +1,4 @@
-export default class Bg {
+export default class Background {
     private root: HTMLElement;
 
     constructor(selector: string) {

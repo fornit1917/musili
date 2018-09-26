@@ -1,45 +1,40 @@
 import { addEventListenerToList, nodeListToArray } from "../utils/dom-utils";
-import AppStorage from "../services/app-storage";
+import TracksSettingsStorage from "../services/tracks-settings-storage";
 import { TracksCriteria } from "../services/types";
 
 const SELECTED_CLASS = "selectable-btn--selected";
 
-export default class Settings {
+export default class TracksSettings {
+    private storage: TracksSettingsStorage;
     private root: HTMLElement;
-    private tempos: HTMLElement[];
-    private genres: HTMLElement[];
-    private storage: AppStorage;
-    private changesCallback: () => void;
+    private temposButtons: HTMLElement[];
+    private genresButtons: HTMLElement[];
+    private onChanged: () => void;
 
-    public isHidden: boolean = false;
+    constructor(selector: string, onChanged: () => void) {
+        this.storage = new TracksSettingsStorage();
+        this.onChanged = onChanged;
 
-    constructor(selector: string, storage: AppStorage) {
-        this.storage = storage;
         this.root = document.querySelector(selector);
-        const tempos = this.root.querySelectorAll(".js-tempo");
-        const genres = this.root.querySelectorAll(".js-genre");
-        addEventListenerToList(tempos, "click", e => { this.onTempoClick(e as MouseEvent); });
-        addEventListenerToList(genres, "click", e => { this.onGenreClick(e as MouseEvent); });
+        const temposButtons = this.root.querySelectorAll(".js-tempo");
+        const genresButtons = this.root.querySelectorAll(".js-genre");
+        addEventListenerToList(temposButtons, "click", e => { this.onTempoClick(e as MouseEvent); });
+        addEventListenerToList(genresButtons, "click", e => { this.onGenreClick(e as MouseEvent); });
+        this.temposButtons = nodeListToArray(temposButtons);
+        this.genresButtons = nodeListToArray(genresButtons);
 
-        this.tempos = nodeListToArray(tempos);
-        this.genres = nodeListToArray(genres);
-
-        const storedSettings = this.getSettingsFromStore();
-        this.tempos.forEach(btn => {
+        const storedSettings = this.getCurrentSettings();
+        this.temposButtons.forEach(btn => {
             if (storedSettings.tempo === btn.dataset.id) {
                 btn.classList.add(SELECTED_CLASS);
                 return;
             }
         });
-        this.genres.forEach(btn => {
+        this.genresButtons.forEach(btn => {
             if (storedSettings.genres.some(item => item === btn.dataset.id)) {
                 btn.classList.add("selectable-btn--selected");
             }
         });
-    }
-
-    public setCallback(cb: () => void): void {
-        this.changesCallback = cb;
     }
 
     public hide() {
@@ -47,7 +42,6 @@ export default class Settings {
         setTimeout(() =>{
             this.root.classList.remove("tracks-settings-container--initial");
             this.root.style.display = "none";
-            this.isHidden = true;
         }, 300);
     }
 
@@ -55,17 +49,10 @@ export default class Settings {
         this.root.style.display = "block";
         setTimeout(() => {
             this.root.classList.remove("tracks-settings-container--hidden");
-            this.isHidden = false;
         }, 100);
     }
 
-    private notifyAboutChanges() {
-        if (this.changesCallback) {
-            this.changesCallback();
-        }
-    }
-
-    private getSettingsFromStore(): TracksCriteria {
+    public getCurrentSettings(): TracksCriteria {
         return {
             tempo: this.storage.getTempo(),
             genres: this.storage.getGenres(),
@@ -73,7 +60,7 @@ export default class Settings {
     }
 
     private getSelectedGenresButtons(): HTMLElement[] {
-        return this.genres.filter(item => item.classList.contains(SELECTED_CLASS));
+        return this.genresButtons.filter(item => item.classList.contains(SELECTED_CLASS));
     }
 
     private getSelectedGenres(): string[] {
@@ -81,11 +68,11 @@ export default class Settings {
     }
 
     private onTempoClick(e: MouseEvent) {
-        this.tempos.forEach(btn => {
+        this.temposButtons.forEach(btn => {
             if (btn.dataset.id === (e.target as HTMLElement).dataset.id) {
                 btn.classList.add(SELECTED_CLASS);
                 this.storage.setTempo(String(btn.dataset.id));
-                this.notifyAboutChanges();
+                this.onChanged();
             } else {
                 btn.classList.remove(SELECTED_CLASS);
             }
@@ -100,6 +87,6 @@ export default class Settings {
         }
         target.classList.toggle(SELECTED_CLASS);
         this.storage.setGenres(this.getSelectedGenres());
-        this.notifyAboutChanges();
+        this.onChanged();
     }
 }
