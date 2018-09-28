@@ -9,6 +9,8 @@ class App {
     private tracksSettings: TracksSettings;
     private player: Player;
 
+    private isStarted: boolean = false;
+
     public constructor() {
         this.startBtn = new StartButton("#start-btn", () => { this.onAppStart(); });
         this.background = new Background("#bg");
@@ -20,9 +22,10 @@ class App {
     }
 
     private onAppStart() {
+        this.isStarted = true;
         this.background.show();
         this.tracksSettings.hide();
-        this.player.loadAndStart();
+        this.player.loadAndStart(this.tracksSettings.getCurrentSettings());
     }
 
     private onShowTracksSettings() {
@@ -34,8 +37,10 @@ class App {
     }
 
     private onTracksSettingsChanged() {
-        const settings = this.tracksSettings.getCurrentSettings();
-        this.player.applyTracksSettingsAfterTimeout(settings);
+        if (this.isStarted) {
+            const settings = this.tracksSettings.getCurrentSettings();
+            this.player.applyTracksSettingsAfterTimeout(settings);
+        }
     }
 }
 
