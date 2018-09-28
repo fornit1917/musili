@@ -1,6 +1,6 @@
 import { addEventListenerToList, nodeListToArray } from "../utils/dom-utils";
 import TracksSettingsStorage from "../services/tracks-settings-storage";
-import { TracksCriteria } from "../services/types";
+import { TracksCriteria } from "../dto-types";
 
 const SELECTED_CLASS = "selectable-btn--selected";
 

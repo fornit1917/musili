@@ -1,4 +1,4 @@
-import { TracksCriteria } from "../services/types";
+import { TracksCriteria } from "../dto-types";
 import PlayerSettingsButton from "./player-settings-button";
 import PlayerControls from "./player-controls";
 
