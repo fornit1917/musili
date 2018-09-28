@@ -22,7 +22,6 @@ export default class PlayerSettingsButton {
         this.text = this.btn.querySelector(".js-text") as HTMLElement;
         
         this.btn.addEventListener("click", () => { this.onClick(); });
-
     }
 
     public setDisabled(isDisabled: boolean) {

@@ -1,6 +1,9 @@
-import { TracksCriteria } from "../dto-types";
+import { TracksCriteria, Track } from "../dto-types";
 import PlayerSettingsButton from "./player-settings-button";
 import PlayerControls from "./player-controls";
+import PlayerTrackBlock from "./player-track-block";
+import ApiClient from "../services/api-client";
+import Playlist from "../services/playlist";
 
 interface PlayerMessageHandlers {
     onShowSettings: () => void;
@@ -12,14 +15,18 @@ export default class Player {
 
     private settingsBtn: PlayerSettingsButton;
     private controls: PlayerControls;
+    private trackBlock: PlayerTrackBlock;
+
+    private playlist: Playlist;
     
     private applySettingsTimeoutId: number = 0;
 
     private messageHandlers: PlayerMessageHandlers;
 
-    constructor(selector: string, messageHandlers: PlayerMessageHandlers) {
+    constructor(selector: string, apiClient: ApiClient, messageHandlers: PlayerMessageHandlers) {
         this.messageHandlers = messageHandlers;
         this.root = document.querySelector(selector);
+        
 
         this.settingsBtn = new PlayerSettingsButton(this.root, this.messageHandlers);
         this.controls = new PlayerControls(this.root, {
@@ -27,13 +34,27 @@ export default class Player {
             onPlay: () => { this.onPlay(); },
             onPause: () => { this.onPause(); },
         });
+        this.trackBlock = new PlayerTrackBlock(this.root);
+
+        this.playlist = new Playlist(apiClient);
         
         this.setDisabled(true);
     }
 
-    public loadAndStart(settings: TracksCriteria) {
-        console.log("Start with settings!");
-        console.log(settings);
+    public loadAndStart(tracksCriteria: TracksCriteria | null = null) {
+        this.startLoading();
+        this.playlist.loadTracks(tracksCriteria)
+            .then(() => {
+                const track = this.playlist.getNextTrack();
+                if (track !== null) {
+                    this.playTrack(track);
+                } else {
+                    throw new Error();
+                }
+            })
+            .catch(() => {
+                alert("Tracks loading error");
+            });
     }
 
     public applyTracksSettingsAfterTimeout(settings: TracksCriteria) {
@@ -43,8 +64,7 @@ export default class Player {
             clearTimeout(this.applySettingsTimeoutId);
         }
         this.applySettingsTimeoutId = setTimeout(() => {
-            console.log("Settings was changed!");
-            console.log(settings);
+            this.loadAndStart(settings);
         }, 1500);
     }
 
@@ -52,6 +72,17 @@ export default class Player {
         this.settingsBtn.setDisabled(isDisabled);
         this.controls.setDisabled(isDisabled);
     }
+
+    private startLoading() {
+        this.setDisabled(true);
+        this.trackBlock.showLoadingIndicator();
+    }
+
+    private playTrack(track: Track) {
+        this.setDisabled(false);
+        this.trackBlock.showTrackInfo(track);
+        this.controls.forcePlay();
+    }    
 
     private onPlay() {
         console.log("Play!");
@@ -62,6 +93,12 @@ export default class Player {
     }
 
     private onNext() {
+        const track = this.playlist.getNextTrack();
+        if (track === null) {
+            this.loadAndStart();
+        } else {
+            this.playTrack(track);
+        }
         console.log("Next!");
     }
 }

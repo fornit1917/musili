@@ -2,6 +2,7 @@
 import TracksSettings from "./components/tracks-settings";
 import StartButton from "./components/start-button";
 import Background from "./components/background";
+import ApiClient from "./services/api-client";
 
 class App {
     private startBtn: StartButton;
@@ -15,7 +16,7 @@ class App {
         this.startBtn = new StartButton("#start-btn", () => { this.onAppStart(); });
         this.background = new Background("#bg");
         this.tracksSettings = new TracksSettings("#settings", () => { this.onTracksSettingsChanged(); });
-        this.player = new Player("#player", {
+        this.player = new Player("#player", new ApiClient(), {
             onHideSettings: () => { this.onHideTracksSettings(); },
             onShowSettings: () => { this.onShowTracksSettings(); },
         });
