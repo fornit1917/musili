@@ -12,7 +12,7 @@ interface PlayerMessageHandlers {
 
 export default class Player {
     private root: HTMLElement;
-
+    private audio: HTMLAudioElement;
     private settingsBtn: PlayerSettingsButton;
     private controls: PlayerControls;
     private trackBlock: PlayerTrackBlock;
@@ -26,7 +26,9 @@ export default class Player {
     constructor(selector: string, apiClient: ApiClient, messageHandlers: PlayerMessageHandlers) {
         this.messageHandlers = messageHandlers;
         this.root = document.querySelector(selector);
-        
+        this.audio = this.root.querySelector(".js-audio");
+        this.audio.onended = () => { this.onNext(); };
+        this.audio.onerror = () => { this.onNext(); };
 
         this.settingsBtn = new PlayerSettingsButton(this.root, this.messageHandlers);
         this.controls = new PlayerControls(this.root, {
@@ -37,7 +39,7 @@ export default class Player {
         this.trackBlock = new PlayerTrackBlock(this.root);
 
         this.playlist = new Playlist(apiClient);
-        
+
         this.setDisabled(true);
     }
 
@@ -82,15 +84,17 @@ export default class Player {
     private playTrack(track: Track) {
         this.setDisabled(false);
         this.trackBlock.showTrackInfo(track);
+        this.audio.src = track.url;
+        this.audio.play();
         this.controls.forcePlay();
     }    
 
     private onPlay() {
-        console.log("Play!");
+        this.audio.play();
     }
 
     private onPause() {
-        console.log("Pause!");
+        this.audio.pause();
     }
 
     private onNext() {
@@ -100,6 +104,5 @@ export default class Player {
         } else {
             this.playTrack(track);
         }
-        console.log("Next!");
     }
 }

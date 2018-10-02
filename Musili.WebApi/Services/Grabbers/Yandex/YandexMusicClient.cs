@@ -32,6 +32,7 @@ namespace Musili.WebApi.Services.Grabbers.Yandex
                 }
             ).ToList();
 
+            int i = 0;
             foreach (Track track in tracks) {
                 string trackInfoUrl = $"https://music.yandex.ru/api/v2.1/handlers/track/{track.OriginalId}/track/download/m?hq=1";
                 JToken trackInfoData = await RequestJsonAsync(trackInfoUrl);
@@ -47,9 +48,11 @@ namespace Musili.WebApi.Services.Grabbers.Yandex
 
                 track.Url = $"https://{host}/get-mp3/{hash}/{ts}{path}";
 
-                if (tracks.Count > 1) {
+                if (tracks.Count > 1 && i < tracks.Count - 1) {
                     await Task.Delay(1000);
                 }
+
+                i++;
             }
 
             return tracks;
