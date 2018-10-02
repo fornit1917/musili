@@ -107,5 +107,11 @@ module.exports = function (env, options) {
                 { test: /\.twig$/, loader: "twig-loader" }
             ],
         },
+
+        devServer: {
+            proxy: {
+                '/api': 'http://localhost:57009',
+              }
+        }
     };
 };

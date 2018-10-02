@@ -52,8 +52,9 @@ export default class Player {
                     throw new Error();
                 }
             })
-            .catch(() => {
+            .catch(e => {
                 alert("Tracks loading error");
+                console.log(e);
             });
     }
 
@@ -79,6 +80,7 @@ export default class Player {
     }
 
     private playTrack(track: Track) {
+        console.log(track);
         this.setDisabled(false);
         this.trackBlock.showTrackInfo(track);
         this.controls.forcePlay();

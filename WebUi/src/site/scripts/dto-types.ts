@@ -7,4 +7,6 @@ export interface Track {
     artist: string;
     title: string;
     url: string;
+    remainingLifeSeconds: number;
+    localExpirationTime: number;
 }
