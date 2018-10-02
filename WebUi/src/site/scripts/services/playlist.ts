@@ -50,9 +50,18 @@ export default class Playlist {
         }
 
         if (this.index < this.tracks.length) {
+            if (this.index > 10) {
+                console.log("REMOVE OLD!");
+                this.tracks = this.tracks.slice(this.index, this.tracks.length-1);
+                this.index = 0;
+            }
+
             if (this.index === this.tracks.length-1) {
                 this.loadTracks();
             }
+
+            console.log(this.tracks);
+            console.log(this.index);
             return this.tracks[this.index];
         }
 

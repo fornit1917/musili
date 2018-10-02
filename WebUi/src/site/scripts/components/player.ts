@@ -80,7 +80,6 @@ export default class Player {
     }
 
     private playTrack(track: Track) {
-        console.log(track);
         this.setDisabled(false);
         this.trackBlock.showTrackInfo(track);
         this.controls.forcePlay();
