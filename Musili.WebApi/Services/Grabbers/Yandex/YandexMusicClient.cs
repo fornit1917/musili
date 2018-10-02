@@ -46,6 +46,10 @@ namespace Musili.WebApi.Services.Grabbers.Yandex
                 string ts = (string)trackSrcData["ts"];
 
                 track.Url = $"https://{host}/get-mp3/{hash}/{ts}{path}";
+
+                if (tracks.Count > 1) {
+                    await Task.Delay(1000);
+                }
             }
 
             return tracks;

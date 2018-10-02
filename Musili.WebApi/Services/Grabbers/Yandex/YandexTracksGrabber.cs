@@ -31,11 +31,11 @@ namespace Musili.WebApi.Services.Grabbers.Yandex
         private async Task<List<Track>> GrabTracksFromList(string url) {
             YandexPlaylistParams playlistParams = urlParser.ParsePlaylistUrl(url);
             List<string> ids = null;
-            int count = 2;
+            int count = 1;
             switch (playlistParams.type) {
                 case YandexPlaylistType.UserPlaylist:
                     ids = await client.GetTracksIdsByUserPlaylistAsync(playlistParams.userId, playlistParams.playlistId);
-                    count = 3;
+                    count = 2;
                     break;
                 case YandexPlaylistType.Artist:
                     ids = await client.GetTracksIdsByArtistAsync(playlistParams.playlistId);

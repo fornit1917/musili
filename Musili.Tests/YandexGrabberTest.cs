@@ -24,7 +24,7 @@ namespace Musili.Tests
             };
 
             List<Track> tracks = grabber.GrabRandomTracksAsync(tracksSource).Result;
-            CheckTracks(tracks, 2, tracksSource, DateTime.Now.AddMinutes(50));
+            CheckTracks(tracks, 1, tracksSource, DateTime.Now.AddMinutes(50));
         }
 
         [TestMethod]
@@ -38,7 +38,7 @@ namespace Musili.Tests
             };
 
             List<Track> tracks = grabber.GrabRandomTracksAsync(tracksSource).Result;
-            CheckTracks(tracks, 2, tracksSource, DateTime.Now.AddMinutes(50));            
+            CheckTracks(tracks, 1, tracksSource, DateTime.Now.AddMinutes(50));            
         }
 
         [TestMethod]
@@ -52,7 +52,7 @@ namespace Musili.Tests
             };
 
             List<Track> tracks = grabber.GrabRandomTracksAsync(tracksSource).Result;
-            CheckTracks(tracks, 3, tracksSource, DateTime.Now.AddMinutes(50));                        
+            CheckTracks(tracks, 2, tracksSource, DateTime.Now.AddMinutes(50));                        
         }
 
         [TestMethod]
