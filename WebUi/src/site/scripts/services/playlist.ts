@@ -52,7 +52,7 @@ export default class Playlist {
         if (this.index < this.tracks.length) {
             if (this.index > 10) {
                 console.log("REMOVE OLD!");
-                this.tracks = this.tracks.slice(this.index, this.tracks.length-1);
+                this.tracks = this.tracks.slice(this.index, this.tracks.length);
                 this.index = 0;
             }
 
