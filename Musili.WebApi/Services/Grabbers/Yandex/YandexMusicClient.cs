@@ -4,18 +4,35 @@ using System;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.IO;
 using Musili.WebApi.Interfaces;
 using Musili.WebApi.Models;
 using Musili.WebApi.Utils;
-
-
 
 namespace Musili.WebApi.Services.Grabbers.Yandex
 {
     public class YandexMusicClient : IYandexMusicClient
     {
         private static string SALT = "XGRlBW9FXlekgbPrRHuSiA";
+
+        private readonly HttpClient httpClient;
+
+        public YandexMusicClient(HttpClient httpClient) {
+            this.httpClient = httpClient;
+            this.httpClient.DefaultRequestHeaders.Clear();
+            this.httpClient.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+            this.httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
+            this.httpClient.DefaultRequestHeaders.Add("referer", "https://music.yandex.ru/");
+            this.httpClient.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.8,ru;q=0.6");
+            this.httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "identity");
+            this.httpClient.DefaultRequestHeaders.Add("Cache-Control", "max-age=0");
+            this.httpClient.DefaultRequestHeaders.Add("DNT", "1");
+            this.httpClient.DefaultRequestHeaders.Add("Upgrade-Insecure-Requests", "1");
+            this.httpClient.DefaultRequestHeaders.Add("Cookie", "_ym_uid=1502906756176177940; mda=0; _ym_isad=2; yandexuid=5733988641502906756; yp=1818266756.yrts.1502906756; _ym_visorc_10630330=w; spravka=dD0xNTAyOTA2NzYxO2k9NDYuMTY0LjE5OC4xNzU7dT0xNTAyOTA2NzYxNTgzNzUzMTAzO2g9ZDQwZmZlNmFkYjQ1NWJhNjNhMWE5MmM3NTFjYTg5MWY=; device_id=\"bd83f65309fad0c369c4a221b8faa9991ee873936\"; _ym_visorc_1028356=b; i=UpYyqKGVjzBkESSuqqttj9x4BrOVszvLI2iE/DLIR1QNZU3zHshVTgnApfM5J8FdYT3DFTK3lftra/BrPQjqlxgsU0U=");
+            this.httpClient.DefaultRequestHeaders.Add("X-Retpath-Y", "https%3A%2F%2Fmusic.yandex.ru");            
+        }
 
         public async Task<List<Track>> GetTracksByIdsAsync(List<string> ids) {
             string query = String.Join(",", ids);
@@ -34,24 +51,10 @@ namespace Musili.WebApi.Services.Grabbers.Yandex
 
             int i = 0;
             foreach (Track track in tracks) {
-                string trackInfoUrl = $"https://music.yandex.ru/api/v2.1/handlers/track/{track.OriginalId}/track/download/m?hq=1";
-                JToken trackInfoData = await RequestJsonAsync(trackInfoUrl);
-
-                string trackSrcUrl = (string)trackInfoData["src"] + "&format=json";
-                JToken trackSrcData = await RequestJsonAsync(trackSrcUrl);
-
-                string path = (string)trackSrcData["path"];
-                string s = (string)trackSrcData["s"];
-                string hash = CryptoUtils.GetMd5Hash($"{SALT}{path.Substring(1)}{s}");
-                string host = (string)trackSrcData["host"];
-                string ts = (string)trackSrcData["ts"];
-
-                track.Url = $"https://{host}/get-mp3/{hash}/{ts}{path}";
-
+                track.Url = await GetTrackUrlAsync(track.OriginalId);
                 if (tracks.Count > 1 && i < tracks.Count - 1) {
                     await Task.Delay(1000);
                 }
-
                 i++;
             }
 
@@ -80,38 +83,26 @@ namespace Musili.WebApi.Services.Grabbers.Yandex
             return GetTrackIdsFromJToken(data["playlist"]["trackIds"]);
         }
 
+        private async Task<string> GetTrackUrlAsync(string trackId) {
+            string trackInfoUrl = $"https://music.yandex.ru/api/v2.1/handlers/track/{trackId}/track/download/m?hq=1";
+            JToken trackInfoData = await RequestJsonAsync(trackInfoUrl);
 
-        private HttpWebRequest CreateRequest(string url) {
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-            req.Headers.Clear();
-            req.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
-            req.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36";
-            req.Method = "GET";
-            req.Referer = "https://music.yandex.ru/";
+            string trackSrcUrl = (string)trackInfoData["src"] + "&format=json";
+            JToken trackSrcData = await RequestJsonAsync(trackSrcUrl);
 
-            req.Headers.Add("Accept-Language", "en-US,en;q=0.8,ru;q=0.6");
-            req.Headers.Add("Accept-Encoding", "identity");
-            req.Headers.Add("Cache-Control", "max-age=0");
-            req.Headers.Add("DNT", "1");
-            req.Headers.Add("Upgrade-Insecure-Requests", "1");
-            req.Headers.Add("Cookie", "_ym_uid=1502906756176177940; mda=0; _ym_isad=2; yandexuid=5733988641502906756; yp=1818266756.yrts.1502906756; _ym_visorc_10630330=w; spravka=dD0xNTAyOTA2NzYxO2k9NDYuMTY0LjE5OC4xNzU7dT0xNTAyOTA2NzYxNTgzNzUzMTAzO2g9ZDQwZmZlNmFkYjQ1NWJhNjNhMWE5MmM3NTFjYTg5MWY=; device_id=\"bd83f65309fad0c369c4a221b8faa9991ee873936\"; _ym_visorc_1028356=b; i=UpYyqKGVjzBkESSuqqttj9x4BrOVszvLI2iE/DLIR1QNZU3zHshVTgnApfM5J8FdYT3DFTK3lftra/BrPQjqlxgsU0U=");
-            req.Headers.Add("X-Retpath-Y", "https%3A%2F%2Fmusic.yandex.ru");
+            string path = (string)trackSrcData["path"];
+            string s = (string)trackSrcData["s"];
+            string hash = CryptoUtils.GetMd5Hash($"{SALT}{path.Substring(1)}{s}");
+            string host = (string)trackSrcData["host"];
+            string ts = (string)trackSrcData["ts"];
 
-            return req;
-        }
+            return $"https://{host}/get-mp3/{hash}/{ts}{path}";
+        }        
 
         private async Task<JToken> RequestJsonAsync(string url) {
-            HttpWebRequest req = CreateRequest(url);
-            WebResponse resp = await req.GetResponseAsync();
-            return await ResponseToJTokenAsync(resp);
-        }
-
-        private async Task<JToken> ResponseToJTokenAsync(WebResponse resp) {
-            using (StreamReader sr = new StreamReader(resp.GetResponseStream()))
-            {
-                string s = await sr.ReadToEndAsync();
-                return JToken.Parse(s);
-            }
+            HttpResponseMessage resp = await this.httpClient.GetAsync(url);
+            string s = await resp.Content.ReadAsStringAsync();
+            return JToken.Parse(s);
         }
 
         private List<string> GetTrackIdsFromJToken(JToken data) {

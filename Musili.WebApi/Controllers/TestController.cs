@@ -28,8 +28,8 @@ namespace Musili.WebApi.Controllers
         }
 
         [HttpGet("")]
-        public async Task<object> Index() {
-            return RandomUtils.GetRandomItems(new List<int>(){1, 2, 3, 4, 5, 6, 7, 9, 10}, 10);
+        public object Index() {
+            return new Object();
         }
     }
 }
