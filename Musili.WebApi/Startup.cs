@@ -52,6 +52,7 @@ namespace Musili.WebApi
                 opts.UseNpgsql(Configuration.GetConnectionString("MusiliDatabase"));
             });
             services.AddScoped<ITracksSourcesRepository, TracksSourceRepository>();
+            services.AddScoped<ITracksRepository, TracksRepository>();
             services.AddScoped<ITracksProvider, TracksProvider>();
 
             services.AddMvc();

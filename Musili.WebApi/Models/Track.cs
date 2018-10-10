@@ -15,6 +15,7 @@ namespace Musili.WebApi.Models
         public int Id { get; set; }
 
         [JsonIgnore]
+        [NotMapped]
         public string OriginalId { get; set; }
 
         [Column("artist")]
