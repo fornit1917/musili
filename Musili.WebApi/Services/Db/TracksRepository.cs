@@ -19,9 +19,11 @@ namespace Musili.WebApi.Services.Db
 
         public async Task<List<Track>> GetTracksAsync(TracksCriteria tracksCriteria, int maxCount = 5, int lastId = 0)
         {
+            var now = DateTime.Now;
+
             var query = db.Tracks
                 .Join(db.TracksSources, t => t.TracksSourceId, ts => ts.Id, (t, ts) => t)
-                .Where(t => t.Id > lastId)
+                .Where(t => t.Id > lastId && t.ExpirationDatetime > now)
                 .OrderBy(t => t.Id)
                 .Take(maxCount);
                 

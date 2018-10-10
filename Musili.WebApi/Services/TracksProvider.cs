@@ -23,7 +23,7 @@ namespace Musili.WebApi.Services
             TracksSource tracksSource =  await tracksSourceRepository.GetRandomTracksSourceAsync(criteria);
             List<Track> tracks = await grabber.GrabRandomTracksAsync(tracksSource);
             await tracksRepository.SaveTracksAsync(tracks);
-            return await tracksRepository.GetTracksAsync(criteria, 5, lastId);
+            return tracks;
         }
     }
 }
