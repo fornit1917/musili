@@ -33,8 +33,6 @@ namespace Musili.WebApi.Services.Db
             if (!tracksCriteria.IsAnyTempo) {
                 query = query.Where(t => t.TracksSource.Tempo == Tempo.Any || tracksCriteria.Tempos.Contains(t.TracksSource.Tempo));
             }
-
-            Console.WriteLine(query.ToSql());
             
             return await query.ToListAsync();
         }
