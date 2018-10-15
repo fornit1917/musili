@@ -4,6 +4,7 @@ export interface TracksCriteria {
 }
 
 export interface Track {
+    id: number;
     artist: string;
     title: string;
     url: string;

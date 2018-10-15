@@ -1,8 +1,10 @@
 import ApiClient from "./api-client";
 import { TracksCriteria, Track } from "../dto-types";
+import TracksHistoryStorage from "./track-history-storage";
 
 export default class Playlist {
     private apiClient: ApiClient;
+    private historyStorage: TracksHistoryStorage;
     private tracks: Track[];
     private index: number = -1;
     private loadingPromise: Promise<void> | null = null;
@@ -10,6 +12,7 @@ export default class Playlist {
 
     public constructor(apiClient: ApiClient) {
         this.apiClient = apiClient;
+        this.historyStorage = new TracksHistoryStorage();
         this.tracks = [];
     }
 
@@ -29,9 +32,10 @@ export default class Playlist {
         }
 
         const previous = this.loadingPromise ? this.loadingPromise : Promise.resolve();
-        this.loadingPromise = previous.then(() => this.apiClient.getTracks(this.tracksCriteria)) 
+        this.loadingPromise = previous.then(() => this.apiClient.getTracks(this.tracksCriteria, this.historyStorage.getLastTrackId())) 
             .then(tracks => {
                 this.tracks = this.tracks.concat(tracks);
+                this.historyStorage.saveLastTrackId(tracks);
                 this.loadingPromise = null;
             })
             .catch(e => {
@@ -51,7 +55,6 @@ export default class Playlist {
 
         if (this.index < this.tracks.length) {
             if (this.index > 10) {
-                console.log("REMOVE OLD!");
                 this.tracks = this.tracks.slice(this.index, this.tracks.length);
                 this.index = 0;
             }
@@ -60,8 +63,6 @@ export default class Playlist {
                 this.loadTracks();
             }
 
-            console.log(this.tracks);
-            console.log(this.index);
             return this.tracks[this.index];
         }
 
