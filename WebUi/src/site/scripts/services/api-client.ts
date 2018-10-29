@@ -1,8 +1,8 @@
 import { TracksCriteria, Track } from "../dto-types";
 
 export default class ApiClient {
-    getTracks(tracksCriteria: TracksCriteria): Promise<Track[]> {
-        const url = `/api/tracks?tempos=${tracksCriteria.tempo}&genres=${tracksCriteria.genres.join(",")}`;
+    getTracks(tracksCriteria: TracksCriteria, lastId: number): Promise<Track[]> {
+        const url = `/api/tracks?tempos=${tracksCriteria.tempo}&genres=${tracksCriteria.genres.join(",")}&lastId=${lastId}`;
         return fetch(url)
             .then(response => response.json())
             .then(items => items.map((item: Track) => {
