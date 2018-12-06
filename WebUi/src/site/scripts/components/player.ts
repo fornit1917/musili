@@ -6,8 +6,8 @@ import ApiClient from "../services/api-client";
 import Playlist from "../services/playlist";
 
 interface PlayerMessageHandlers {
-    onShowSettings: () => void;
-    onHideSettings: () => void;
+    onShowSettings: () => Promise<void>;
+    onHideSettings: () => Promise<void>;
 }
 
 export default class Player {
