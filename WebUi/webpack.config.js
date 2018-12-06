@@ -34,9 +34,9 @@ module.exports = function (env, options) {
             chunks: ["admin"],
         }),
 
-        new CopyWebpackPlugin([
-           { from: "./src/site/img", to: "img" },
-        ]),
+        // new CopyWebpackPlugin([
+        //    { from: "./src/site/img", to: "img" },
+        // ]),
     ];
     if (!isDev) {
         plugins.push(
@@ -98,8 +98,8 @@ module.exports = function (env, options) {
                     test: /\.woff2?$|\.ttf$|\.eot$|\.svg$|\.png|\.jpe?g|\.gif$/,
                     loader: "file-loader",
                     options: {
-                        name: "[name].[ext]",
-                        //useRelativePath: true,
+                        name: "assets/[name].[ext]",
+                        // useRelativePath: true,
                         publicPath: "/",
                     }
                 },                
