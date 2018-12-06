@@ -1,0 +1,16 @@
+[Unit]
+Description=Musili Web Service
+
+[Service]
+WorkingDirectory=/srv/musili/app
+ExecStart=/usr/bin/dotnet /srv/musili/app/Musili.WebApi.dll --urls http://localhost:5010
+Restart=always
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=musili
+User=musili
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+
+[Install]
+WantedBy=multi-user.target

@@ -16,6 +16,7 @@ using Musili.WebApi.Services;
 using Musili.WebApi.Services.Grabbers;
 using Musili.WebApi.Services.Grabbers.Yandex;
 using System.Net.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Musili.WebApi
 {
@@ -65,6 +66,10 @@ namespace Musili.WebApi
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
 
             app.UseMvc();
         }
