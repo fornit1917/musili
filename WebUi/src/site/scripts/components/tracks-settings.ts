@@ -37,19 +37,26 @@ export default class TracksSettings {
         });
     }
 
-    public hide() {
-        this.root.classList.add("tracks-settings-container--hidden");
-        setTimeout(() =>{
-            this.root.classList.remove("tracks-settings-container--initial");
-            this.root.style.display = "none";
-        }, 300);
+    public hide(): Promise<void> {
+        return new Promise(resolve => {
+            this.root.classList.add("tracks-settings-container--hidden");
+            setTimeout(() =>{
+                this.root.classList.remove("tracks-settings-container--initial");
+                this.root.style.display = "none";
+                resolve();
+            }, 100);
+        });
     }
 
-    public show() {
-        this.root.style.display = "block";
-        setTimeout(() => {
-            this.root.classList.remove("tracks-settings-container--hidden");
-        }, 100);
+    public show(): Promise<void> {
+        return new Promise(resolve => {
+            this.root.style.display = "block";
+            setTimeout(() => {
+                this.root.classList.remove("tracks-settings-container--hidden");
+                resolve();
+            }, 100);
+        })
+        
     }
 
     public getCurrentSettings(): TracksCriteria {

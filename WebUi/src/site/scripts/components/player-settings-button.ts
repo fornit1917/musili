@@ -1,6 +1,6 @@
 interface MessageHandlers {
-    onShowSettings: () => void;
-    onHideSettings: () => void;
+    onShowSettings: () => Promise<void>;
+    onHideSettings: () => Promise<void>;
 }
 
 export default class PlayerSettingsButton {
@@ -47,24 +47,30 @@ export default class PlayerSettingsButton {
     }
 
     private showSettings() {
-        this.messageHandlers.onShowSettings();
-        this.isSettingsHidden = false;
-        this.text.innerText = this.btn.dataset.textHide;
-        this.icon.style.display = "none";
-        this.hideSettingsAfterTimeout();
+        this.setDisabled(true);
+        this.messageHandlers.onShowSettings().then(() => {
+            this.isSettingsHidden = false;
+            this.text.innerText = this.btn.dataset.textHide;
+            this.icon.style.display = "none";
+            this.hideSettingsAfterTimeout();
+            this.setDisabled(false);
+        });
     }
 
     private hideSettings() {
-        this.text.innerText = this.btn.dataset.text;
-        this.icon.style.display = "block";
+        this.setDisabled(true);
+        this.messageHandlers.onHideSettings().then(() => {
+            this.text.innerText = this.btn.dataset.text;
+            this.icon.style.display = "block";
 
-        if (this.hideSettingsTimeoutId) {
-            clearTimeout(this.hideSettingsTimeoutId);
-            this.hideSettingsTimeoutId = 0;
-        }
-
-        this.messageHandlers.onHideSettings();
-        this.isSettingsHidden = true;
+            if (this.hideSettingsTimeoutId) {
+                clearTimeout(this.hideSettingsTimeoutId);
+                this.hideSettingsTimeoutId = 0;
+            }    
+            
+            this.isSettingsHidden = true;
+            this.setDisabled(false);
+        });
     }
 
     private hideSettingsAfterTimeout() {

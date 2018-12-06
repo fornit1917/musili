@@ -15,6 +15,7 @@ using Musili.WebApi.Models;
 using Musili.WebApi.Services;
 using Musili.WebApi.Services.Grabbers;
 using Musili.WebApi.Services.Grabbers.Yandex;
+using System.Net.Http;
 
 namespace Musili.WebApi
 {
@@ -28,7 +29,8 @@ namespace Musili.WebApi
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            services.AddHttpClient<IYandexMusicClient, YandexMusicClient>();
+            services.AddHttpClient<IYandexMusicClient, YandexMusicClient>()
+                .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler() { MaxConnectionsPerServer = 2 });
 
             // grabbers for each service
             services.AddSingleton<YandexTracksGrabber>();

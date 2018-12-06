@@ -17,8 +17,8 @@ class App {
         this.background = new Background("#bg");
         this.tracksSettings = new TracksSettings("#settings", () => { this.onTracksSettingsChanged(); });
         this.player = new Player("#player", new ApiClient(), {
-            onHideSettings: () => { this.onHideTracksSettings(); },
-            onShowSettings: () => { this.onShowTracksSettings(); },
+            onHideSettings: () => this.onHideTracksSettings(),
+            onShowSettings: () => this.onShowTracksSettings(),
         });
     }
 
@@ -30,11 +30,11 @@ class App {
     }
 
     private onShowTracksSettings() {
-        this.tracksSettings.show();
+        return this.tracksSettings.show();
     }
 
     private onHideTracksSettings() {
-        this.tracksSettings.hide();
+        return this.tracksSettings.hide();
     }
 
     private onTracksSettingsChanged() {
