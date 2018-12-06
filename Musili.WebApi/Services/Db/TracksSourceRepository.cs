@@ -27,7 +27,7 @@ namespace Musili.WebApi.Services.Db
 
             int count = await query.CountAsync();
             int offset = RandomUtils.GetRandomFromInterval(0, count);
-            query = query.Skip(offset).Take(1);
+            query = query.OrderBy(ts => ts.Id).Skip(offset).Take(1);
             
             return await query.FirstOrDefaultAsync();
         }
