@@ -34,9 +34,9 @@ module.exports = function (env, options) {
             chunks: ["admin"],
         }),
 
-        // new CopyWebpackPlugin([
-        //    { from: "./src/site/img", to: "img" },
-        // ]),
+        new CopyWebpackPlugin([
+           { from: "./src/favicon.png", to: "favicon.png" },
+        ]),
     ];
     if (!isDev) {
         plugins.push(
