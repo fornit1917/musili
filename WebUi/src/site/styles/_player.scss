@@ -45,6 +45,10 @@ $progress-height: 14px;
         }
     }
 
+    &__left-controls {
+        white-space: nowrap;
+    }
+
     &__middle-controls {
         margin-left: 40px;
     }
@@ -86,4 +90,14 @@ $progress-height: 14px;
     &__artist {
         font-size: 0.9rem;
     }
+}
+
+@media (max-width: 576px) {
+    .player {
+        &__settings-btn {
+            span {
+                display: none;
+            }
+        }
+    }   
 }
