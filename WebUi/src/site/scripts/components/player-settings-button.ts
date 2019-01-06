@@ -51,7 +51,7 @@ export default class PlayerSettingsButton {
         this.messageHandlers.onShowSettings().then(() => {
             this.isSettingsHidden = false;
             this.text.innerText = this.btn.dataset.textHide;
-            this.icon.style.display = "none";
+            // this.icon.style.display = "none";
             this.hideSettingsAfterTimeout();
             this.setDisabled(false);
         });
@@ -61,7 +61,7 @@ export default class PlayerSettingsButton {
         this.setDisabled(true);
         this.messageHandlers.onHideSettings().then(() => {
             this.text.innerText = this.btn.dataset.text;
-            this.icon.style.display = "block";
+            // this.icon.style.display = "block";
 
             if (this.hideSettingsTimeoutId) {
                 clearTimeout(this.hideSettingsTimeoutId);
