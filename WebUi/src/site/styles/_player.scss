@@ -1,9 +1,12 @@
+$player-height: 64px;
+$progress-height: 14px;
+
 .player {
     background: #3d4558;
     position: fixed;
     bottom: 0;
     box-sizing: border-box;
-    height: 64px;
+    height: $player-height;
     width: 100%;
     display: flex;
     padding: 0 10px;
@@ -48,6 +51,34 @@
 
     &__right-controls {
         margin-left: auto;
+    }
+}
+
+.track-progress {
+    position: fixed;
+    bottom: $player-height;
+    width: 100%;
+    height: $progress-height;
+    background: #343a4a;
+
+    &__bg {
+        width: 0%;
+        height: 100%;
+        background: #288cfb;
+    }
+
+    &__time {
+        position: absolute;
+        top:0;
+        font-size: 11px;
+
+        &--current {
+            left: 20px;
+        }
+
+        &--total {
+            right: 20px;
+        }
     }
 }
 
