@@ -74,7 +74,7 @@ export default class Player {
             })
             .catch(e => {
                 alert("Tracks loading error");
-                console.log(e);
+                location.reload();
             });
     }
 
