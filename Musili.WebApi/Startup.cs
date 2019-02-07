@@ -30,6 +30,8 @@ namespace Musili.WebApi
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            services.AddHostedService<TracksUpdaterBackgroundService>();
+
             services.AddHttpClient<IYandexMusicClient, YandexMusicClient>()
                 .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler() { MaxConnectionsPerServer = 2 });
 
@@ -57,6 +59,7 @@ namespace Musili.WebApi
             services.AddScoped<ITracksSourcesRepository, TracksSourceRepository>();
             services.AddScoped<ITracksRepository, TracksRepository>();
             services.AddScoped<ITracksProvider, TracksProvider>();
+            services.AddScoped<ITracksUpdater, TracksUpdater>();
 
             services.AddMvc();
         }

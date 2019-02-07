@@ -6,6 +6,7 @@ using Musili.WebApi.Models;
 using Musili.WebApi.Utils;
 using System;
 using System.Collections.Generic;
+using Npgsql;
 
 namespace Musili.WebApi.Services.Db
 {
@@ -17,8 +18,7 @@ namespace Musili.WebApi.Services.Db
             this.db = db;
         }
 
-        public async Task<List<Track>> GetTracksAsync(TracksCriteria tracksCriteria, int maxCount = 5, int lastId = 0)
-        {
+        public async Task<List<Track>> GetTracksAsync(TracksCriteria tracksCriteria, int maxCount = 5, int lastId = 0) {
             var now = DateTime.Now;
 
             var query = db.Tracks
@@ -37,10 +37,15 @@ namespace Musili.WebApi.Services.Db
             return await query.ToListAsync();
         }
 
-        public Task SaveTracksAsync(List<Track> tracks)
-        {
+        public Task SaveTracksAsync(List<Track> tracks) {
             db.Tracks.AddRange(tracks);
             return db.SaveChangesAsync();
+        }
+
+        public Task RemoveOldTracksAsync(DateTime dateTime) {
+            var commandText = "DELETE FROM app.track WHERE expiration_datetime <= @dt::timestamp";
+            var param = new NpgsqlParameter("@dt", dateTime.ToString());
+            return db.Database.ExecuteSqlCommandAsync(commandText, param);
         }
     }
 }
