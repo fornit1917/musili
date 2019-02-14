@@ -11,6 +11,7 @@ namespace Musili.WebApi.Services
     {
         private IServiceProvider services;
         private Timer timer;
+        private bool started = false;
 
         public TracksUpdaterBackgroundService(IServiceProvider services) {
             this.services = services;
@@ -27,6 +28,11 @@ namespace Musili.WebApi.Services
         }
 
         private async void DoWorkAsync(object state) {
+            if (started) {
+                return;
+            }
+
+            started = true;
             using (var scope = services.CreateScope()) {
                 ITracksUpdater tracksUpdater = scope.ServiceProvider.GetRequiredService<ITracksUpdater>();
                 try {
@@ -35,6 +41,8 @@ namespace Musili.WebApi.Services
                 } catch (Exception e) {
                     Console.WriteLine(e.Message);
                     Console.WriteLine(e.StackTrace);
+                } finally {
+                    started = false;
                 }
             }   
         }
