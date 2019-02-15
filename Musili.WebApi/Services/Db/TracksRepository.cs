@@ -22,10 +22,7 @@ namespace Musili.WebApi.Services.Db
             var now = DateTime.Now;
 
             var query = db.Tracks
-                .Join(db.TracksSources, t => t.TracksSourceId, ts => ts.Id, (t, ts) => t)
-                .Where(t => t.Id > lastId && t.ExpirationDatetime > now)
-                .OrderBy(t => t.Id)
-                .Take(maxCount);
+                .Where(t => t.Id > lastId && t.ExpirationDatetime > now);
                 
             if (!tracksCriteria.IsAnyGenre) {
                 query = query.Where(t => t.TracksSource.Genre == Genre.Any || tracksCriteria.Genres.Contains(t.TracksSource.Genre));
@@ -33,6 +30,8 @@ namespace Musili.WebApi.Services.Db
             if (!tracksCriteria.IsAnyTempo) {
                 query = query.Where(t => t.TracksSource.Tempo == Tempo.Any || tracksCriteria.Tempos.Contains(t.TracksSource.Tempo));
             }
+
+            query = query.OrderBy(t => t.Id).Take(maxCount);
             
             return await query.ToListAsync();
         }
