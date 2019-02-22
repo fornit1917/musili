@@ -8,22 +8,20 @@ using System;
 using System.Collections.Generic;
 using Npgsql;
 
-namespace Musili.WebApi.Services.Db
-{
-    public class TracksRepository : ITracksRepository
-    {
-        private AppDbContext db;
+namespace Musili.WebApi.Services.Db {
+    public class TracksRepository : ITracksRepository {
+        private AppDbContext _db;
 
         public TracksRepository(AppDbContext db) {
-            this.db = db;
+            _db = db;
         }
 
         public async Task<List<Track>> GetTracksAsync(TracksCriteria tracksCriteria, int maxCount = 5, int lastId = 0) {
             var now = DateTime.Now;
 
-            var query = db.Tracks
+            var query = _db.Tracks
                 .Where(t => t.Id > lastId && t.ExpirationDatetime > now);
-                
+
             if (!tracksCriteria.IsAnyGenre) {
                 query = query.Where(t => t.TracksSource.Genre == Genre.Any || tracksCriteria.Genres.Contains(t.TracksSource.Genre));
             }
@@ -32,19 +30,19 @@ namespace Musili.WebApi.Services.Db
             }
 
             query = query.OrderBy(t => t.Id).Take(maxCount);
-            
+
             return await query.ToListAsync();
         }
 
         public Task SaveTracksAsync(List<Track> tracks) {
-            db.Tracks.AddRange(tracks);
-            return db.SaveChangesAsync();
+            _db.Tracks.AddRange(tracks);
+            return _db.SaveChangesAsync();
         }
 
         public Task RemoveOldTracksAsync(DateTime dateTime) {
             var commandText = "DELETE FROM app.track WHERE expiration_datetime <= @dt::timestamp";
             var param = new NpgsqlParameter("@dt", dateTime.ToString());
-            return db.Database.ExecuteSqlCommandAsync(commandText, param);
+            return _db.Database.ExecuteSqlCommandAsync(commandText, param);
         }
     }
 }

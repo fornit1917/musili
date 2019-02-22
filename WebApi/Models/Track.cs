@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 using Musili.WebApi.Models;
 using Newtonsoft.Json;
 
-namespace Musili.WebApi.Models
-{
-    [Table("track", Schema="app")]
-    public class Track
-    {
+namespace Musili.WebApi.Models {
+    [Table("track", Schema = "app")]
+    public class Track {
         [Column("id")]
         public int Id { get; set; }
 
@@ -38,7 +36,7 @@ namespace Musili.WebApi.Models
         public DateTime ExpirationDatetime { get; set; }
 
         public int RemainingLifeSeconds => (int)ExpirationDatetime.Subtract(DateTime.Now.AddSeconds(10)).TotalSeconds;
-        
+
         [JsonIgnore]
         public TracksSource TracksSource { get; set; }
     }

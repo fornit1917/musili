@@ -6,18 +6,16 @@ using Musili.WebApi.Models;
 using Musili.WebApi.Utils;
 using System;
 
-namespace Musili.WebApi.Services.Db
-{
-    public class TracksSourceRepository : ITracksSourcesRepository
-    {
-        private AppDbContext db;
+namespace Musili.WebApi.Services.Db {
+    public class TracksSourceRepository : ITracksSourcesRepository {
+        private AppDbContext _db;
 
         public TracksSourceRepository(AppDbContext db) {
-            this.db = db;
+            _db = db;
         }
 
         public async Task<TracksSource> GetRandomTracksSourceAsync(TracksCriteria criteria) {
-            var query = from ts in db.TracksSources select ts;
+            var query = from ts in _db.TracksSources select ts;
             if (!criteria.IsAnyTempo) {
                 query = query.Where(ts => ts.Tempo == Tempo.Any || criteria.Tempos.Contains(ts.Tempo));
             }
@@ -28,7 +26,7 @@ namespace Musili.WebApi.Services.Db
             int count = await query.CountAsync();
             int offset = RandomUtils.GetRandomFromInterval(0, count);
             query = query.OrderBy(ts => ts.Id).Skip(offset).Take(1);
-            
+
             return await query.FirstOrDefaultAsync();
         }
     }

@@ -8,10 +8,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Musili.WebApi.Services.Db
-{
-    public static class IQueryableHelper
-    {
+namespace Musili.WebApi.Services.Db {
+    public static class IQueryableHelper {
         private static readonly FieldInfo _queryCompilerField = typeof(EntityQueryProvider).GetTypeInfo().DeclaredFields.Single(x => x.Name == "_queryCompiler");
 
         private static readonly TypeInfo _queryCompilerTypeInfo = typeof(QueryCompiler).GetTypeInfo();
@@ -23,8 +21,7 @@ namespace Musili.WebApi.Services.Db
         private static readonly PropertyInfo _dependenciesProperty = typeof(Database).GetTypeInfo().DeclaredProperties.Single(x => x.Name == "Dependencies");
 
         public static string ToSql<TEntity>(this IQueryable<TEntity> queryable)
-            where TEntity : class
-        {
+            where TEntity : class {
             if (!(queryable is EntityQueryable<TEntity>) && !(queryable is InternalDbSet<TEntity>))
                 throw new ArgumentException();
 

@@ -2,11 +2,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Musili.WebApi.Models;
 
-namespace Musili.WebApi.Models
-{
-    [Table("tracks_source", Schema="app")]
-    public class TracksSource
-    {
+namespace Musili.WebApi.Models {
+    [Table("tracks_source", Schema = "app")]
+    public class TracksSource {
         [Column("id")]
         public int Id { get; set; }
 
@@ -14,13 +12,13 @@ namespace Musili.WebApi.Models
         public Genre Genre { get; set; }
 
         [Column("tempo")]
-        public Tempo Tempo { get; set; }        
+        public Tempo Tempo { get; set; }
 
         [Column("service")]
         public TracksSourceService Service { get; set; }
 
         [Column("source_type")]
-        public TracksSourceType SourceType { get; set; }        
+        public TracksSourceType SourceType { get; set; }
 
         [Column("value")]
         public string Value { get; set; }

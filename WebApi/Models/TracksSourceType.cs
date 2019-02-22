@@ -1,10 +1,8 @@
-namespace Musili.WebApi.Models
-{
-    public enum TracksSourceType
-    {
+namespace Musili.WebApi.Models {
+    public enum TracksSourceType {
         YandexTracks,
         YandexPlaylistSearchQuery,
 
-        VkGroupWall,   
+        VkGroupWall,
     }
 }

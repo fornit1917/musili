@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Musili.WebApi.Utils
-{
-    public static class RandomUtils
-    {
+namespace Musili.WebApi.Utils {
+    public static class RandomUtils {
         private static Random rnd = new Random();
 
         public static T GetRandomListItem<T>(List<T> items) {

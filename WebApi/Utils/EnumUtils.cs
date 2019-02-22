@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Musili.WebApi.Utils
-{
-    public static class EnumUtils
-    {
-        public static List<TEnum> ParseEnumValuesList<TEnum>(string valuesList, char separator = ',') where TEnum:struct {
+namespace Musili.WebApi.Utils {
+    public static class EnumUtils {
+        public static List<TEnum> ParseEnumValuesList<TEnum>(string valuesList, char separator = ',') where TEnum : struct {
             var result = new List<TEnum>();
             if (valuesList != null) {
                 string[] parts = valuesList.Split(separator);

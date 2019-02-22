@@ -9,17 +9,15 @@ using Musili.WebApi.Models;
 using Musili.WebApi.Utils;
 using Microsoft.EntityFrameworkCore;
 
-namespace Musili.WebApi.Controllers
-{
+namespace Musili.WebApi.Controllers {
     [Route("api/[controller]")]
-    public class TestController : Controller
-    {
-        private ITracksProvider tracksProvider;
-        private AppDbContext db;
+    public class TestController : Controller {
+        private ITracksProvider _tracksProvider;
+        private AppDbContext _db;
 
         public TestController(AppDbContext db, ITracksProvider tracksProvider) {
-            this.db = db;
-            this.tracksProvider = tracksProvider;
+            _db = db;
+            _tracksProvider = tracksProvider;
         }
 
         [HttpGet("source")]

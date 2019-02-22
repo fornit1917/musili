@@ -18,10 +18,8 @@ using Musili.WebApi.Services.Grabbers.Yandex;
 using System.Net.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 
-namespace Musili.WebApi
-{
-    public class Startup
-    {
+namespace Musili.WebApi {
+    public class Startup {
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }

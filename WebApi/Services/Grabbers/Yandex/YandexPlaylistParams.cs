@@ -1,7 +1,5 @@
-namespace Musili.WebApi.Services.Grabbers.Yandex 
-{
-    public struct YandexPlaylistParams
-    {
+namespace Musili.WebApi.Services.Grabbers.Yandex {
+    public struct YandexPlaylistParams {
         public readonly YandexPlaylistType type;
         public readonly string userId;
         public readonly string playlistId;

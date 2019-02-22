@@ -7,21 +7,19 @@ using Musili.WebApi.Services.Db;
 using Musili.WebApi.Interfaces;
 using Musili.WebApi.Models;
 
-namespace Musili.WebApi.Controllers
-{
+namespace Musili.WebApi.Controllers {
     [Route("api/[controller]")]
-    public class TracksController : Controller
-    {
-        private ITracksProvider tracksProvider;
+    public class TracksController : Controller {
+        private ITracksProvider _tracksProvider;
 
         public TracksController(ITracksProvider tracksProvider, AppDbContext db) {
-            this.tracksProvider = tracksProvider;
+            _tracksProvider = tracksProvider;
         }
 
         [HttpGet("")]
         public async Task<List<Track>> GetTracks(string tempos, string genres, int lastId = 0) {
             TracksCriteria criteriaSet = new TracksCriteria(tempos, genres);
-            return await tracksProvider.GetTracksAsync(criteriaSet, lastId);
+            return await _tracksProvider.GetTracksAsync(criteriaSet, lastId);
         }
     }
 }

@@ -4,28 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Musili.WebApi.Models
-{
-    public class TracksCriteria
-    {
-        private List<Tempo> tempos;
-        private List<Genre> genres;
+namespace Musili.WebApi.Models {
+    public class TracksCriteria {
+        public List<Tempo> Tempos { get; private set; }
+        public List<Genre> Genres { get; private set; }
 
-        private bool isAnyTempo;
-        private bool isAnyGenre;
-
-        public List<Tempo> Tempos => tempos;
-        public List<Genre> Genres => genres;
-
-        public bool IsAnyTempo => isAnyTempo;
-        public bool IsAnyGenre => isAnyGenre;
+        public bool IsAnyTempo { get; private set; }
+        public bool IsAnyGenre { get; private set; }
 
         public TracksCriteria(string temposCommaList, string genresCommaList) {
-            tempos = EnumUtils.ParseEnumValuesList<Tempo>(temposCommaList, ',').Where(item => item != Tempo.Any).ToList();
-            isAnyTempo = tempos.Count == 0 || (tempos.Count == 1 && tempos[0] == Tempo.Any) || (tempos.Count == Enum.GetValues(typeof(Tempo)).Length - 1);
+            Tempos = EnumUtils.ParseEnumValuesList<Tempo>(temposCommaList, ',').Where(item => item != Tempo.Any).ToList();
+            IsAnyTempo = Tempos.Count == 0 || (Tempos.Count == 1 && Tempos[0] == Tempo.Any) || (Tempos.Count == Enum.GetValues(typeof(Tempo)).Length - 1);
 
-            genres = EnumUtils.ParseEnumValuesList<Genre>(genresCommaList, ',').Where(item => item != Genre.Any).ToList();
-            isAnyGenre = genres.Count == 0 || (genres.Count == 1 && genres[0] == Genre.Any) || (genres.Count == Enum.GetValues(typeof(Genre)).Length - 1);
+            Genres = EnumUtils.ParseEnumValuesList<Genre>(genresCommaList, ',').Where(item => item != Genre.Any).ToList();
+            IsAnyGenre = Genres.Count == 0 || (Genres.Count == 1 && Genres[0] == Genre.Any) || (Genres.Count == Enum.GetValues(typeof(Genre)).Length - 1);
         }
     }
 }
