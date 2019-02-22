@@ -39,7 +39,7 @@ namespace Musili.WebApi.Services
                             await tracksRepository.SaveTracksAsync(tracks);
                             //Console.WriteLine($"{genre} - {tempo}: {tracks.Count} tracks");
                             await Task.Delay(1000);
-                        } catch (Exception e) {
+                        } catch {
                             // todo: log
                         }
                         requestsCount++;

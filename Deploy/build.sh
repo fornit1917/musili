@@ -4,7 +4,7 @@ DIR="$( cd "$(dirname "$0")" ; pwd -P )"
 OUT_DIR="${DIR}/dist"
 OUT_DIR_FILES="${DIR}/dist/files"
 UI_SRC_DIR="${DIR}/../WebUi"
-API_SRC_DIR="${DIR}/../Musili.WebApi"
+API_SRC_DIR="${DIR}/../WebApi"
 
 rm -rf "${OUT_DIR}"
 mkdir "${OUT_DIR}"

@@ -16,4 +16,6 @@ mv app-next app-current
 ln -s app-current app
 
 sudo service musili start
+sudo service musili status
+
 echo "Done"

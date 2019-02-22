@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>MusiliDevSecretId</UserSecretsId>
+    <RootNamespace>Musili.WebApi</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
