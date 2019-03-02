@@ -19,17 +19,6 @@ namespace Musili.WebApi.Services.Grabbers.Yandex {
 
         public YandexMusicClient(HttpClient httpClient) {
             _httpClient = httpClient;
-            _httpClient.DefaultRequestHeaders.Clear();
-            _httpClient.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-            _httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
-            _httpClient.DefaultRequestHeaders.Add("referer", "https://music.yandex.ru/");
-            _httpClient.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.8,ru;q=0.6");
-            _httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "identity");
-            _httpClient.DefaultRequestHeaders.Add("Cache-Control", "max-age=0");
-            _httpClient.DefaultRequestHeaders.Add("DNT", "1");
-            _httpClient.DefaultRequestHeaders.Add("Upgrade-Insecure-Requests", "1");
-            _httpClient.DefaultRequestHeaders.Add("Cookie", "_ym_uid=1502906756176177940; mda=0; _ym_isad=2; yandexuid=5733988641502906756; yp=1818266756.yrts.1502906756; _ym_visorc_10630330=w; spravka=dD0xNTAyOTA2NzYxO2k9NDYuMTY0LjE5OC4xNzU7dT0xNTAyOTA2NzYxNTgzNzUzMTAzO2g9ZDQwZmZlNmFkYjQ1NWJhNjNhMWE5MmM3NTFjYTg5MWY=; device_id=\"bd83f65309fad0c369c4a221b8faa9991ee873936\"; _ym_visorc_1028356=b; i=UpYyqKGVjzBkESSuqqttj9x4BrOVszvLI2iE/DLIR1QNZU3zHshVTgnApfM5J8FdYT3DFTK3lftra/BrPQjqlxgsU0U=");
-            _httpClient.DefaultRequestHeaders.Add("X-Retpath-Y", "https%3A%2F%2Fmusic.yandex.ru");
         }
 
         public async Task<List<Track>> GetTracksByIdsAsync(List<string> ids) {
@@ -98,13 +87,27 @@ namespace Musili.WebApi.Services.Grabbers.Yandex {
         }
 
         private async Task<JToken> RequestJsonAsync(string url) {
-            HttpResponseMessage resp = await this._httpClient.GetAsync(url);
+            HttpResponseMessage resp = await _httpClient.GetAsync(url);
             string s = await resp.Content.ReadAsStringAsync();
             return JToken.Parse(s);
         }
 
         private List<string> GetTrackIdsFromJToken(JToken data) {
             return (from tId in data select ((string)tId).Split(':')[0]).ToList();
+        }
+
+        public static void ConfigureHttpClient(HttpClient httpClient) {
+            httpClient.DefaultRequestHeaders.Clear();
+            httpClient.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+            httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
+            httpClient.DefaultRequestHeaders.Add("referer", "https://music.yandex.ru/");
+            httpClient.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.8,ru;q=0.6");
+            httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "identity");
+            httpClient.DefaultRequestHeaders.Add("Cache-Control", "max-age=0");
+            httpClient.DefaultRequestHeaders.Add("DNT", "1");
+            httpClient.DefaultRequestHeaders.Add("Upgrade-Insecure-Requests", "1");
+            httpClient.DefaultRequestHeaders.Add("Cookie", "_ym_uid=1502906756176177940; mda=0; _ym_isad=2; yandexuid=5733988641502906756; yp=1818266756.yrts.1502906756; _ym_visorc_10630330=w; spravka=dD0xNTAyOTA2NzYxO2k9NDYuMTY0LjE5OC4xNzU7dT0xNTAyOTA2NzYxNTgzNzUzMTAzO2g9ZDQwZmZlNmFkYjQ1NWJhNjNhMWE5MmM3NTFjYTg5MWY=; device_id=\"bd83f65309fad0c369c4a221b8faa9991ee873936\"; _ym_visorc_1028356=b; i=UpYyqKGVjzBkESSuqqttj9x4BrOVszvLI2iE/DLIR1QNZU3zHshVTgnApfM5J8FdYT3DFTK3lftra/BrPQjqlxgsU0U=");
+            httpClient.DefaultRequestHeaders.Add("X-Retpath-Y", "https%3A%2F%2Fmusic.yandex.ru");
         }
     }
 }

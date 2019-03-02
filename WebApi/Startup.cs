@@ -34,6 +34,7 @@ namespace Musili.WebApi {
             services.AddHostedService<TracksUpdaterBackgroundService>();
 
             services.AddHttpClient<IYandexMusicClient, YandexMusicClient>()
+                .ConfigureHttpClient(YandexMusicClient.ConfigureHttpClient)
                 .AddPolicyHandler(GetHttpRetryPolicy());
 
             // grabbers for each service
