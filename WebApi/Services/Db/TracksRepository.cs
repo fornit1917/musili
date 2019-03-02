@@ -19,8 +19,12 @@ namespace Musili.WebApi.Services.Db {
         public async Task<List<Track>> GetTracksAsync(TracksCriteria tracksCriteria, int maxCount = 5, int lastId = 0) {
             var now = DateTime.Now;
 
-            var query = _db.Tracks
-                .Where(t => t.Id > lastId && t.ExpirationDatetime > now);
+            var query = _db.Tracks.Where(t => t.ExpirationDatetime > now);
+            if (lastId > 0) {
+                query = query.Where(t => t.Id > lastId).OrderBy(t => t.Id);
+            } else {
+                query = query.OrderByDescending(t => t.Id);
+            }
 
             if (!tracksCriteria.IsAnyGenre) {
                 query = query.Where(t => t.TracksSource.Genre == Genre.Any || tracksCriteria.Genres.Contains(t.TracksSource.Genre));
@@ -29,8 +33,7 @@ namespace Musili.WebApi.Services.Db {
                 query = query.Where(t => t.TracksSource.Tempo == Tempo.Any || tracksCriteria.Tempos.Contains(t.TracksSource.Tempo));
             }
 
-            query = query.OrderBy(t => t.Id).Take(maxCount);
-
+            query = query.Take(maxCount);
             return await query.ToListAsync();
         }
 
