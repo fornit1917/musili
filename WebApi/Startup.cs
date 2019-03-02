@@ -17,6 +17,9 @@ using Musili.WebApi.Services.Grabbers;
 using Musili.WebApi.Services.Grabbers.Yandex;
 using System.Net.Http;
 using Microsoft.AspNetCore.HttpOverrides;
+using Polly.Extensions.Http;
+using Polly;
+using Polly.Retry;
 
 namespace Musili.WebApi {
     public class Startup {
@@ -31,7 +34,7 @@ namespace Musili.WebApi {
             services.AddHostedService<TracksUpdaterBackgroundService>();
 
             services.AddHttpClient<IYandexMusicClient, YandexMusicClient>()
-                .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler() { MaxConnectionsPerServer = 2 });
+                .AddPolicyHandler(GetHttpRetryPolicy());
 
             // grabbers for each service
             services.AddSingleton<YandexTracksGrabber>();
@@ -73,6 +76,13 @@ namespace Musili.WebApi {
             });
 
             app.UseMvc();
+        }
+
+
+        private static RetryPolicy<System.Net.Http.HttpResponseMessage> GetHttpRetryPolicy() {
+            return HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(1));
         }
     }
 }
