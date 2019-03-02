@@ -9,6 +9,8 @@ namespace Musili.Tests.Mocks
 {
     public class GrabbersMocksFactory
     {
+        private static ISemaphores _semaphores = new SemaphoresMock();
+
         public static ICommonTracksGrabber CreateMockedGrabber() {
             Func<TracksSourceService, ITracksGrabber> grabbersProvider = tracksSourceService => {
                 switch (tracksSourceService) {
@@ -19,7 +21,7 @@ namespace Musili.Tests.Mocks
                 }
             };
 
-            return new TracksGrabber(grabbersProvider);
+            return new TracksGrabber(grabbersProvider, _semaphores);
         }
     }
 }
