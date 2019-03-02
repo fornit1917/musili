@@ -37,6 +37,8 @@ namespace Musili.WebApi {
                 .ConfigureHttpClient(YandexMusicClient.ConfigureHttpClient)
                 .AddPolicyHandler(GetHttpRetryPolicy());
 
+            services.AddSingleton<ISemaphores, Semaphores>();
+
             // grabbers for each service
             services.AddSingleton<YandexTracksGrabber>();
 
