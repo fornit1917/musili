@@ -1,2 +1,2 @@
 # Musili
-Service for background music listening. Not ready yet.
+Service for online music listening. Not ready yet.
