@@ -18,8 +18,7 @@ namespace Musili.WebApi.Services {
             _tracksGrabber = tracksGrabber;
         }
 
-        public async Task LoadNewTracksForAllCriteriasAsync() {
-            int maxTime = 60 * 30;
+        public async Task LoadNewTracksForAllCriteriasAsync(int maxTime) {
             foreach (string genre in Enum.GetNames(typeof(Genre))) {
                 foreach (string tempo in Enum.GetNames(typeof(Tempo))) {
                     if (genre == "Any" || tempo == "Any") {

@@ -10,13 +10,17 @@ namespace Musili.WebApi.Services {
         private IServiceProvider _services;
         private Timer _timer;
         private bool _started = false;
+        private AppConfig _appConfig;
 
-        public TracksUpdaterBackgroundService(IServiceProvider services) {
+        public TracksUpdaterBackgroundService(IServiceProvider services, AppConfig appConfig) {
             _services = services;
+            _appConfig = appConfig;
         }
 
         public Task StartAsync(CancellationToken cancellationToken) {
-            _timer = new Timer(DoWorkAsync, null, TimeSpan.Zero, TimeSpan.FromSeconds(60 * 30));
+            if (_appConfig.DeleteOldTracksInBackground || _appConfig.LoadNewTracksInBackground) {
+                _timer = new Timer(DoWorkAsync, null, TimeSpan.Zero, TimeSpan.FromSeconds(_appConfig.TracksUpdaterTimeoutSeconds));
+            }
             return Task.CompletedTask;
         }
 
@@ -34,9 +38,14 @@ namespace Musili.WebApi.Services {
             using (var scope = _services.CreateScope()) {
                 ITracksUpdater tracksUpdater = scope.ServiceProvider.GetRequiredService<ITracksUpdater>();
                 try {
-                    await tracksUpdater.RemoveOldTracksAsync();
-                    await tracksUpdater.LoadNewTracksForAllCriteriasAsync();
+                    if (_appConfig.DeleteOldTracksInBackground) {
+                        await tracksUpdater.RemoveOldTracksAsync();
+                    }
+                    if (_appConfig.LoadNewTracksInBackground) {
+                        await tracksUpdater.LoadNewTracksForAllCriteriasAsync(_appConfig.TracksUpdaterMaxDurationSeconds);
+                    }
                 } catch (Exception e) {
+                    // todo: add logger
                     Console.WriteLine(e.Message);
                     Console.WriteLine(e.StackTrace);
                 } finally {
