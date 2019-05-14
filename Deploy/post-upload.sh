@@ -14,6 +14,7 @@ sudo rm app
 mv app-current app-prev
 mv app-next app-current
 ln -s app-current app
+sudo ln -s /srv/musili/logs /srv/musili/app/logs
 
 sudo service musili start
 sudo service musili status
