@@ -9,3 +9,5 @@ WebUi/node_modules
 WebUi/dist
 Deploy/secrets.json
 Deploy/dist
+WebApi/logs
+
