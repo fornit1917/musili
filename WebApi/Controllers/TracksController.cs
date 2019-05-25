@@ -12,7 +12,7 @@ namespace Musili.WebApi.Controllers {
     public class TracksController : Controller {
         private ITracksProvider _tracksProvider;
 
-        public TracksController(ITracksProvider tracksProvider, AppDbContext db) {
+        public TracksController(ITracksProvider tracksProvider) {
             _tracksProvider = tracksProvider;
         }
 

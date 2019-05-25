@@ -15,7 +15,7 @@ namespace Musili.Tests.Mocks
             Func<TracksSourceService, ITracksGrabber> grabbersProvider = tracksSourceService => {
                 switch (tracksSourceService) {
                     case TracksSourceService.Yandex:
-                        return new YandexTracksGrabber(new YandexMusicClientMock());
+                        return new YandexTracksGrabber(new YandexMusicClientMock(), new LoggerMock<YandexTracksGrabber>());
                     default:
                         throw new NotImplementedException();
                 }

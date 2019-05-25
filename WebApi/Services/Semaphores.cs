@@ -12,7 +12,7 @@ namespace Musili.WebApi.Services {
             _semaphores = new Dictionary<TracksSourceService, SemaphoreSlim>();
             foreach(TracksSourceService service in Enum.GetValues(typeof(TracksSourceService))) {
                 int maxConnections = GetMaxConnections(appConfig, service);
-                var semaphore = new SemaphoreSlim(maxConnections); // todo: get from config
+                var semaphore = new SemaphoreSlim(maxConnections);
                 _semaphores.Add(service, semaphore);
             }
         }

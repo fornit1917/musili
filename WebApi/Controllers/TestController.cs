@@ -39,5 +39,11 @@ namespace Musili.WebApi.Controllers {
             _logger.LogError("Test error message");
             return "Ok";
         }
+
+        [HttpGet("error")]
+        public string Error() {
+            throw new Exception("Error message");
+            return "hello!";
+        }
     }
 }

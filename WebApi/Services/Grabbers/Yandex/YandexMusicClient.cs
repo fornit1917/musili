@@ -23,7 +23,7 @@ namespace Musili.WebApi.Services.Grabbers.Yandex {
 
         public async Task<List<Track>> GetTracksByIdsAsync(List<string> ids) {
             string query = String.Join(",", ids);
-            String url = $"https://music.yandex.ru/api/v2.1/handlers/tracks?tracks={query}";
+            string url = $"https://music.yandex.ru/api/v2.1/handlers/tracks?tracks={query}";
             JToken data = await RequestJsonAsync(url);
             List<Track> tracks = (
                 from t in data

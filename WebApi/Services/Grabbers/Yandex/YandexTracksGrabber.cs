@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Musili.WebApi.Interfaces;
 using Musili.WebApi.Models;
 using Musili.WebApi.Utils;
@@ -8,12 +9,14 @@ using Musili.WebApi.Utils;
 namespace Musili.WebApi.Services.Grabbers.Yandex {
     public class YandexTracksGrabber : ITracksGrabber {
         private IYandexMusicClient _client;
+        private ILogger<YandexTracksGrabber> _logger;
         private YandexUrlParser _urlParser = new YandexUrlParser();
 
         public TimeSpan LinkLifeTime { get; } = new TimeSpan(0, 50, 0);
 
-        public YandexTracksGrabber(IYandexMusicClient client) {
+        public YandexTracksGrabber(IYandexMusicClient client, ILogger<YandexTracksGrabber> logger) {
             _client = client;
+            _logger = logger;
         }
 
         public Task<List<Track>> GrabRandomTracksAsync(TracksSource tracksSource) {
@@ -29,6 +32,8 @@ namespace Musili.WebApi.Services.Grabbers.Yandex {
             YandexPlaylistParams playlistParams = _urlParser.ParsePlaylistUrl(url);
             List<string> ids = null;
             int count = 1;
+
+            _logger.LogInformation("Load tracks from {0}", url);
             switch (playlistParams.type) {
                 case YandexPlaylistType.UserPlaylist:
                     ids = await _client.GetTracksIdsByUserPlaylistAsync(playlistParams.userId, playlistParams.playlistId);
@@ -41,6 +46,7 @@ namespace Musili.WebApi.Services.Grabbers.Yandex {
                     ids = await _client.GetTracksIdsByAlbumAsync(playlistParams.playlistId);
                     break;
             }
+            _logger.LogInformation("Tracks ids loaded, total: {0}", ids == null ? 0 : ids.Count);
 
             ids = RandomUtils.GetRandomItems(ids, count);
             return await _client.GetTracksByIdsAsync(ids);
