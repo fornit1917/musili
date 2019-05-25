@@ -3,7 +3,6 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Musili.WebApi.Interfaces;
 using Musili.WebApi.Models;
-using Musili.WebApi.Utils;
 using System;
 using System.Collections.Generic;
 using Npgsql;
