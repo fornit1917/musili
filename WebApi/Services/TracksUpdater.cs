@@ -28,9 +28,9 @@ namespace Musili.WebApi.Services {
             foreach(var criteria in hotCriterias) {
                 try {
                     List<Track> tracks = await _tracksProvider.GrabAndSaveTracks(criteria);
-                    _logger.LogInformation("Loaded in background {0} tracks by criteria {1}", tracks.Count, criteria.ToString());
+                    _logger.LogInformation("Loaded {0} tracks in background. Criteria: {1}", tracks.Count, criteria.ToString());
                 } catch (Exception ex) {
-                    _logger.LogError(ex, "Failed to background loading tracks by criteria {0}", criteria.ToString());
+                    _logger.LogError(ex, "Failed to load tracks in background. Criteria: {0}", criteria.ToString());
                 }
             }
         }

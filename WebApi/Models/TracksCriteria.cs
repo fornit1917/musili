@@ -22,8 +22,8 @@ namespace Musili.WebApi.Models {
 
         public override string ToString() {
             string genres = IsAnyGenre ? "Any" : string.Join(",", Genres);
-            string tempos = IsAnyGenre ? "Any" : string.Join(",", Tempos);
-            return $"Genres: {genres} / Tempos: {tempos}";
+            string tempos = IsAnyTempo ? "Any" : string.Join(",", Tempos);
+            return $"{genres} / {tempos}";
         }
     }
 }
