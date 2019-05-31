@@ -4,42 +4,33 @@ using System.Collections.Generic;
 using System.Linq;
 using Musili.WebApi.Interfaces;
 using Musili.WebApi.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Musili.WebApi.Services {
     public class TracksUpdater : ITracksUpdater {
-        private ITracksRepository _tracksRepository;
-        private ITracksSourcesRepository _tracksSourcesRepository;
-        private ICommonTracksGrabber _tracksGrabber;
+        private readonly ITracksRepository _tracksRepository;
+        private readonly ITracksRequestsRating _tracksRequestsRating;
+        private readonly ITracksProvider _tracksProvider;
+        private readonly ILogger<TracksUpdater> _logger;
 
-        public TracksUpdater(ITracksRepository tracksRepository, ITracksSourcesRepository tracksSourcesRepository, ICommonTracksGrabber tracksGrabber) {
+        public TracksUpdater(ITracksRepository tracksRepository, ITracksRequestsRating tracksRequestsRating, ITracksProvider tracksProvider, ILogger<TracksUpdater> logger) {
             _tracksRepository = tracksRepository;
-            _tracksSourcesRepository = tracksSourcesRepository;
-            _tracksGrabber = tracksGrabber;
+            _tracksRequestsRating = tracksRequestsRating;
+            _tracksProvider = tracksProvider;
+            _logger = logger;
         }
 
-        public async Task LoadNewTracksForAllCriteriasAsync(int maxTime) {
-            foreach (string genre in Enum.GetNames(typeof(Genre))) {
-                foreach (string tempo in Enum.GetNames(typeof(Tempo))) {
-                    if (genre == "Any" || tempo == "Any") {
-                        continue;
-                    }
-                    int time = 0;
-                    int requestsCount = 0;
-                    while (requestsCount < 10 && time < maxTime) {
-                        try {
-                            var criteria = new TracksCriteria(tempo, genre);
-                            TracksSource tracksSource = await _tracksSourcesRepository.GetRandomTracksSourceAsync(criteria);
-                            List<Track> tracks = await _tracksGrabber.GrabRandomTracksAsync(tracksSource);
-                            int duration = tracks.Select(t => t.Duration).Sum();
-                            time += duration;
-                            await _tracksRepository.SaveTracksAsync(tracks);
-                            //Console.WriteLine($"{genre} - {tempo}: {tracks.Count} tracks");
-                            await Task.Delay(1000);
-                        } catch {
-                            // todo: log
-                        }
-                        requestsCount++;
-                    }
+        public async Task LoadNewTracksForHotCriteriasAsync(int hotCriteriaLifeTime) {
+            DateTime minRequestDatetime = DateTime.Now.Subtract(TimeSpan.FromSeconds(hotCriteriaLifeTime));
+            _tracksRequestsRating.RemoveOldRequests(minRequestDatetime);
+            TracksCriteria[] hotCriterias = _tracksRequestsRating.GetHotCriterias(minRequestDatetime);
+            _logger.LogTrace("Count of hot criterias for background tracks loading: {0}", hotCriterias.Length);
+            foreach(var criteria in hotCriterias) {
+                try {
+                    List<Track> tracks = await _tracksProvider.GrabAndSaveTracks(criteria);
+                    _logger.LogInformation("Loaded in background {0} tracks by criteria {1}", tracks.Count, criteria.ToString());
+                } catch (Exception ex) {
+                    _logger.LogError(ex, "Failed to background loading tracks by criteria {0}", criteria.ToString());
                 }
             }
         }

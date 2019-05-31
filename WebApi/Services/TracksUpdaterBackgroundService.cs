@@ -23,7 +23,7 @@ namespace Musili.WebApi.Services {
 
         public Task StartAsync(CancellationToken cancellationToken) {
             if (_appConfig.DeleteOldTracksInBackground || _appConfig.LoadNewTracksInBackground) {
-                _timer = new Timer(DoWorkAsync, null, TimeSpan.Zero, TimeSpan.FromSeconds(_appConfig.TracksUpdaterTimeoutSeconds));
+                _timer = new Timer(DoWorkAsync, null, TimeSpan.Zero, TimeSpan.FromSeconds(_appConfig.TracksUpdaterTimeout));
             }
             return Task.CompletedTask;
         }
@@ -43,16 +43,16 @@ namespace Musili.WebApi.Services {
                 ITracksUpdater tracksUpdater = scope.ServiceProvider.GetRequiredService<ITracksUpdater>();
                 try {
                     MappedDiagnosticsLogicalContext.Set("backgroundTaskId", Guid.NewGuid());
-                    _logger.LogTrace("Background taks has been started");
+                    _logger.LogTrace("Background task has been started");
 
                     if (_appConfig.DeleteOldTracksInBackground) {
                         await tracksUpdater.RemoveOldTracksAsync();
                     }
                     if (_appConfig.LoadNewTracksInBackground) {
-                        await tracksUpdater.LoadNewTracksForAllCriteriasAsync(_appConfig.TracksUpdaterMaxDurationSeconds);
+                        await tracksUpdater.LoadNewTracksForHotCriteriasAsync(_appConfig.TracksUpdaterHotCriteriaLifetime);
                     }
 
-                    _logger.LogTrace("Background taks has been completed successfully");
+                    _logger.LogTrace("Background task has been completed successfully");
                 } catch (Exception e) {
                     _logger.LogError(e, "Unhandled exception in background tracks updater background task");
                 } finally {

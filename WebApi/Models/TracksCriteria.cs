@@ -19,5 +19,11 @@ namespace Musili.WebApi.Models {
             Genres = EnumUtils.ParseEnumValuesList<Genre>(genresCommaList, ',').Where(item => item != Genre.Any).ToList();
             IsAnyGenre = Genres.Count == 0 || (Genres.Count == 1 && Genres[0] == Genre.Any) || (Genres.Count == Enum.GetValues(typeof(Genre)).Length - 1);
         }
+
+        public override string ToString() {
+            string genres = IsAnyGenre ? "Any" : string.Join(",", Genres);
+            string tempos = IsAnyGenre ? "Any" : string.Join(",", Tempos);
+            return $"Genres: {genres} / Tempos: {tempos}";
+        }
     }
 }

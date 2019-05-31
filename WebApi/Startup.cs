@@ -36,6 +36,7 @@ namespace Musili.WebApi {
                 .AddPolicyHandler(GetHttpRetryPolicy());
 
             services.AddSingleton<ISemaphores, Semaphores>();
+            services.AddSingleton<ITracksRequestsRating, TracksRequestsRating>();
 
             // grabbers for each service
             services.AddSingleton<YandexTracksGrabber>();
