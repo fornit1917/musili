@@ -1,5 +1,6 @@
 [Unit]
 Description=Musili Web Service
+After=syslog.target network.target postgresql.service
 
 [Service]
 WorkingDirectory=/srv/musili/app
