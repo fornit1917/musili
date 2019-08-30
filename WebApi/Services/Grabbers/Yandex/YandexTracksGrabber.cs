@@ -19,7 +19,7 @@ namespace Musili.WebApi.Services.Grabbers.Yandex {
             _logger = logger;
         }
 
-        public Task<List<Track>> GrabRandomTracksAsync(TracksSource tracksSource) {
+        public Task<List<Track>> GrabRandomTracks(TracksSource tracksSource) {
             switch (tracksSource.SourceType) {
                 case TracksSourceType.YandexTracks:
                     return GrabTracksFromList(tracksSource.Value);
@@ -36,20 +36,20 @@ namespace Musili.WebApi.Services.Grabbers.Yandex {
             _logger.LogInformation("Load tracks from {0}", url);
             switch (playlistParams.type) {
                 case YandexPlaylistType.UserPlaylist:
-                    ids = await _client.GetTracksIdsByUserPlaylistAsync(playlistParams.userId, playlistParams.playlistId);
+                    ids = await _client.GetTracksIdsByUserPlaylist(playlistParams.userId, playlistParams.playlistId);
                     count = 2;
                     break;
                 case YandexPlaylistType.Artist:
-                    ids = await _client.GetTracksIdsByArtistAsync(playlistParams.playlistId);
+                    ids = await _client.GetTracksIdsByArtist(playlistParams.playlistId);
                     break;
                 case YandexPlaylistType.Album:
-                    ids = await _client.GetTracksIdsByAlbumAsync(playlistParams.playlistId);
+                    ids = await _client.GetTracksIdsByAlbum(playlistParams.playlistId);
                     break;
             }
             _logger.LogInformation("Tracks ids loaded, total: {0}", ids == null ? 0 : ids.Count);
 
             ids = RandomUtils.GetRandomItems(ids, count);
-            return await _client.GetTracksByIdsAsync(ids);
+            return await _client.GetTracksByIds(ids);
         }
     }
 }

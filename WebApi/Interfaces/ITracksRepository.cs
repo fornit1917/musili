@@ -5,8 +5,8 @@ using Musili.WebApi.Models;
 
 namespace Musili.WebApi.Interfaces {
     public interface ITracksRepository {
-        Task<List<Track>> GetTracksAsync(TracksCriteria tracksCriteria, int maxCount = 5, int lastId = 0);
-        Task SaveTracksAsync(List<Track> tracks);
-        Task RemoveOldTracksAsync(DateTime dateTime);
+        Task<List<Track>> GetTracks(TracksCriteria tracksCriteria, int maxCount = 5, int lastId = 0);
+        Task SaveTracks(List<Track> tracks);
+        Task RemoveOldTracks(DateTime dateTime);
     }
 }

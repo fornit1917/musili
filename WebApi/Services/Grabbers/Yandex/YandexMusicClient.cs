@@ -18,10 +18,10 @@ namespace Musili.WebApi.Services.Grabbers.Yandex {
             _httpClient = httpClient;
         }
 
-        public async Task<List<Track>> GetTracksByIdsAsync(List<string> ids) {
+        public async Task<List<Track>> GetTracksByIds(List<string> ids) {
             string query = String.Join(",", ids);
             string url = $"https://music.yandex.ru/api/v2.1/handlers/tracks?tracks={query}";
-            JToken data = await RequestJsonAsync(url);
+            JToken data = await RequestJson(url);
             List<Track> tracks = (
                 from t in data
                 let version = t["version"]
@@ -35,7 +35,7 @@ namespace Musili.WebApi.Services.Grabbers.Yandex {
 
             int i = 0;
             foreach (Track track in tracks) {
-                track.Url = await GetTrackUrlAsync(track.OriginalId);
+                track.Url = await GetTrackUrl(track.OriginalId);
                 if (tracks.Count > 1 && i < tracks.Count - 1) {
                     await Task.Delay(1000);
                 }
@@ -45,9 +45,9 @@ namespace Musili.WebApi.Services.Grabbers.Yandex {
             return tracks;
         }
 
-        public async Task<List<string>> GetTracksIdsByAlbumAsync(string albumId) {
+        public async Task<List<string>> GetTracksIdsByAlbum(string albumId) {
             string url = $"https://music.yandex.ru/handlers/album.jsx?album={albumId}&lang=ru&external-domain=music.yandex.ru&overembed=false&ncrnd=0.3792734650109968";
-            JToken data = await RequestJsonAsync(url);
+            JToken data = await RequestJson(url);
             return (
                 from volume in data["volumes"]
                 from track in volume
@@ -55,24 +55,24 @@ namespace Musili.WebApi.Services.Grabbers.Yandex {
             ).ToList();
         }
 
-        public async Task<List<string>> GetTracksIdsByArtistAsync(string artistId) {
+        public async Task<List<string>> GetTracksIdsByArtist(string artistId) {
             string url = $"https://music.yandex.ru/handlers/artist.jsx?artist={artistId}&what=tracks&sort=&dir=&lang=ru&external-domain=music.yandex.ru&overembed=false&ncrnd=0.329131147428392";
-            JToken data = await RequestJsonAsync(url);
+            JToken data = await RequestJson(url);
             return GetTrackIdsFromJToken(data["trackIds"]);
         }
 
-        public async Task<List<string>> GetTracksIdsByUserPlaylistAsync(string userId, string playlistId) {
+        public async Task<List<string>> GetTracksIdsByUserPlaylist(string userId, string playlistId) {
             string url = $"https://music.yandex.ru/handlers/playlist.jsx?owner={userId}&kinds={playlistId}&light=true&lang=ru&external-domain=music.yandex.ru&overembed=false&ncrnd=0.5872919215747372";
-            JToken data = await RequestJsonAsync(url);
+            JToken data = await RequestJson(url);
             return GetTrackIdsFromJToken(data["playlist"]["trackIds"]);
         }
 
-        private async Task<string> GetTrackUrlAsync(string trackId) {
+        private async Task<string> GetTrackUrl(string trackId) {
             string trackInfoUrl = $"https://music.yandex.ru/api/v2.1/handlers/track/{trackId}/track/download/m?hq=1";
-            JToken trackInfoData = await RequestJsonAsync(trackInfoUrl);
+            JToken trackInfoData = await RequestJson(trackInfoUrl);
 
             string trackSrcUrl = (string)trackInfoData["src"] + "&format=json";
-            JToken trackSrcData = await RequestJsonAsync(trackSrcUrl);
+            JToken trackSrcData = await RequestJson(trackSrcUrl);
 
             string path = (string)trackSrcData["path"];
             string s = (string)trackSrcData["s"];
@@ -83,7 +83,7 @@ namespace Musili.WebApi.Services.Grabbers.Yandex {
             return $"https://{host}/get-mp3/{hash}/{ts}{path}";
         }
 
-        private async Task<JToken> RequestJsonAsync(string url) {
+        private async Task<JToken> RequestJson(string url) {
             HttpResponseMessage resp = await _httpClient.GetAsync(url);
             string s = await resp.Content.ReadAsStringAsync();
             return JToken.Parse(s);

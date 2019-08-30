@@ -42,10 +42,10 @@ namespace Musili.WebApi.Services {
                 ITracksUpdater tracksUpdater = scope.ServiceProvider.GetRequiredService<ITracksUpdater>();
                 try {
                     if (_appConfig.DeleteOldTracksInBackground) {
-                        await tracksUpdater.RemoveOldTracksAsync();
+                        await tracksUpdater.RemoveOldTracks();
                     }
                     if (_appConfig.LoadNewTracksInBackground) {
-                        await tracksUpdater.LoadNewTracksForHotCriteriasAsync(_appConfig.TracksUpdaterHotCriteriaLifetime);
+                        await tracksUpdater.LoadNewTracksForHotCriterias(_appConfig.TracksUpdaterHotCriteriaLifetime);
                     }
                 } catch (Exception e) {
                     _logger.LogError(e, "Unhandled exception in background tracks updater background task");

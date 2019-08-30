@@ -17,8 +17,8 @@ namespace Musili.WebApi.Services {
             _grabber = grabber;
         }
 
-        public async Task<List<Track>> GetTracksAsync(TracksCriteria criteria, int lastId = 0) {
-            List<Track> tracks = await _tracksRepository.GetTracksAsync(criteria, 5, lastId);
+        public async Task<List<Track>> GetTracks(TracksCriteria criteria, int lastId = 0) {
+            List<Track> tracks = await _tracksRepository.GetTracks(criteria, 5, lastId);
             if (tracks.Count == 0) {
                 return await GrabAndSaveTracks(criteria);
             }
@@ -26,9 +26,9 @@ namespace Musili.WebApi.Services {
         }
 
         public async Task<List<Track>> GrabAndSaveTracks(TracksCriteria criteria) {
-            TracksSource tracksSource = await _tracksSourceRepository.GetRandomTracksSourceAsync(criteria);
-            List<Track> tracks = await _grabber.GrabRandomTracksAsync(tracksSource);
-            await _tracksRepository.SaveTracksAsync(tracks);
+            TracksSource tracksSource = await _tracksSourceRepository.GetRandomTracksSource(criteria);
+            List<Track> tracks = await _grabber.GrabRandomTracks(tracksSource);
+            await _tracksRepository.SaveTracks(tracks);
             return tracks;
         }
     }

@@ -7,6 +7,6 @@ namespace Musili.WebApi.Interfaces {
     public interface ITracksGrabber {
         TimeSpan LinkLifeTime { get; }
 
-        Task<List<Track>> GrabRandomTracksAsync(TracksSource tracksSource);
+        Task<List<Track>> GrabRandomTracks(TracksSource tracksSource);
     }
 }

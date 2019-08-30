@@ -16,13 +16,13 @@ namespace Musili.WebApi.Services.Grabbers {
             _semaphores = semaphores;
         }
 
-        public async Task<List<Track>> GrabRandomTracksAsync(TracksSource tracksSource) {
+        public async Task<List<Track>> GrabRandomTracks(TracksSource tracksSource) {
             SemaphoreSlim semaphore = _semaphores.GetSemaphoreForService(tracksSource.Service);
             await semaphore.WaitAsync();
             try {
                 ITracksGrabber grabber = _grabbersProvider(tracksSource.Service);
                 DateTime expirationDatetime = DateTime.Now.Add(grabber.LinkLifeTime);
-                List<Track> tracks = await grabber.GrabRandomTracksAsync(tracksSource);
+                List<Track> tracks = await grabber.GrabRandomTracks(tracksSource);
                 foreach (var track in tracks) {
                     track.TracksSource = tracksSource;
                     track.ExpirationDatetime = expirationDatetime;

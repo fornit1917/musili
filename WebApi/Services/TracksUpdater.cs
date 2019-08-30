@@ -21,7 +21,7 @@ namespace Musili.WebApi.Services {
             _logger = logger;
         }
 
-        public async Task LoadNewTracksForHotCriteriasAsync(int hotCriteriaLifeTime) {
+        public async Task LoadNewTracksForHotCriterias(int hotCriteriaLifeTime) {
             using (MappedDiagnosticsLogicalContext.SetScoped("jobId", "load-tracks")) {
                 DateTime minRequestDatetime = DateTime.Now.Subtract(TimeSpan.FromSeconds(hotCriteriaLifeTime));
                 _tracksRequestsRating.RemoveOldRequests(minRequestDatetime);
@@ -38,9 +38,9 @@ namespace Musili.WebApi.Services {
             }
         }
 
-        public Task RemoveOldTracksAsync() {
+        public Task RemoveOldTracks() {
             using (MappedDiagnosticsLogicalContext.SetScoped("jobId", "remove-old-tracks")) {
-                return _tracksRepository.RemoveOldTracksAsync(DateTime.Now);
+                return _tracksRepository.RemoveOldTracks(DateTime.Now);
             }
         }
     }

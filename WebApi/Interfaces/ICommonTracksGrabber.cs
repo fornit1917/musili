@@ -4,6 +4,6 @@ using Musili.WebApi.Models;
 
 namespace Musili.WebApi.Interfaces {
     public interface ICommonTracksGrabber {
-        Task<List<Track>> GrabRandomTracksAsync(TracksSource tracksSource);
+        Task<List<Track>> GrabRandomTracks(TracksSource tracksSource);
     }
 }

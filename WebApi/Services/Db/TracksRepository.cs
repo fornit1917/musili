@@ -15,7 +15,7 @@ namespace Musili.WebApi.Services.Db {
             _db = db;
         }
 
-        public async Task<List<Track>> GetTracksAsync(TracksCriteria tracksCriteria, int maxCount = 5, int lastId = 0) {
+        public async Task<List<Track>> GetTracks(TracksCriteria tracksCriteria, int maxCount = 5, int lastId = 0) {
             var now = DateTime.Now;
 
             var query = _db.Tracks.Where(t => t.ExpirationDatetime > now);
@@ -36,12 +36,12 @@ namespace Musili.WebApi.Services.Db {
             return await query.ToListAsync();
         }
 
-        public Task SaveTracksAsync(List<Track> tracks) {
+        public Task SaveTracks(List<Track> tracks) {
             _db.Tracks.AddRange(tracks);
             return _db.SaveChangesAsync();
         }
 
-        public Task RemoveOldTracksAsync(DateTime dateTime) {
+        public Task RemoveOldTracks(DateTime dateTime) {
             var commandText = "DELETE FROM app.track WHERE expiration_datetime <= @dt::timestamp";
             var param = new NpgsqlParameter("@dt", dateTime.ToString());
             return _db.Database.ExecuteSqlCommandAsync(commandText, param);
