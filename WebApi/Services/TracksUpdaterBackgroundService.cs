@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Musili.WebApi.Interfaces;
-using NLog;
 
 namespace Musili.WebApi.Services {
     public class TracksUpdaterBackgroundService : IHostedService, IDisposable {
@@ -42,21 +41,15 @@ namespace Musili.WebApi.Services {
             using (var scope = _services.CreateScope()) {
                 ITracksUpdater tracksUpdater = scope.ServiceProvider.GetRequiredService<ITracksUpdater>();
                 try {
-                    MappedDiagnosticsLogicalContext.Set("backgroundTaskId", Guid.NewGuid());
-                    _logger.LogTrace("Background task has been started");
-
                     if (_appConfig.DeleteOldTracksInBackground) {
                         await tracksUpdater.RemoveOldTracksAsync();
                     }
                     if (_appConfig.LoadNewTracksInBackground) {
                         await tracksUpdater.LoadNewTracksForHotCriteriasAsync(_appConfig.TracksUpdaterHotCriteriaLifetime);
                     }
-
-                    _logger.LogTrace("Background task has been completed successfully");
                 } catch (Exception e) {
                     _logger.LogError(e, "Unhandled exception in background tracks updater background task");
                 } finally {
-                    MappedDiagnosticsContext.Remove("backgroundTaskId");
                     _started = false;
                 }
             }

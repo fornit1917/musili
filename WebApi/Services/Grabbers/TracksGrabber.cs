@@ -20,7 +20,6 @@ namespace Musili.WebApi.Services.Grabbers {
             SemaphoreSlim semaphore = _semaphores.GetSemaphoreForService(tracksSource.Service);
             await semaphore.WaitAsync();
             try {
-                MappedDiagnosticsLogicalContext.Set("grabRequestId", Guid.NewGuid());
                 ITracksGrabber grabber = _grabbersProvider(tracksSource.Service);
                 DateTime expirationDatetime = DateTime.Now.Add(grabber.LinkLifeTime);
                 List<Track> tracks = await grabber.GrabRandomTracksAsync(tracksSource);
@@ -30,7 +29,6 @@ namespace Musili.WebApi.Services.Grabbers {
                 }
                 return tracks;
             } finally {
-                MappedDiagnosticsLogicalContext.Remove("grabRequestId");
                 semaphore.Release();
             }
         }
