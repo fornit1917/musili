@@ -4,6 +4,7 @@ packages
 TestResults
 [Oo]bj/
 [Bb]in/
+*.user
 src/WebUi/node_modules
 src/WebUi/dist
 src/WebApi/logs
