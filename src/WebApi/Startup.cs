@@ -4,16 +4,20 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.HttpOverrides;
+using Polly.Extensions.Http;
+using Polly;
+using Polly.Retry;
+using FluentMigrator.Runner;
 using Musili.WebApi.Services.Db;
 using Musili.WebApi.Interfaces;
 using Musili.WebApi.Models;
 using Musili.WebApi.Services;
 using Musili.WebApi.Services.Grabbers;
 using Musili.WebApi.Services.Grabbers.Yandex;
-using Microsoft.AspNetCore.HttpOverrides;
-using Polly.Extensions.Http;
-using Polly;
-using Polly.Retry;
+using Musili.WebApi.Migrations;
+using FluentMigrator.Runner.VersionTableInfo;
+using NLog.Extensions.Logging;
 
 namespace Musili.WebApi {
     public class Startup {
@@ -65,6 +69,16 @@ namespace Musili.WebApi {
             services.AddScoped<ITracksUpdater, TracksUpdater>();
 
             services.AddMvc();
+
+            services.AddFluentMigratorCore()
+                .ConfigureRunner(builder => {
+                    builder
+                        .AddPostgres()
+                        .WithGlobalConnectionString("MusiliDatabase")
+                        .WithVersionTable(new VersionTable())
+                        .ScanIn(typeof(VersionTable).Assembly).For.Migrations();
+                })
+                .AddLogging(lb => lb.AddNLog());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

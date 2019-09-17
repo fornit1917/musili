@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using FluentMigrator.Runner;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Web;
@@ -16,7 +13,14 @@ namespace Musili.WebApi {
             Logger logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             try {
                 logger.Info("Init application...");
-                BuildWebHost(args).Run();
+                var host = BuildWebHost(args);
+                
+                using (var scope = host.Services.CreateScope()) {
+                    IMigrationRunner migrationRunner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
+                    migrationRunner.MigrateUp();
+                }
+
+                host.Run();
             } catch (Exception ex) {
                 logger.Error(ex, "Stopped program because of exception");
             } finally {
