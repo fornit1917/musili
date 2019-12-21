@@ -77,6 +77,6 @@ export default class PlayerSettingsButton {
         if (this.hideSettingsTimeoutId) {
             clearTimeout(this.hideSettingsTimeoutId);
         }
-        this.hideSettingsTimeoutId = setTimeout(() => { this.hideSettings(); }, 10000);
+        this.hideSettingsTimeoutId = window.setTimeout(() => { this.hideSettings(); }, 10000);
     }
 }

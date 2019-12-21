@@ -84,7 +84,7 @@ export default class Player {
         if (this.applySettingsTimeoutId) {
             clearTimeout(this.applySettingsTimeoutId);
         }
-        this.applySettingsTimeoutId = setTimeout(() => {
+        this.applySettingsTimeoutId = window.setTimeout(() => {
             this.loadAndStart(settings);
         }, 1500);
     }
