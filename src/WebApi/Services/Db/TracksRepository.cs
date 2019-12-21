@@ -44,7 +44,7 @@ namespace Musili.WebApi.Services.Db {
         public Task RemoveOldTracks(DateTime dateTime) {
             var commandText = "DELETE FROM app.track WHERE expiration_datetime <= @dt::timestamp";
             var param = new NpgsqlParameter("@dt", dateTime.ToString());
-            return _db.Database.ExecuteSqlCommandAsync(commandText, param);
+            return _db.Database.ExecuteSqlRawAsync(commandText, param);
         }
     }
 }

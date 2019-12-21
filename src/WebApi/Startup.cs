@@ -18,6 +18,7 @@ using Musili.WebApi.Services.Grabbers.Yandex;
 using Musili.WebApi.Migrations;
 using FluentMigrator.Runner.VersionTableInfo;
 using NLog.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 
 namespace Musili.WebApi {
     public class Startup {
@@ -82,18 +83,19 @@ namespace Musili.WebApi {
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
+            app.UseForwardedHeaders(new ForwardedHeadersOptions {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             } else {
                 app.UseExceptionHandler("/error");
             }
 
-            app.UseForwardedHeaders(new ForwardedHeadersOptions {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            });
-
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(e => e.MapControllers());
         }
 
 
