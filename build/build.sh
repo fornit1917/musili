@@ -26,7 +26,7 @@ mv ./dist/* "${OUT_DIR_FILES}/wwwroot"
 
 echo "Build back-end"
 cd "${API_SRC_DIR}"
-API_DIST="${API_SRC_DIR}/bin/Release/netcoreapp2.1/publish";
+API_DIST="${API_SRC_DIR}/bin/Release/netcoreapp3.1/publish";
 rm -rf "${API_DIST}";
 dotnet publish -c Release
 mv "${API_DIST}"/* "${OUT_DIR_FILES}"
