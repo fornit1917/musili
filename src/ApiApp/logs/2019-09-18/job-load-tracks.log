@@ -1,8 +1,0 @@
-2019-09-18 00:03:32.7270 | TRACE | Musili.WebApi.Services.TracksUpdater | Count of hot criterias for background tracks loading: 1 
-2019-09-18 00:03:32.7270 | TRACE | Musili.WebApi.Services.TracksUpdater | Count of hot criterias for background tracks loading: 1 
-2019-09-18 00:03:33.1263 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Load tracks from https://music.yandex.ru/users/Musili.Ru/playlists/1005 
-2019-09-18 00:03:33.1398 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Load tracks from https://music.yandex.ru/users/Musili.Ru/playlists/1005 
-2019-09-18 00:03:34.0533 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Tracks ids loaded, total: 357 
-2019-09-18 00:03:34.0533 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Tracks ids loaded, total: 357 
-2019-09-18 00:03:35.6190 | INFO | Musili.WebApi.Services.TracksUpdater | Loaded 2 tracks in background. Criteria: Any / Any 
-2019-09-18 00:03:35.6190 | INFO | Musili.WebApi.Services.TracksUpdater | Loaded 2 tracks in background. Criteria: Any / Any 
