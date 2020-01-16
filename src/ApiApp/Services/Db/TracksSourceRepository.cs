@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Musili.ApiApp.Interfaces;
 using Musili.ApiApp.Models;
 using Musili.ApiApp.Utils;
 

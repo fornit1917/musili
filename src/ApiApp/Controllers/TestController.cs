@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Musili.ApiApp.Services;
 using Musili.ApiApp.Services.Db;
-using Musili.ApiApp.Interfaces;
 using Musili.ApiApp.Models;
 using Microsoft.Extensions.Logging;
 

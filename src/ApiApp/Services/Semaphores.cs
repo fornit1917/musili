@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using Musili.ApiApp.Interfaces;
 using Musili.ApiApp.Models;
 
 namespace Musili.ApiApp.Services {

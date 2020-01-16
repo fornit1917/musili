@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Musili.ApiApp.Interfaces {
+namespace Musili.ApiApp.Services {
     public interface ITracksUpdater {
         Task RemoveOldTracks();
         Task LoadNewTracksForHotCriterias(int hotCriteriaLifeTime);

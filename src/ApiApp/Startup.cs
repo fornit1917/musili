@@ -10,13 +10,11 @@ using Polly;
 using Polly.Retry;
 using FluentMigrator.Runner;
 using Musili.ApiApp.Services.Db;
-using Musili.ApiApp.Interfaces;
 using Musili.ApiApp.Models;
 using Musili.ApiApp.Services;
 using Musili.ApiApp.Services.Grabbers;
 using Musili.ApiApp.Services.Grabbers.Yandex;
 using Musili.ApiApp.Migrations;
-using FluentMigrator.Runner.VersionTableInfo;
 using NLog.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
 
@@ -47,7 +45,7 @@ namespace Musili.ApiApp {
             services.AddSingleton<YandexTracksGrabber>();
 
             // factory for grabber for each music service
-            services.AddSingleton<Func<TracksSourceService, ITracksGrabber>>(serviceProvider => {
+            services.AddSingleton<Func<TracksSourceService, IServiceTracksGrabber>>(serviceProvider => {
                 return source => {
                     switch (source) {
                         case TracksSourceService.Yandex:

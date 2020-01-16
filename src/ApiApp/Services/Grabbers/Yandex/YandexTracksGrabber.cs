@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Musili.ApiApp.Interfaces;
 using Musili.ApiApp.Models;
 using Musili.ApiApp.Utils;
 
 namespace Musili.ApiApp.Services.Grabbers.Yandex {
-    public class YandexTracksGrabber : ITracksGrabber {
+    public class YandexTracksGrabber : IServiceTracksGrabber {
         private IYandexMusicClient _client;
         private ILogger<YandexTracksGrabber> _logger;
         private YandexUrlParser _urlParser = new YandexUrlParser();

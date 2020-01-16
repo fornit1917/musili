@@ -1,11 +1,10 @@
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Linq;
-using Musili.ApiApp.Interfaces;
-using Musili.ApiApp.Models;
 using Microsoft.Extensions.Logging;
 using NLog;
+using Musili.ApiApp.Models;
+using Musili.ApiApp.Services.Db;
 
 namespace Musili.ApiApp.Services {
     public class TracksUpdater : ITracksUpdater {

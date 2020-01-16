@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Musili.ApiApp.Interfaces;
+using Musili.ApiApp.Services;
 using Musili.ApiApp.Models;
 
 namespace Musili.ApiApp.Controllers {
