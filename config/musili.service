@@ -4,7 +4,7 @@ After=syslog.target network.target postgresql.service
 
 [Service]
 WorkingDirectory=/srv/musili/app
-ExecStart=/usr/bin/dotnet /srv/musili/app/WebApi.dll --urls http://localhost:5010
+ExecStart=/usr/bin/dotnet /srv/musili/app/ApiApp.dll --urls http://localhost:5010
 Restart=always
 RestartSec=10
 KillSignal=SIGINT

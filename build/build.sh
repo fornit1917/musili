@@ -3,8 +3,8 @@
 DIR="$( cd "$(dirname "$0")" ; pwd -P )"
 OUT_DIR="${DIR}/dist"
 OUT_DIR_FILES="${DIR}/dist/files"
-UI_SRC_DIR="${DIR}/../src/WebUi"
-API_SRC_DIR="${DIR}/../src/WebApi"
+UI_SRC_DIR="${DIR}/../src/UiApp"
+API_SRC_DIR="${DIR}/../src/ApiApp"
 
 rm -rf "${OUT_DIR}"
 mkdir "${OUT_DIR}"

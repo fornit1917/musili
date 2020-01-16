@@ -99,7 +99,7 @@ namespace Musili.ApiApp {
         }
 
 
-        private static RetryPolicy<System.Net.Http.HttpResponseMessage> GetHttpRetryPolicy() {
+        private static AsyncRetryPolicy<System.Net.Http.HttpResponseMessage> GetHttpRetryPolicy() {
             return HttpPolicyExtensions
                 .HandleTransientHttpError()
                 .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(1));
