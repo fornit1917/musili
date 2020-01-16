@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Musili.WebApi.Migrations {
+namespace Musili.ApiApp.Migrations {
     [VersionTableMetaData]
     public class VersionTable : IVersionTableMetaData {
         public string ColumnName => "version";

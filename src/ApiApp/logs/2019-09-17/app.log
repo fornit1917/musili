@@ -1,0 +1,109 @@
+2019-09-17 23:55:20.1683 | INFO | Musili.WebApi.Program |  | Init application... 
+2019-09-17 23:55:22.7306 | INFO | FluentMigrator.Runner.MigrationRunner |  | VersionMigration migrating 
+2019-09-17 23:55:22.7419 | INFO | FluentMigrator.Runner.MigrationRunner |  | VersionMigration migrating 
+2019-09-17 23:55:22.7419 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | Beginning Transaction 
+2019-09-17 23:55:22.7419 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | Beginning Transaction 
+2019-09-17 23:55:22.7780 | INFO | FluentMigrator.Runner.MigrationRunner |  | CreateTable _migrations 
+2019-09-17 23:55:22.7780 | INFO | FluentMigrator.Runner.MigrationRunner |  | CreateTable _migrations 
+2019-09-17 23:55:22.7945 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | CREATE TABLE "app"."_migrations" ("version" bigint NOT NULL); 
+2019-09-17 23:55:22.7945 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | CREATE TABLE "app"."_migrations" ("version" bigint NOT NULL); 
+2019-09-17 23:55:22.8076 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0234749s 
+2019-09-17 23:55:22.8076 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0234749s 
+2019-09-17 23:55:22.8076 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | Committing Transaction 
+2019-09-17 23:55:22.8076 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | Committing Transaction 
+2019-09-17 23:55:22.8339 | INFO | FluentMigrator.Runner.MigrationRunner |  | VersionMigration migrated 
+2019-09-17 23:55:22.8339 | INFO | FluentMigrator.Runner.MigrationRunner |  | VersionMigration migrated 
+2019-09-17 23:55:22.8339 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0539331s 
+2019-09-17 23:55:22.8339 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0539331s 
+2019-09-17 23:55:22.8624 | INFO | FluentMigrator.Runner.MigrationRunner |  | VersionUniqueMigration migrating 
+2019-09-17 23:55:22.8624 | INFO | FluentMigrator.Runner.MigrationRunner |  | VersionUniqueMigration migrating 
+2019-09-17 23:55:22.8624 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | Beginning Transaction 
+2019-09-17 23:55:22.8624 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | Beginning Transaction 
+2019-09-17 23:55:22.8775 | INFO | FluentMigrator.Runner.MigrationRunner |  | CreateIndex _migrations (version) 
+2019-09-17 23:55:22.8775 | INFO | FluentMigrator.Runner.MigrationRunner |  | CreateIndex _migrations (version) 
+2019-09-17 23:55:22.8775 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | CREATE UNIQUE INDEX "_migrations_version_idx" ON "app"."_migrations" ("version" ASC); 
+2019-09-17 23:55:22.8814 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | CREATE UNIQUE INDEX "_migrations_version_idx" ON "app"."_migrations" ("version" ASC); 
+2019-09-17 23:55:22.8814 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0167023s 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0167023s 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.MigrationRunner |  | AlterTable _migrations 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.MigrationRunner |  | AlterTable _migrations 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  |  
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  |  
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0020659s 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0020659s 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.MigrationRunner |  | CreateColumn _migrations applied_on DateTime 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.MigrationRunner |  | CreateColumn _migrations applied_on DateTime 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | ALTER TABLE "app"."_migrations" ADD "applied_on" timestamp; 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | ALTER TABLE "app"."_migrations" ADD "applied_on" timestamp; 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0029143s 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0029143s 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | Committing Transaction 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | Committing Transaction 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.MigrationRunner |  | VersionUniqueMigration migrated 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.MigrationRunner |  | VersionUniqueMigration migrated 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0052109s 
+2019-09-17 23:55:22.8961 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0052109s 
+2019-09-17 23:55:22.9152 | INFO | FluentMigrator.Runner.MigrationRunner |  | VersionDescriptionMigration migrating 
+2019-09-17 23:55:22.9152 | INFO | FluentMigrator.Runner.MigrationRunner |  | VersionDescriptionMigration migrating 
+2019-09-17 23:55:22.9152 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | Beginning Transaction 
+2019-09-17 23:55:22.9152 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | Beginning Transaction 
+2019-09-17 23:55:22.9152 | INFO | FluentMigrator.Runner.MigrationRunner |  | AlterTable _migrations 
+2019-09-17 23:55:22.9152 | INFO | FluentMigrator.Runner.MigrationRunner |  | AlterTable _migrations 
+2019-09-17 23:55:22.9152 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  |  
+2019-09-17 23:55:22.9152 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  |  
+2019-09-17 23:55:22.9152 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,000864s 
+2019-09-17 23:55:22.9152 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,000864s 
+2019-09-17 23:55:22.9152 | INFO | FluentMigrator.Runner.MigrationRunner |  | CreateColumn _migrations description String 
+2019-09-17 23:55:22.9152 | INFO | FluentMigrator.Runner.MigrationRunner |  | CreateColumn _migrations description String 
+2019-09-17 23:55:22.9152 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | ALTER TABLE "app"."_migrations" ADD "description" varchar(1024); 
+2019-09-17 23:55:22.9152 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | ALTER TABLE "app"."_migrations" ADD "description" varchar(1024); 
+2019-09-17 23:55:22.9343 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,010595s 
+2019-09-17 23:55:22.9343 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,010595s 
+2019-09-17 23:55:22.9343 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | Committing Transaction 
+2019-09-17 23:55:22.9343 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | Committing Transaction 
+2019-09-17 23:55:22.9343 | INFO | FluentMigrator.Runner.MigrationRunner |  | VersionDescriptionMigration migrated 
+2019-09-17 23:55:22.9343 | INFO | FluentMigrator.Runner.MigrationRunner |  | VersionDescriptionMigration migrated 
+2019-09-17 23:55:22.9343 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0131409s 
+2019-09-17 23:55:22.9343 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0131409s 
+2019-09-17 23:55:22.9477 | INFO | FluentMigrator.Runner.MigrationRunner |  | 201909172310: FirstTestMigration migrating 
+2019-09-17 23:55:22.9477 | INFO | FluentMigrator.Runner.MigrationRunner |  | 201909172310: FirstTestMigration migrating 
+2019-09-17 23:55:22.9477 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | Beginning Transaction 
+2019-09-17 23:55:22.9477 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | Beginning Transaction 
+2019-09-17 23:55:22.9477 | INFO | FluentMigrator.Runner.MigrationRunner |  | ExecuteSqlStatement 
+                CREATE TABLE app.test_table (
+                    id serial primary key,
+                    some_data text not null
+                );
+                INSERT INTO app.test_table (id, some_data) VALUES (1, 'hello!');
+             
+2019-09-17 23:55:22.9477 | INFO | FluentMigrator.Runner.MigrationRunner |  | ExecuteSqlStatement 
+                CREATE TABLE app.test_table (
+                    id serial primary key,
+                    some_data text not null
+                );
+                INSERT INTO app.test_table (id, some_data) VALUES (1, 'hello!');
+             
+2019-09-17 23:55:22.9477 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | 
+                CREATE TABLE app.test_table (
+                    id serial primary key,
+                    some_data text not null
+                );
+                INSERT INTO app.test_table (id, some_data) VALUES (1, 'hello!');
+             
+2019-09-17 23:55:22.9477 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | 
+                CREATE TABLE app.test_table (
+                    id serial primary key,
+                    some_data text not null
+                );
+                INSERT INTO app.test_table (id, some_data) VALUES (1, 'hello!');
+             
+2019-09-17 23:55:22.9717 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0195594s 
+2019-09-17 23:55:22.9717 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0195594s 
+2019-09-17 23:55:22.9816 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | INSERT INTO "app"."_migrations" ("version","applied_on","description") VALUES (201909172310,'2019-09-17T20:55:22','FirstTestMigration'); 
+2019-09-17 23:55:22.9816 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | INSERT INTO "app"."_migrations" ("version","applied_on","description") VALUES (201909172310,'2019-09-17T20:55:22','FirstTestMigration'); 
+2019-09-17 23:55:22.9816 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | Committing Transaction 
+2019-09-17 23:55:22.9816 | INFO | FluentMigrator.Runner.Processors.Postgres.PostgresProcessor |  | Committing Transaction 
+2019-09-17 23:55:22.9816 | INFO | FluentMigrator.Runner.MigrationRunner |  | 201909172310: FirstTestMigration migrated 
+2019-09-17 23:55:22.9816 | INFO | FluentMigrator.Runner.MigrationRunner |  | 201909172310: FirstTestMigration migrated 
+2019-09-17 23:55:22.9816 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0327457s 
+2019-09-17 23:55:22.9816 | INFO | FluentMigrator.Runner.MigrationRunner |  | => 0,0327457s 

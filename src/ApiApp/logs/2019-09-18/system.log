@@ -1,0 +1,48 @@
+2019-09-18 00:03:33.1811 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | Start processing HTTP request GET https://music.yandex.ru/handlers/playlist.jsx?owner=Musili.Ru&kinds=1005&light=true&lang=ru&external-domain=music.yandex.ru&overembed=false&ncrnd=0.5872919215747372 
+2019-09-18 00:03:33.1932 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | Start processing HTTP request GET https://music.yandex.ru/handlers/playlist.jsx?owner=Musili.Ru&kinds=1005&light=true&lang=ru&external-domain=music.yandex.ru&overembed=false&ncrnd=0.5872919215747372 
+2019-09-18 00:03:33.2234 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Sending HTTP request GET https://music.yandex.ru/handlers/playlist.jsx?owner=Musili.Ru&kinds=1005&light=true&lang=ru&external-domain=music.yandex.ru&overembed=false&ncrnd=0.5872919215747372 
+2019-09-18 00:03:33.2246 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Sending HTTP request GET https://music.yandex.ru/handlers/playlist.jsx?owner=Musili.Ru&kinds=1005&light=true&lang=ru&external-domain=music.yandex.ru&overembed=false&ncrnd=0.5872919215747372 
+2019-09-18 00:03:33.8406 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Received HTTP response after 615.2317ms - OK 
+2019-09-18 00:03:33.8406 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Received HTTP response after 615.2317ms - OK 
+2019-09-18 00:03:33.8406 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | End processing HTTP request after 674.6387ms - OK 
+2019-09-18 00:03:33.8622 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | End processing HTTP request after 674.6387ms - OK 
+2019-09-18 00:03:34.0533 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | Start processing HTTP request GET https://music.yandex.ru/api/v2.1/handlers/tracks?tracks=42199625,9431 
+2019-09-18 00:03:34.0533 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | Start processing HTTP request GET https://music.yandex.ru/api/v2.1/handlers/tracks?tracks=42199625,9431 
+2019-09-18 00:03:34.0533 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Sending HTTP request GET https://music.yandex.ru/api/v2.1/handlers/tracks?tracks=42199625,9431 
+2019-09-18 00:03:34.0533 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Sending HTTP request GET https://music.yandex.ru/api/v2.1/handlers/tracks?tracks=42199625,9431 
+2019-09-18 00:03:34.1151 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Received HTTP response after 50.9289ms - OK 
+2019-09-18 00:03:34.1159 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Received HTTP response after 50.9289ms - OK 
+2019-09-18 00:03:34.1159 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | End processing HTTP request after 53.6922ms - OK 
+2019-09-18 00:03:34.1159 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | End processing HTTP request after 53.6922ms - OK 
+2019-09-18 00:03:34.1159 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | Start processing HTTP request GET https://music.yandex.ru/api/v2.1/handlers/track/42199625/track/download/m?hq=1 
+2019-09-18 00:03:34.1159 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | Start processing HTTP request GET https://music.yandex.ru/api/v2.1/handlers/track/42199625/track/download/m?hq=1 
+2019-09-18 00:03:34.1159 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Sending HTTP request GET https://music.yandex.ru/api/v2.1/handlers/track/42199625/track/download/m?hq=1 
+2019-09-18 00:03:34.1159 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Sending HTTP request GET https://music.yandex.ru/api/v2.1/handlers/track/42199625/track/download/m?hq=1 
+2019-09-18 00:03:34.1595 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Received HTTP response after 36.467ms - OK 
+2019-09-18 00:03:34.1595 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Received HTTP response after 36.467ms - OK 
+2019-09-18 00:03:34.1627 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | End processing HTTP request after 40.8101ms - OK 
+2019-09-18 00:03:34.1627 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | End processing HTTP request after 40.8101ms - OK 
+2019-09-18 00:03:34.1627 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | Start processing HTTP request GET https://storage.mds.yandex.net/file-download-info/912218_518022e4.63407878.2.42199625/2?sign=25ffb9332c7cb44803d2ef6599edabcc7cb18886b58f51342a2bd8799346f292&ts=5d814a61&format=json 
+2019-09-18 00:03:34.1627 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | Start processing HTTP request GET https://storage.mds.yandex.net/file-download-info/912218_518022e4.63407878.2.42199625/2?sign=25ffb9332c7cb44803d2ef6599edabcc7cb18886b58f51342a2bd8799346f292&ts=5d814a61&format=json 
+2019-09-18 00:03:34.1627 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Sending HTTP request GET https://storage.mds.yandex.net/file-download-info/912218_518022e4.63407878.2.42199625/2?sign=25ffb9332c7cb44803d2ef6599edabcc7cb18886b58f51342a2bd8799346f292&ts=5d814a61&format=json 
+2019-09-18 00:03:34.1627 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Sending HTTP request GET https://storage.mds.yandex.net/file-download-info/912218_518022e4.63407878.2.42199625/2?sign=25ffb9332c7cb44803d2ef6599edabcc7cb18886b58f51342a2bd8799346f292&ts=5d814a61&format=json 
+2019-09-18 00:03:34.3094 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Received HTTP response after 141.3182ms - OK 
+2019-09-18 00:03:34.3094 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Received HTTP response after 141.3182ms - OK 
+2019-09-18 00:03:34.3094 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | End processing HTTP request after 145.2677ms - OK 
+2019-09-18 00:03:34.3094 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | End processing HTTP request after 145.2677ms - OK 
+2019-09-18 00:03:35.3305 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | Start processing HTTP request GET https://music.yandex.ru/api/v2.1/handlers/track/9431/track/download/m?hq=1 
+2019-09-18 00:03:35.3305 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | Start processing HTTP request GET https://music.yandex.ru/api/v2.1/handlers/track/9431/track/download/m?hq=1 
+2019-09-18 00:03:35.3305 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Sending HTTP request GET https://music.yandex.ru/api/v2.1/handlers/track/9431/track/download/m?hq=1 
+2019-09-18 00:03:35.3305 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Sending HTTP request GET https://music.yandex.ru/api/v2.1/handlers/track/9431/track/download/m?hq=1 
+2019-09-18 00:03:35.3800 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Received HTTP response after 48.0562ms - OK 
+2019-09-18 00:03:35.3800 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Received HTTP response after 48.0562ms - OK 
+2019-09-18 00:03:35.3814 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | End processing HTTP request after 50.9306ms - OK 
+2019-09-18 00:03:35.3814 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | End processing HTTP request after 50.9306ms - OK 
+2019-09-18 00:03:35.3814 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | Start processing HTTP request GET https://storage.mds.yandex.net/file-download-info/207154_0299f95e.53928837.1.9431/2?sign=8acebf8b0f908513c431181d9bbedf9be20f484b49e8856da0a76c0c7531f226&ts=5d814a62&format=json 
+2019-09-18 00:03:35.3814 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | Start processing HTTP request GET https://storage.mds.yandex.net/file-download-info/207154_0299f95e.53928837.1.9431/2?sign=8acebf8b0f908513c431181d9bbedf9be20f484b49e8856da0a76c0c7531f226&ts=5d814a62&format=json 
+2019-09-18 00:03:35.3814 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Sending HTTP request GET https://storage.mds.yandex.net/file-download-info/207154_0299f95e.53928837.1.9431/2?sign=8acebf8b0f908513c431181d9bbedf9be20f484b49e8856da0a76c0c7531f226&ts=5d814a62&format=json 
+2019-09-18 00:03:35.3814 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Sending HTTP request GET https://storage.mds.yandex.net/file-download-info/207154_0299f95e.53928837.1.9431/2?sign=8acebf8b0f908513c431181d9bbedf9be20f484b49e8856da0a76c0c7531f226&ts=5d814a62&format=json 
+2019-09-18 00:03:35.4629 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Received HTTP response after 79.2734ms - OK 
+2019-09-18 00:03:35.4629 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.ClientHandler |  | Received HTTP response after 79.2734ms - OK 
+2019-09-18 00:03:35.4629 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | End processing HTTP request after 81.6504ms - OK 
+2019-09-18 00:03:35.4629 | INFO | System.Net.Http.HttpClient.IYandexMusicClient.LogicalHandler |  | End processing HTTP request after 81.6504ms - OK 

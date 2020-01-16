@@ -1,0 +1,64 @@
+2019-12-21 12:05:42.6728 | TRACE | Musili.WebApi.Services.TracksUpdater | Count of hot criterias for background tracks loading: 0 
+2019-12-21 12:05:42.6777 | TRACE | Musili.WebApi.Services.TracksUpdater | Count of hot criterias for background tracks loading: 0 
+2019-12-21 12:07:51.7530 | TRACE | Musili.WebApi.Services.TracksUpdater | Count of hot criterias for background tracks loading: 0 
+2019-12-21 12:07:51.7570 | TRACE | Musili.WebApi.Services.TracksUpdater | Count of hot criterias for background tracks loading: 0 
+2019-12-21 12:09:54.4139 | TRACE | Musili.WebApi.Services.TracksUpdater | Count of hot criterias for background tracks loading: 1 
+2019-12-21 12:09:54.4139 | TRACE | Musili.WebApi.Services.TracksUpdater | Count of hot criterias for background tracks loading: 1 
+2019-12-21 12:09:54.7846 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Load tracks from https://music.yandex.ru/users/Musili.Ru/playlists/1007 
+2019-12-21 12:09:54.7846 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Load tracks from https://music.yandex.ru/users/Musili.Ru/playlists/1007 
+2019-12-21 12:09:55.5371 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Tracks ids loaded, total: 172 
+2019-12-21 12:09:55.5371 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Tracks ids loaded, total: 172 
+2019-12-21 12:09:56.1322 | ERROR | Musili.WebApi.Services.TracksUpdater | Failed to load tracks in background. Criteria: Any / Any Newtonsoft.Json.JsonReaderException: Error reading JToken from JsonReader. Path '', line 0, position 0.
+   at Newtonsoft.Json.Linq.JToken.ReadFrom(JsonReader reader, JsonLoadSettings settings)
+   at Newtonsoft.Json.Linq.JToken.Parse(String json, JsonLoadSettings settings)
+   at Newtonsoft.Json.Linq.JToken.Parse(String json)
+   at Musili.WebApi.Services.Grabbers.Yandex.YandexMusicClient.RequestJson(String url) in D:\dev\musili\src\WebApi\Services\Grabbers\Yandex\YandexMusicClient.cs:line 89
+   at Musili.WebApi.Services.Grabbers.Yandex.YandexMusicClient.GetTracksByIds(List`1 ids) in D:\dev\musili\src\WebApi\Services\Grabbers\Yandex\YandexMusicClient.cs:line 24
+   at Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber.GrabTracksFromList(String url) in D:\dev\musili\src\WebApi\Services\Grabbers\Yandex\YandexTracksGrabber.cs:line 52
+   at Musili.WebApi.Services.Grabbers.TracksGrabber.GrabRandomTracks(TracksSource tracksSource) in D:\dev\musili\src\WebApi\Services\Grabbers\TracksGrabber.cs:line 25
+   at Musili.WebApi.Services.TracksProvider.GrabAndSaveTracks(TracksCriteria criteria) in D:\dev\musili\src\WebApi\Services\TracksProvider.cs:line 30
+   at Musili.WebApi.Services.TracksUpdater.LoadNewTracksForHotCriterias(Int32 hotCriteriaLifeTime) in D:\dev\musili\src\WebApi\Services\TracksUpdater.cs:line 32
+2019-12-21 12:09:56.2276 | ERROR | Musili.WebApi.Services.TracksUpdater | Failed to load tracks in background. Criteria: Any / Any Newtonsoft.Json.JsonReaderException: Error reading JToken from JsonReader. Path '', line 0, position 0.
+   at Newtonsoft.Json.Linq.JToken.ReadFrom(JsonReader reader, JsonLoadSettings settings)
+   at Newtonsoft.Json.Linq.JToken.Parse(String json, JsonLoadSettings settings)
+   at Newtonsoft.Json.Linq.JToken.Parse(String json)
+   at Musili.WebApi.Services.Grabbers.Yandex.YandexMusicClient.RequestJson(String url) in D:\dev\musili\src\WebApi\Services\Grabbers\Yandex\YandexMusicClient.cs:line 89
+   at Musili.WebApi.Services.Grabbers.Yandex.YandexMusicClient.GetTracksByIds(List`1 ids) in D:\dev\musili\src\WebApi\Services\Grabbers\Yandex\YandexMusicClient.cs:line 24
+   at Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber.GrabTracksFromList(String url) in D:\dev\musili\src\WebApi\Services\Grabbers\Yandex\YandexTracksGrabber.cs:line 52
+   at Musili.WebApi.Services.Grabbers.TracksGrabber.GrabRandomTracks(TracksSource tracksSource) in D:\dev\musili\src\WebApi\Services\Grabbers\TracksGrabber.cs:line 25
+   at Musili.WebApi.Services.TracksProvider.GrabAndSaveTracks(TracksCriteria criteria) in D:\dev\musili\src\WebApi\Services\TracksProvider.cs:line 30
+   at Musili.WebApi.Services.TracksUpdater.LoadNewTracksForHotCriterias(Int32 hotCriteriaLifeTime) in D:\dev\musili\src\WebApi\Services\TracksUpdater.cs:line 32
+2019-12-21 12:12:02.9941 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Load tracks from https://music.yandex.ru/users/music.partners/playlists/1073 
+2019-12-21 12:12:02.9941 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Load tracks from https://music.yandex.ru/users/music.partners/playlists/1073 
+2019-12-21 12:12:03.6215 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Tracks ids loaded, total: 17 
+2019-12-21 12:12:03.6215 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Tracks ids loaded, total: 17 
+2019-12-21 12:12:05.3501 | INFO | Musili.WebApi.Services.TracksUpdater | Loaded 2 tracks in background. Criteria: Any / Any 
+2019-12-21 12:12:05.3501 | INFO | Musili.WebApi.Services.TracksUpdater | Loaded 2 tracks in background. Criteria: Any / Any 
+2019-12-21 12:12:35.9305 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Load tracks from https://music.yandex.ru/users/dec.83/playlists/1000 
+2019-12-21 12:12:35.9305 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Load tracks from https://music.yandex.ru/users/dec.83/playlists/1000 
+2019-12-21 12:12:36.6238 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Tracks ids loaded, total: 97 
+2019-12-21 12:12:36.6238 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Tracks ids loaded, total: 97 
+2019-12-21 12:12:38.6326 | INFO | Musili.WebApi.Services.TracksUpdater | Loaded 2 tracks in background. Criteria: Any / Any 
+2019-12-21 12:12:38.6326 | INFO | Musili.WebApi.Services.TracksUpdater | Loaded 2 tracks in background. Criteria: Any / Any 
+2019-12-21 12:13:39.7847 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Load tracks from https://music.yandex.ru/users/Musili.Ru/playlists/1006 
+2019-12-21 12:13:39.7901 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Load tracks from https://music.yandex.ru/users/Musili.Ru/playlists/1006 
+2019-12-21 12:13:40.6339 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Tracks ids loaded, total: 197 
+2019-12-21 12:13:40.6339 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Tracks ids loaded, total: 197 
+2019-12-21 12:13:42.3617 | INFO | Musili.WebApi.Services.TracksUpdater | Loaded 2 tracks in background. Criteria: Any / Any 
+2019-12-21 12:13:42.3617 | INFO | Musili.WebApi.Services.TracksUpdater | Loaded 2 tracks in background. Criteria: Any / Any 
+2019-12-21 12:16:34.9266 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Load tracks from https://music.yandex.ru/users/yamusic-top/playlists/1033 
+2019-12-21 12:16:34.9312 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Load tracks from https://music.yandex.ru/users/yamusic-top/playlists/1033 
+2019-12-21 12:16:35.7155 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Tracks ids loaded, total: 100 
+2019-12-21 12:16:35.7155 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Tracks ids loaded, total: 100 
+2019-12-21 12:16:37.3470 | INFO | Musili.WebApi.Services.TracksUpdater | Loaded 2 tracks in background. Criteria: Any / Any 
+2019-12-21 12:16:37.3470 | INFO | Musili.WebApi.Services.TracksUpdater | Loaded 2 tracks in background. Criteria: Any / Any 
+2019-12-21 12:17:08.5001 | TRACE | Musili.WebApi.Services.TracksUpdater | Count of hot criterias for background tracks loading: 1 
+2019-12-21 12:17:09.6371 | TRACE | Musili.WebApi.Services.TracksUpdater | Count of hot criterias for background tracks loading: 1 
+2019-12-21 12:17:10.0757 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Load tracks from https://music.yandex.ru/users/Musili.Ru/playlists/1007 
+2019-12-21 12:17:10.2603 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Load tracks from https://music.yandex.ru/users/Musili.Ru/playlists/1007 
+2019-12-21 12:17:11.0614 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Tracks ids loaded, total: 172 
+2019-12-21 12:17:11.0614 | INFO | Musili.WebApi.Services.Grabbers.Yandex.YandexTracksGrabber | Tracks ids loaded, total: 172 
+2019-12-21 12:17:12.7107 | INFO | Musili.WebApi.Services.TracksUpdater | Loaded 2 tracks in background. Criteria: Any / Any 
+2019-12-21 12:17:12.7107 | INFO | Musili.WebApi.Services.TracksUpdater | Loaded 2 tracks in background. Criteria: Any / Any 
+2019-12-21 12:36:01.8381 | TRACE | Musili.WebApi.Services.TracksUpdater | Count of hot criterias for background tracks loading: 0 
+2019-12-21 12:36:01.8508 | TRACE | Musili.WebApi.Services.TracksUpdater | Count of hot criterias for background tracks loading: 0 

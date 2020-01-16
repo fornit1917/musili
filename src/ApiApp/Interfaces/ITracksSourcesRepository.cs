@@ -1,0 +1,8 @@
+using System.Threading.Tasks;
+using Musili.ApiApp.Models;
+
+namespace Musili.ApiApp.Interfaces {
+    public interface ITracksSourcesRepository {
+        Task<TracksSource> GetRandomTracksSource(TracksCriteria criteria);
+    }
+}

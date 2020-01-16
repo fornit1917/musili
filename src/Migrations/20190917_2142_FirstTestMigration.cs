@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentMigrator;
 
-namespace Musili.WebApi.Migrations {
+namespace Musili.ApiApp.Migrations {
     [Migration(201909172310)]
     public class FirstTestMigration : Migration {
         public override void Up() {
