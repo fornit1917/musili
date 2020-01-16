@@ -5,8 +5,8 @@ TestResults
 [Oo]bj/
 [Bb]in/
 *.user
-src/WebUi/node_modules
-src/WebUi/dist
+src/UiApp/node_modules
+src/UiApp/dist
 src/WebApi/logs
 build/secrets.json
 build/dist

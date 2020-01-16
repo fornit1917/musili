@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "concurrently --kill-others \"npm run backend\" \"npm run dev-server\"",
-    "backend": "dotnet run --project ../WebApi",
+    "backend": "dotnet run --project ../ApiApp",
     "dev-server": "webpack-dev-server --progress --colors --mode development",
     "build": "webpack --progress --colors --mode production",
     "build-dev": "webpack --progress --colors --mode development"
