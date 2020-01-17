@@ -7,6 +7,6 @@ TestResults
 *.user
 src/UiApp/node_modules
 src/UiApp/dist
-src/UiApp/logs
+src/ApiApp/logs
 build/secrets.json
 build/dist
