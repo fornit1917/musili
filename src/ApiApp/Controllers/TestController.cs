@@ -21,7 +21,8 @@ namespace Musili.ApiApp.Controllers {
 
         [HttpGet("source")]
         public async Task<TracksSource> Source(string tempo, string genres, [FromServices] ITracksSourcesRepository sourcesRepository) {
-            return await sourcesRepository.GetRandomTracksSource(new TracksCriteria(tempo, genres));
+            TracksSource src =  await sourcesRepository.GetRandomTracksSource(new TracksCriteria(tempo, genres));
+            return src == null ? new TracksSource { Id = -10000 } : src;
         }
 
         [HttpGet("")]

@@ -23,12 +23,12 @@ namespace Musili.ApiApp.Services.Db {
             } else {
                 query = query.OrderByDescending(t => t.Id);
             }
-
+             
             if (!tracksCriteria.IsAnyGenre) {
-                query = query.Where(t => t.TracksSource.Genre == Genre.Any || tracksCriteria.Genres.Contains(t.TracksSource.Genre));
+                query = query.Where(t => t.TracksSource.Tags.Any(t => tracksCriteria.Genres.Contains(t)));
             }
             if (!tracksCriteria.IsAnyTempo) {
-                query = query.Where(t => t.TracksSource.Tempo == Tempo.Any || tracksCriteria.Tempos.Contains(t.TracksSource.Tempo));
+                query = query.Where(t => t.TracksSource.Tags.Any(t => tracksCriteria.Tempos.Contains(t)));
             }
 
             query = query.Take(maxCount);

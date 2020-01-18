@@ -1,18 +1,10 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Musili.ApiApp.Models;
 
 namespace Musili.ApiApp.Models {
     [Table("tracks_source", Schema = "app")]
     public class TracksSource {
         [Column("id")]
         public int Id { get; set; }
-
-        [Column("genre")]
-        public Genre Genre { get; set; }
-
-        [Column("tempo")]
-        public Tempo Tempo { get; set; }
 
         [Column("service")]
         public TracksSourceService Service { get; set; }
@@ -25,5 +17,8 @@ namespace Musili.ApiApp.Models {
 
         [Column("params_json")]
         public string ParamsJson { get; set; }
+
+        [Column("tags")]
+        public string[] Tags { get; set; }
     }
 }
