@@ -1,27 +1,28 @@
-create schema if not exists app;
+CREATE SCHEMA IF NOT EXISTS app;
 
-create table app.tracks_source (
-	id serial primary key,
-	is_priority boolean not null default false,
-	tempo smallint not null,
-	genre smallint not null,
-	service smallint not null,
-	source_type smallint not null,
-	value varchar(2048) not null,
-	params_json text default null
+CREATE TABLE app.tracks_source (
+	id serial NOT NULL,
+	is_priority bool NOT NULL DEFAULT false,
+	service int2 NOT NULL,
+	source_type int2 NOT NULL,
+	value varchar(2048) NOT NULL,
+	params_json text NULL,
+	tags text[] NULL,
+	CONSTRAINT tracks_source_pkey PRIMARY KEY (id)
 );
-create index tracks_source_tempo_idx on app.tracks_source(tempo);
-create index tracks_source_genre_idx on app.tracks_source(genre);
-create index tracks_source_is_priority_idx on app.tracks_source(is_priority);
+CREATE INDEX tracks_source_is_priority_idx ON app.tracks_source USING btree (is_priority);
+CREATE INDEX tracks_source_tags_idx ON app.tracks_source USING gin (tags);
 
-create table app.track (
-	id serial primary key,
-	tracks_source_id int not null references app.tracks_source(id) on delete cascade on update cascade,
-	artist varchar(255) not null,
-	title varchar(255) not null,
-	url varchar(2048) not null,
-	duration int not null default 0,
-	expiration_datetime timestamp not null
+CREATE TABLE app.track (
+	id serial NOT NULL,
+	tracks_source_id int4 NOT NULL,
+	artist varchar(255) NOT NULL,
+	title varchar(255) NOT NULL,
+	url varchar(2048) NOT NULL,
+	duration int4 NOT NULL DEFAULT 0,
+	expiration_datetime timestamp NOT NULL,
+	CONSTRAINT track_pkey PRIMARY KEY (id),
+	CONSTRAINT track_tracks_source_id_fkey FOREIGN KEY (tracks_source_id) REFERENCES app.tracks_source(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
-create index track_tracks_source_idx on app.track(tracks_source_id);
-create index track_expiration_datetime_idx on app.track(expiration_datetime);
+CREATE INDEX track_expiration_datetime_idx ON app.track USING btree (expiration_datetime);
+CREATE INDEX track_tracks_source_idx ON app.track USING btree (tracks_source_id);
