@@ -15,11 +15,8 @@ namespace Musili.ApiApp.Services.Db {
         public async Task<TracksSource> GetRandomTracksSource(TracksCriteria criteria) {
             var query = from ts in _db.TracksSources select ts;
 
-            if (!criteria.IsAnyGenre) {
-                query = query.Where(ts => ts.Tags.Any(t => criteria.Genres.Contains(t)));
-            }
-            if (!criteria.IsAnyTempo) {
-                query = query.Where(ts => ts.Tags.Any(t => criteria.Tempos.Contains(t)));
+            foreach (string[] tagsGroup in criteria.TagsGroups) {
+                query = query.Where(ts => ts.Tags.Any(t => tagsGroup.Contains(t)));
             }
 
             int count = await query.CountAsync();

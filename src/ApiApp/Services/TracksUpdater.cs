@@ -9,22 +9,20 @@ using Musili.ApiApp.Services.Db;
 namespace Musili.ApiApp.Services {
     public class TracksUpdater : ITracksUpdater {
         private readonly ITracksRepository _tracksRepository;
-        private readonly ITracksRequestsRating _tracksRequestsRating;
         private readonly ITracksProvider _tracksProvider;
         private readonly ILogger<TracksUpdater> _logger;
 
-        public TracksUpdater(ITracksRepository tracksRepository, ITracksRequestsRating tracksRequestsRating, ITracksProvider tracksProvider, ILogger<TracksUpdater> logger) {
+        public TracksUpdater(ITracksRepository tracksRepository, ITracksProvider tracksProvider, ILogger<TracksUpdater> logger) {
             _tracksRepository = tracksRepository;
-            _tracksRequestsRating = tracksRequestsRating;
             _tracksProvider = tracksProvider;
             _logger = logger;
         }
 
         public async Task LoadNewTracksForHotCriterias(int hotCriteriaLifeTime) {
             using (MappedDiagnosticsLogicalContext.SetScoped("jobId", "load-tracks")) {
-                DateTime minRequestDatetime = DateTime.Now.Subtract(TimeSpan.FromSeconds(hotCriteriaLifeTime));
-                _tracksRequestsRating.RemoveOldRequests(minRequestDatetime);
-                TracksCriteria[] hotCriterias = _tracksRequestsRating.GetHotCriterias(minRequestDatetime);
+
+                TracksCriteria[] hotCriterias = Array.Empty<TracksCriteria>(); // todo: implement it
+
                 _logger.LogTrace("Count of hot criterias for background tracks loading: {0}", hotCriterias.Length);
                 foreach (var criteria in hotCriterias) {
                     try {

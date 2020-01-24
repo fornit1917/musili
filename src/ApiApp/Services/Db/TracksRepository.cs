@@ -23,12 +23,9 @@ namespace Musili.ApiApp.Services.Db {
             } else {
                 query = query.OrderByDescending(t => t.Id);
             }
-             
-            if (!tracksCriteria.IsAnyGenre) {
-                query = query.Where(t => t.TracksSource.Tags.Any(t => tracksCriteria.Genres.Contains(t)));
-            }
-            if (!tracksCriteria.IsAnyTempo) {
-                query = query.Where(t => t.TracksSource.Tags.Any(t => tracksCriteria.Tempos.Contains(t)));
+
+            foreach (string[] tagsGroup in tracksCriteria.TagsGroups) {
+                query = query.Where(t => t.TracksSource.Tags.Any(t => tagsGroup.Contains(t)));
             }
 
             query = query.Take(maxCount);

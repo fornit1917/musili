@@ -3,15 +3,19 @@ using System.Linq;
 
 namespace Musili.ApiApp.Models {
     public class TracksCriteria {
-        public string[] Tempos { get; }
-        public string[] Genres { get; }
-
-        public bool IsAnyTempo => Tempos == null || Tempos.Length == 0;
-        public bool IsAnyGenre => Genres == null || Genres.Length == 0;
+        public List<string[]> TagsGroups { get; }
 
         public TracksCriteria(string temposCommaList, string genresCommaList) {
-            Tempos = temposCommaList?.Split(",").Where(x => !string.IsNullOrEmpty(x)).Select(x => x).ToArray();
-            Genres = genresCommaList?.Split(",").Where(x => !string.IsNullOrEmpty(x)).Select(x => x).ToArray();
+            string[] tempos = temposCommaList?.Split(",").Where(x => !string.IsNullOrEmpty(x)).Select(x => x).ToArray();
+            string[] genres = genresCommaList?.Split(",").Where(x => !string.IsNullOrEmpty(x)).Select(x => x).ToArray();
+            
+            TagsGroups = new List<string[]>();
+            if (tempos?.Length > 0) {
+                TagsGroups.Add(tempos);
+            }
+            if (genres?.Length > 0) {
+                TagsGroups.Add(genres);
+            }
         }
     }
 }

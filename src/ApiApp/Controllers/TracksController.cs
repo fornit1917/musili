@@ -8,11 +8,9 @@ namespace Musili.ApiApp.Controllers {
     [Route("api/[controller]")]
     public class TracksController : Controller {
         private readonly ITracksProvider _tracksProvider;
-        private readonly ITracksRequestsRating _tracksRequestsRating;
 
-        public TracksController(ITracksProvider tracksProvider, ITracksRequestsRating tracksRequestsRating) {
+        public TracksController(ITracksProvider tracksProvider) {
             _tracksProvider = tracksProvider;
-            _tracksRequestsRating = tracksRequestsRating;
         }
 
         [HttpGet("")]
