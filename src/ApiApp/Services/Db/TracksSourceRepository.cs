@@ -14,18 +14,18 @@ namespace Musili.ApiApp.Services.Db {
 
         public async Task<TracksSource> GetRandomTracksSource(TracksCriteria criteria) {
             var query = from ts in _db.TracksSources select ts;
-            if (!criteria.IsAnyTempo) {
-                query = query.Where(ts => ts.Tempo == Tempo.Any || criteria.Tempos.Contains(ts.Tempo));
-            }
-            if (!criteria.IsAnyGenre) {
-                query = query.Where(ts => ts.Genre == Genre.Any || criteria.Genres.Contains(ts.Genre));
+
+            foreach (string[] tagsGroup in criteria.TagsGroups) {
+                query = query.Where(ts => ts.Tags.Any(t => tagsGroup.Contains(t)));
             }
 
             int count = await query.CountAsync();
             int offset = RandomUtils.GetRandomFromInterval(0, count);
-            query = query.OrderBy(ts => ts.Id).Skip(offset).Take(1);
+            query = query.OrderBy(ts => ts.Id).Skip(offset);
 
             return await query.FirstOrDefaultAsync();
         }
+
+
     }
 }

@@ -5,7 +5,7 @@ namespace Musili.ApiApp.Utils {
     public static class RandomUtils {
         private static Random rnd = new Random();
 
-        public static T GetRandomListItem<T>(List<T> items) {
+        public static T GetRandomListItem<T>(IList<T> items) {
             return items[rnd.Next(0, items.Count)];
         }
 

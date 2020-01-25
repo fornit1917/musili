@@ -17,6 +17,7 @@ using Musili.ApiApp.Services.Grabbers.Yandex;
 using Musili.ApiApp.Migrations;
 using NLog.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Musili.ApiApp {
     public class Startup {
@@ -39,7 +40,7 @@ namespace Musili.ApiApp {
                 .AddPolicyHandler(GetHttpRetryPolicy());
 
             services.AddSingleton<ISemaphores, Semaphores>();
-            services.AddSingleton<ITracksRequestsRating, TracksRequestsRating>();
+            services.AddSingleton<IBackgroundTracksLoadingList, BackgroundTracksLoadingList>();
 
             // grabbers for each service
             services.AddSingleton<YandexTracksGrabber>();
@@ -60,6 +61,7 @@ namespace Musili.ApiApp {
             services.AddSingleton<ICommonTracksGrabber, TracksGrabber>();
 
             services.AddDbContext<AppDbContext>(opts => {
+                opts.UseLoggerFactory(new LoggerFactory(new[] { new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider() }));
                 opts.UseNpgsql(Configuration.GetConnectionString("MusiliDatabase"));
             });
             services.AddScoped<ITracksSourcesRepository, TracksSourceRepository>();

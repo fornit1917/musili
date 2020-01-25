@@ -9,24 +9,26 @@ using Musili.ApiApp.Services.Db;
 namespace Musili.ApiApp.Services {
     public class TracksUpdater : ITracksUpdater {
         private readonly ITracksRepository _tracksRepository;
-        private readonly ITracksRequestsRating _tracksRequestsRating;
         private readonly ITracksProvider _tracksProvider;
+        private readonly IBackgroundTracksLoadingList _backgroundTracksLoadingList;
         private readonly ILogger<TracksUpdater> _logger;
 
-        public TracksUpdater(ITracksRepository tracksRepository, ITracksRequestsRating tracksRequestsRating, ITracksProvider tracksProvider, ILogger<TracksUpdater> logger) {
+        public TracksUpdater(ITracksRepository tracksRepository, ITracksProvider tracksProvider, IBackgroundTracksLoadingList backgroundTracksLoadingList, ILogger<TracksUpdater> logger) {
             _tracksRepository = tracksRepository;
-            _tracksRequestsRating = tracksRequestsRating;
             _tracksProvider = tracksProvider;
+            _backgroundTracksLoadingList = backgroundTracksLoadingList;
             _logger = logger;
         }
 
-        public async Task LoadNewTracksForHotCriterias(int hotCriteriaLifeTime) {
+        public async Task LoadNewTracksForHotCriterias() {
             using (MappedDiagnosticsLogicalContext.SetScoped("jobId", "load-tracks")) {
-                DateTime minRequestDatetime = DateTime.Now.Subtract(TimeSpan.FromSeconds(hotCriteriaLifeTime));
-                _tracksRequestsRating.RemoveOldRequests(minRequestDatetime);
-                TracksCriteria[] hotCriterias = _tracksRequestsRating.GetHotCriterias(minRequestDatetime);
-                _logger.LogTrace("Count of hot criterias for background tracks loading: {0}", hotCriterias.Length);
-                foreach (var criteria in hotCriterias) {
+                TracksCriteria[] criterias = _backgroundTracksLoadingList.GetDistinctCriteriasAndClear();
+                if (criterias == null || criterias.Length == 0) {
+                    return;
+                }
+
+                _logger.LogTrace("Count of criterias for background tracks loading: {0}", criterias.Length);
+                foreach (var criteria in criterias) {
                     try {
                         List<Track> tracks = await _tracksProvider.GrabAndSaveTracks(criteria);
                         _logger.LogInformation("Loaded {0} tracks in background. Criteria: {1}", tracks.Count, criteria.ToString());
