@@ -44,7 +44,7 @@ namespace Musili.ApiApp.Services {
                         await tracksUpdater.RemoveOldTracks();
                     }
                     if (_appConfig.LoadNewTracksInBackground) {
-                        await tracksUpdater.LoadNewTracksForHotCriterias(_appConfig.TracksUpdaterHotCriteriaLifetime);
+                        await tracksUpdater.LoadNewTracksForHotCriterias();
                     }
                 } catch (Exception e) {
                     _logger.LogError(e, "Unhandled exception in background tracks updater background task");

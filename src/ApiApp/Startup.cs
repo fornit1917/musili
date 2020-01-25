@@ -40,6 +40,7 @@ namespace Musili.ApiApp {
                 .AddPolicyHandler(GetHttpRetryPolicy());
 
             services.AddSingleton<ISemaphores, Semaphores>();
+            services.AddSingleton<IBackgroundTracksLoadingList, BackgroundTracksLoadingList>();
 
             // grabbers for each service
             services.AddSingleton<YandexTracksGrabber>();

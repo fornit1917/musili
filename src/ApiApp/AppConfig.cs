@@ -8,7 +8,6 @@ namespace Musili.ApiApp {
         public bool DeleteOldTracksInBackground { get; set; } = true;
         public bool LoadNewTracksInBackground { get; set; } = false;
         public int TracksUpdaterTimeout { get; set; } = 300;
-        public int TracksUpdaterHotCriteriaLifetime { get; set; } = 600;
 
         public int MaxConnectionsYandex { get; set; } = 3;
     }

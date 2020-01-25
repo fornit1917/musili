@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Musili.ApiApp.Utils;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Musili.ApiApp.Models {
@@ -16,6 +18,37 @@ namespace Musili.ApiApp.Models {
             if (genres?.Length > 0) {
                 TagsGroups.Add(genres);
             }
+        }
+
+        public TracksCriteria(List<string[]> tagsGroups) {
+            TagsGroups = tagsGroups;
+        }
+
+        public TracksCriteria(string tagsGroups) {
+            TagsGroups = new List<string[]>();
+            if (!string.IsNullOrWhiteSpace(tagsGroups)) {
+                foreach (var tagsCommaList in tagsGroups.Split(';')) {
+                    TagsGroups.Add(tagsCommaList.Split(','));
+                }
+            }
+        }
+
+        public TracksCriteria GetRandomMinimalCriteria() {
+            List<string[]> minimalTagsGroups = TagsGroups.Select(tags => new[] { RandomUtils.GetRandomListItem(tags) }).ToList();
+            return new TracksCriteria(minimalTagsGroups);
+        }
+
+        public override string ToString() {
+            if (TagsGroups.Count == 0) {
+                return "";
+            }
+
+            var groupsAsStrings = TagsGroups
+                .Select(tags => tags.OrderBy(t => t))
+                .Select(tags => string.Join(',', tags))
+                .OrderBy(tagsStr => tagsStr);
+
+            return string.Join(';', groupsAsStrings);
         }
     }
 }
