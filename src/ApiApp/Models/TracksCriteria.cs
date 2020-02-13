@@ -8,8 +8,8 @@ namespace Musili.ApiApp.Models {
         public List<string[]> TagsGroups { get; }
 
         public TracksCriteria(string temposCommaList, string genresCommaList) {
-            string[] tempos = temposCommaList?.Split(",").Where(x => !string.IsNullOrEmpty(x)).Select(x => x).ToArray();
-            string[] genres = genresCommaList?.Split(",").Where(x => !string.IsNullOrEmpty(x)).Select(x => x).ToArray();
+            string[] tempos = temposCommaList?.Split(",").Where(x => !string.IsNullOrEmpty(x) && x != "any").Select(x => x).ToArray();
+            string[] genres = genresCommaList?.Split(",").Where(x => !string.IsNullOrEmpty(x) && x != "any").Select(x => x).ToArray();
             
             TagsGroups = new List<string[]>();
             if (tempos?.Length > 0) {
