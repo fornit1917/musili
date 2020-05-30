@@ -30,11 +30,22 @@ export default class TracksSettings {
                 return;
             }
         });
+        if (this.temposButtons.every(btn => !btn.classList.contains(SELECTED_CLASS))) {
+            this.storage.setTempo("any");
+            this.temposButtons.find(btn => btn.dataset.id === "any").classList.add(SELECTED_CLASS);
+        }
+
         this.genresButtons.forEach(btn => {
             if (storedSettings.genres.some(item => item === btn.dataset.id)) {
-                btn.classList.add("selectable-btn--selected");
+                btn.classList.add(SELECTED_CLASS);
             }
         });
+        if (this.genresButtons.every(btn => !btn.classList.contains(SELECTED_CLASS))) {
+            this.storage.setGenres(['classical','electronic']);
+            this.genresButtons
+                .filter(btn => btn.dataset.id === 'classical' || btn.dataset.id === 'electronic')
+                .forEach(btn => btn.classList.add(SELECTED_CLASS));
+        }
     }
 
     public hide(): Promise<void> {
