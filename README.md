@@ -1,2 +1,2 @@
 # Musili
-Service for online music listening. Not ready yet.
+Service for online music listening. Not ready yet. Abandoned project.
